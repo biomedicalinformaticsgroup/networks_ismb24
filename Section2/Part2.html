@@ -1,0 +1,886 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Part 2: Similarity Network Fusion &#8212; ISMB Tutorial Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Section2/Part2';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Section 3 - SNF + GNN’s" href="../Section3_intro.html" />
+    <link rel="prev" title="Part 1: Over-representation and Enrichment Analysis" href="Part1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="ISMB Tutorial Book - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="ISMB Tutorial Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    An Introduction to Multi Modal Analysis using Networks
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Section1_intro.html">Section 1 - Network Basics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Section1/Section1.html">Part 1 - Introduction to Biomedical Networks</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Section1/Section1-PSN.html">Part 2 - Patient similarity networks</a></li>
+
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Section2_intro.html">Section 2: Network Analysis</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Part1.html">Part 1: Over-representation and Enrichment Analysis</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Part 2: Similarity Network Fusion</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Section3_intro.html">Section 3 - SNF + GNN’s</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Section3/Part1.html"><font color="darkblue"> Part 1 : Message Passing </font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Section3/Part2.html"><font color="darkblue"> Part 2 : Problem Formulation / Patient Similarity Network Generation </font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Section3/Part3.html"><font color="darkblue"> Part 3 : Smoking Network Classification using Graph Convolutional Networks</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Section3/Part4.html"><font color="darkblue"> Part 4 : Similarity Network Fusion with Graph Convolutional Networks</font></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ConceptGlossary.html">Concept Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../functions_definitions.html">Custom Function Definitions</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Barry8197/ISMB_Test" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Barry8197/ISMB_Test/issues/new?title=Issue%20on%20page%20%2FSection2/Part2.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Section2/Part2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Part 2: Similarity Network Fusion</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paths">Paths</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-custom-functions">Import custom functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patient-network-analysis">2. Patient Network Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-on-individual-patient-networks">2.1 Clustering on Individual Patient Networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-network-fusion-snf">2.2 Similarity Network Fusion (SNF)</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="part-2-similarity-network-fusion">
+<h1>Part 2: Similarity Network Fusion<a class="headerlink" href="#part-2-similarity-network-fusion" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">urllib</span> <span class="k">as</span> <span class="nn">ul</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">ast</span>
+<span class="kn">from</span> <span class="nn">prettytable</span> <span class="kn">import</span> <span class="n">PrettyTable</span>
+<span class="kn">import</span> <span class="nn">gseapy</span> <span class="k">as</span> <span class="nn">gp</span>
+<span class="kn">from</span> <span class="nn">palettable</span> <span class="kn">import</span> <span class="n">wesanderson</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+<span class="n">current_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;__file__&#39;</span><span class="p">))</span>
+<span class="n">parent_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_dir</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/chaeeunlee/Documents/VSC_workspaces/ISMB_Test/Section2
+/Users/chaeeunlee/Documents/VSC_workspaces/ISMB_Test
+</pre></div>
+</div>
+</div>
+</div>
+<section id="paths">
+<h2>Paths<a class="headerlink" href="#paths" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">intermediate_data_dir</span> <span class="o">=</span> <span class="s1">&#39;/data/intermediate/&#39;</span>
+<span class="n">raw_data_dir</span> <span class="o">=</span> <span class="s1">&#39;/data/raw/&#39;</span>
+
+<span class="c1"># Define paths to .gml network files from Section 1</span>
+<span class="c1"># These paths point to the Gene correlation network, Patient network from (1) TCGA gene expression data and (2) TCGA DNA methylation data.</span>
+<span class="n">G_patient_gxp_path</span> <span class="o">=</span> <span class="n">intermediate_data_dir</span> <span class="o">+</span> <span class="s1">&#39;section2_networks_v2/patient_coexpression_network_knn.gml&#39;</span>
+<span class="n">G_patient_dnam_path</span> <span class="o">=</span> <span class="n">intermediate_data_dir</span> <span class="o">+</span> <span class="s1">&#39;section2_networks_v2/patient_meth_network_knn.gml&#39;</span>
+
+<span class="c1"># Load the GML graphs into NetworkX graph objects</span>
+<span class="c1"># nx.read_gml() function reads a graph from a GML file</span>
+<span class="n">G_patient_gxp</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">read_gml</span><span class="p">(</span><span class="n">G_patient_gxp_path</span><span class="p">)</span>  <span class="c1"># Patient gene expression network</span>
+<span class="n">G_patient_dnam</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">read_gml</span><span class="p">(</span><span class="n">G_patient_dnam_path</span><span class="p">)</span>  <span class="c1"># Patient methylation network</span>
+
+<span class="c1"># Get all nodes in each graph</span>
+<span class="c1"># The nodes represent genes or patients depending on the network</span>
+<span class="n">G_patient_gxp_nodes_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">G_patient_gxp</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span>  <span class="c1"># Patient nodes</span>
+<span class="n">G_patient_dnam_nodes_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">G_patient_dnam</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span>  <span class="c1"># Patient nodes</span>
+
+<span class="c1"># Define paths to the raw TCGA datasets</span>
+<span class="n">tcga_dnam_path</span> <span class="o">=</span> <span class="n">raw_data_dir</span> <span class="o">+</span> <span class="s1">&#39;ISMB_TCGA_DNAm.pkl&#39;</span>  <span class="c1"># TCGA DNA methylation data</span>
+<span class="n">tcga_gxp_path</span> <span class="o">=</span> <span class="n">raw_data_dir</span> <span class="o">+</span> <span class="s1">&#39;ISMB_TCGA_GE.pkl&#39;</span>  <span class="c1"># TCGA Gene expression data</span>
+
+<span class="c1"># Load the gene expression dataset</span>
+<span class="c1"># pd.read_pickle() function loads a pickled pandas DataFrame or Series</span>
+<span class="n">tcga_gxp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="n">tcga_gxp_path</span><span class="p">)</span>
+<span class="c1"># Extract metadata from the gene expression dataset</span>
+<span class="c1"># Metadata might include information such as patient IDs, sample conditions, etc.</span>
+<span class="n">tcga_gxp_meta</span> <span class="o">=</span> <span class="n">tcga_gxp</span><span class="p">[</span><span class="s1">&#39;datMeta&#39;</span><span class="p">]</span>
+
+<span class="c1"># For this example, we&#39;ll use a CSV file that includes gene symbols</span>
+<span class="c1"># pd.read_csv() function loads a CSV file into a pandas DataFrame</span>
+<span class="n">tcga_gxp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">intermediate_data_dir</span> <span class="o">+</span> <span class="s1">&#39;tcga_ge_df_symbols_t.csv&#39;</span><span class="p">)</span>  <span class="c1"># Dataset with gene symbols</span>
+<span class="c1"># Set &#39;GENES&#39; column as the index for easy access to gene-specific data</span>
+<span class="n">tcga_gxp_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;GENES&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tcga_gxp_meta_dict</span> <span class="o">=</span> <span class="n">tcga_gxp_meta</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tcga_gxp_meta_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;patient&#39;, &#39;race&#39;, &#39;gender&#39;, &#39;sample_type&#39;, &#39;cigarettes_per_day&#39;, &#39;Smoked&#39;, &#39;sizeFactor&#39;, &#39;replaceable&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="import-custom-functions">
+<h2>Import custom functions<a class="headerlink" href="#import-custom-functions" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functions</span> <span class="kn">import</span> <span class="n">get_k_neighbours</span><span class="p">,</span> <span class="n">draw_network_with_node_attrs</span> <span class="c1"># get_edge_attributes</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="patient-network-analysis">
+<h2>2. Patient Network Analysis<a class="headerlink" href="#patient-network-analysis" title="Link to this heading">#</a></h2>
+<p>In Part 1, we worked with gene expression networks, where each node represented a gene. In Part 2, our focus shifts to patient networks. In Patient Similarity Networks (PSNs), each node represents an individual patient and the edges encode similarities between patients, based on various modalities of data such as gene expression profiles and DNA methylation patterns.</p>
+<section id="clustering-on-individual-patient-networks">
+<h3>2.1 Clustering on Individual Patient Networks<a class="headerlink" href="#clustering-on-individual-patient-networks" title="Link to this heading">#</a></h3>
+<p>We can apply clustering on PSNs and identify patterns in relation to a phenotypic attribute (e.g., smoking status)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
+
+<span class="k">def</span> <span class="nf">get_edge_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extracts edge attributes from a graph.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (networkx.Graph): The graph from which to extract edge attributes.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: A list of edge attributes.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If the graph G is empty or not defined.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">G</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The graph is empty or not defined.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Extract edge attributes</span>
+    <span class="n">edge_attributes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">for</span> <span class="o">*</span><span class="n">_</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)))</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">edge_attributes</span>
+
+<span class="n">G_patient_gxp_weight</span> <span class="o">=</span> <span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">G_patient_gxp</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">G_patient_dnam_weight</span> <span class="o">=</span> <span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">G_patient_dnam</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;G_patient_gxp_weight: </span><span class="si">{</span><span class="n">G_patient_gxp_weight</span><span class="si">}</span><span class="s2">, G_patient_dnam_weight: </span><span class="si">{</span><span class="n">G_patient_dnam_weight</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>G_patient_gxp_weight: weight, G_patient_dnam_weight: weight
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the greedy modularity maximization method to detect communities in the patient network.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">#################################################</span>
+<span class="sd">                YOUR CODE HERE</span>
+<span class="sd">#################################################</span>
+
+<span class="sd">Use the greedy modularity maximisation method to detect communities in the patient network.</span>
+<span class="sd">    hint : use nx.algorithms.community.modularity_max.greedy_modularity_communities()</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="n">patient_gxp_communities</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">community</span><span class="o">.</span><span class="n">modularity_max</span><span class="o">.</span><span class="n">greedy_modularity_communities</span><span class="p">(</span><span class="n">G_patient_gxp</span><span class="p">)</span> <span class="c1"># , weight=G_patient_gxp_weight)</span>
+<span class="n">patient_dnam_communities</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">community</span><span class="o">.</span><span class="n">modularity_max</span><span class="o">.</span><span class="n">greedy_modularity_communities</span><span class="p">(</span><span class="n">G_patient_dnam</span><span class="p">)</span> <span class="c1">#, weight=G_patient_dnam_weight)</span>
+
+<span class="c1"># Visualize the patient network with identified communities.</span>
+<span class="n">draw_network_with_node_attrs</span><span class="p">(</span><span class="n">G_patient_gxp</span><span class="p">,</span> <span class="n">tcga_gxp_meta_dict</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Patient Gene Expression Network&#39;</span><span class="p">,</span> <span class="n">communities</span><span class="o">=</span><span class="n">patient_gxp_communities</span><span class="p">,</span> <span class="n">color_attr</span><span class="o">=</span><span class="s1">&#39;community&#39;</span><span class="p">,</span> <span class="n">shape_attr</span><span class="o">=</span><span class="s1">&#39;Smoked&#39;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="s1">&#39;spring&#39;</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">draw_network_with_node_attrs</span><span class="p">(</span><span class="n">G_patient_dnam</span><span class="p">,</span> <span class="n">tcga_gxp_meta_dict</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Patient DNA Methylation Network&#39;</span><span class="p">,</span> <span class="n">communities</span><span class="o">=</span><span class="n">patient_dnam_communities</span><span class="p">,</span> <span class="n">color_attr</span><span class="o">=</span><span class="s1">&#39;community&#39;</span><span class="p">,</span> <span class="n">shape_attr</span><span class="o">=</span><span class="s1">&#39;Smoked&#39;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="s1">&#39;spring&#39;</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8672cdc5822f96f61f4726a915487e9c207bb3bbab8f8f51b53558b5f60bee81.png" src="../_images/8672cdc5822f96f61f4726a915487e9c207bb3bbab8f8f51b53558b5f60bee81.png" />
+<img alt="../_images/9921ba10ea0ce03566d17252b25cdfd4322a606edc9713f72454b7f429cf61be.png" src="../_images/9921ba10ea0ce03566d17252b25cdfd4322a606edc9713f72454b7f429cf61be.png" />
+</div>
+</div>
+</section>
+<section id="similarity-network-fusion-snf">
+<h3>2.2 Similarity Network Fusion (SNF)<a class="headerlink" href="#similarity-network-fusion-snf" title="Link to this heading">#</a></h3>
+<p>When working with patient data, we often want to combine information from multiple modalities. Here, we use Similarity Network Fusion (SNF) to integrate patient data in the space of samples (e.g., patients) rather than measurements (e.g., gene expression) <a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/24464287/">(Wang et al.)</a>.</p>
+<p>SNF consists of two main steps:</p>
+<ol class="arabic simple">
+<li><p>Construction of Patient-Similarity Networks (<code class="docutils literal notranslate"><span class="pre">Section</span> <span class="pre">1</span></code>):</p>
+<ul class="simple">
+<li><p>For each type of data (e.g., gene expression, DNA methylation), SNF constructs a patient-by-patient similarity matrix. This matrix represents a similarity network where nodes are samples (patients) and weighted edges represent the pairwise similarities between them.</p></li>
+</ul>
+</li>
+<li><p>Integration of Networks:</p>
+<ul class="simple">
+<li><p>Using a nonlinear combination method based on message-passing theory, SNF iteratively updates each network with information from the others. This process aligns each network more closely to the other with every iteration. The iterative update continues until convergence, resulting in a single integrated similarity network.</p></li>
+</ul>
+</li>
+</ol>
+<p>We use the Python library <a class="reference external" href="https://github.com/rmarkello/snfpy"><code class="docutils literal notranslate"><span class="pre">snfpy</span></code></a> to perform Similarity Network Fusion (SNF) on two patient networks. We start by identifying the overlapping patient nodes between gene expression (<code class="docutils literal notranslate"><span class="pre">G_patient_gxp</span></code>) and DNA methylation (<code class="docutils literal notranslate"><span class="pre">G_patient_dnam</span></code>) networks to ensure the networks represent the same patients. We then create adjacency matrices for these networks and use them as input for SNF. SNF fuses these networks into a single network (<code class="docutils literal notranslate"><span class="pre">G_snf</span></code>) that captures information from both modalities. The resulting SNF adjacency matrix is converted to a NetworkX graph, and edges with weights below a cutoff are removed to enhance community detection. Additionally, we perform a k-nearest neighbors (KNN) procedure on the SNF adjacency matrix to create another network (<code class="docutils literal notranslate"><span class="pre">G_snf_knn</span></code>). This step emphasises local neighborhood structures within the fused network.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">snf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get overlapping patient nodes from the two patient networks</span>
+<span class="c1"># In patient networks, the nodes represent patients. We want to ensure that there are sufficient number of nodes commonly found in the networks of different modalities before Similarity Network Fusion (SNF), so that they represent different aspects of the same patients.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">#################################################</span>
+<span class="sd">                YOUR CODE HERE</span>
+<span class="sd">#################################################</span>
+
+<span class="sd">In patient networks, the nodes represent patients. We want to ensure that there are sufficient number of nodes commonly found in the networks of different modalities before Similarity Network Fusion (SNF), so that they represent different aspects of the same patients.</span>
+<span class="sd">Get overlapping patient nodes from the two patient networks</span>
+<span class="sd">    hint : use set() </span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="n">all_idx</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">G_patient_gxp_nodes_list</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">G_patient_dnam_nodes_list</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of overlapping patient nodes: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">all_idx</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">#################################################</span>
+<span class="sd">                YOUR CODE HERE</span>
+<span class="sd">#################################################</span>
+
+<span class="sd">Create adjacency matrix from G_patient_gxp and G_patient_dnam for overlapping nodes</span>
+<span class="sd">    hint : use nx.to_pandas_adjacency() with argument &quot;nodelist&quot;</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># Create adjacency matrix for G_patient_gxp with overlapping nodes</span>
+<span class="n">G_patient_gxp_adj_matrix</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_pandas_adjacency</span><span class="p">(</span><span class="n">G_patient_gxp</span><span class="p">,</span> <span class="n">nodelist</span><span class="o">=</span><span class="n">all_idx</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">G_patient_gxp_weight</span><span class="p">)</span>
+
+<span class="c1"># Create adjacency matrix for G_patient_dnam with overlapping nodes</span>
+<span class="n">G_patient_dnam_adj_matrix</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_pandas_adjacency</span><span class="p">(</span><span class="n">G_patient_dnam</span><span class="p">,</span> <span class="n">nodelist</span><span class="o">=</span><span class="n">all_idx</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">G_patient_dnam_weight</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of overlapping patient nodes: 381
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">full_graphs</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># List of adjacency (similarity) matrices</span>
+<span class="n">full_graphs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">G_patient_gxp_adj_matrix</span><span class="p">)</span>
+<span class="n">full_graphs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">G_patient_dnam_adj_matrix</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the number of nearest neighbors and the number of iterations for SNF</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="n">cutoff_weight</span> <span class="o">=</span> <span class="mf">0.003</span> <span class="c1"># Edges with weights below a cutoff are removed to enhance community detection</span>
+
+<span class="c1"># Perform SNF</span>
+<span class="c1"># &#39;K&#39; is the number of nearest neighbors used in SNF, &#39;t&#39; is the number of iterations</span>
+<span class="n">adj</span> <span class="o">=</span> <span class="n">snf</span><span class="o">.</span><span class="n">snf</span><span class="p">(</span><span class="n">full_graphs</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Convert the resulting SNF matrix back into a pandas DataFrame for easier manipulation</span>
+<span class="n">adj_snf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">adj</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">all_idx</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">all_idx</span><span class="p">)</span>   
+<span class="c1"># Convert the DataFrame to a NumPy array</span>
+<span class="n">adj_snf_data</span> <span class="o">=</span> <span class="n">adj_snf</span><span class="o">.</span><span class="n">values</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">adj_snf_data</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Convert the adjacency matrix to a NetworkX graph</span>
+<span class="n">G_snf</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_numpy_array</span><span class="p">(</span><span class="n">adj_snf_data</span><span class="p">)</span>
+<span class="c1"># Set the node labels using the DataFrame index</span>
+<span class="n">G_snf</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">relabel_nodes</span><span class="p">(</span><span class="n">G_snf</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">adj_snf</span><span class="o">.</span><span class="n">index</span><span class="p">)))</span>
+
+<span class="c1"># Remove edges with weight under cutoff value</span>
+<span class="n">edges_to_remove</span> <span class="o">=</span> <span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">G_snf</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">cutoff_weight</span><span class="p">]</span>
+<span class="n">G_snf</span><span class="o">.</span><span class="n">remove_edges_from</span><span class="p">(</span><span class="n">edges_to_remove</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cluster G_snf using greedy modularity communities algorithm</span>
+<span class="n">snf_communities</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">community</span><span class="o">.</span><span class="n">modularity_max</span><span class="o">.</span><span class="n">greedy_modularity_communities</span><span class="p">(</span><span class="n">G_snf</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;weight&#39;</span><span class="p">)</span>
+<span class="n">draw_network_with_node_attrs</span><span class="p">(</span><span class="n">G_snf</span><span class="p">,</span> <span class="n">node_attributes</span><span class="o">=</span><span class="n">tcga_gxp_meta_dict</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;SNF Patient Network&#39;</span><span class="p">,</span> <span class="n">communities</span><span class="o">=</span><span class="n">snf_communities</span><span class="p">,</span> <span class="n">color_attr</span><span class="o">=</span><span class="s1">&#39;community&#39;</span><span class="p">,</span> <span class="n">shape_attr</span><span class="o">=</span><span class="s1">&#39;Smoked&#39;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="s1">&#39;spring&#39;</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/30349b5c74d5c0918e97b4b2f35c9ef71ca7182cb617e253091694a8dbe808b7.png" src="../_images/30349b5c74d5c0918e97b4b2f35c9ef71ca7182cb617e253091694a8dbe808b7.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute the k-nearest neighbors for the nodes in the network</span>
+<span class="n">k_neighbors</span> <span class="o">=</span> <span class="n">get_k_neighbours</span><span class="p">(</span><span class="n">adj_snf</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+<span class="c1"># print(f&quot;k_neighbors: {k_neighbors}&quot;)</span>
+
+<span class="c1"># Create a new NetworkX graph</span>
+<span class="n">G_snf_knn</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">G_snf_knn</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">adj_snf</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="c1"># Add edges between each node and its k-nearest neighbors</span>
+<span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">neighbors</span> <span class="ow">in</span> <span class="n">k_neighbors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">:</span>
+        <span class="n">G_snf_knn</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cluster G_snf_knn using greedy modularity communities algorithm</span>
+<span class="n">snf_knn_communities</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">community</span><span class="o">.</span><span class="n">modularity_max</span><span class="o">.</span><span class="n">greedy_modularity_communities</span><span class="p">(</span><span class="n">G_snf_knn</span><span class="p">)</span> <span class="c1"># , weight=&#39;weight&#39;)</span>
+<span class="n">draw_network_with_node_attrs</span><span class="p">(</span><span class="n">G_snf_knn</span><span class="p">,</span> <span class="n">node_attributes</span><span class="o">=</span><span class="n">tcga_gxp_meta_dict</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;SNF Patient Network + KNN&#39;</span><span class="p">,</span> <span class="n">communities</span><span class="o">=</span><span class="n">snf_knn_communities</span><span class="p">,</span> <span class="n">color_attr</span><span class="o">=</span><span class="s1">&#39;community&#39;</span><span class="p">,</span> <span class="n">shape_attr</span><span class="o">=</span><span class="s1">&#39;Smoked&#39;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="s1">&#39;spring&#39;</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/fadf4772b16fb18231660d1ae53ae26cb608a974d62b7d7d1c691798dd7ca1f0.png" src="../_images/fadf4772b16fb18231660d1ae53ae26cb608a974d62b7d7d1c691798dd7ca1f0.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Section2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Part1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Part 1: Over-representation and Enrichment Analysis</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Section3_intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Section 3 - SNF + GNN’s</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paths">Paths</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-custom-functions">Import custom functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patient-network-analysis">2. Patient Network Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-on-individual-patient-networks">2.1 Clustering on Individual Patient Networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-network-fusion-snf">2.2 Similarity Network Fusion (SNF)</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By https://biomedicalinformaticsgroup.github.io/
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
