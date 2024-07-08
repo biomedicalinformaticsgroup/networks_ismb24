@@ -1,0 +1,1833 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Retrieval of Protein-Protein Interactions from STRING &#8212; ISMB Tutorial Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Section1/Part1';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="ISMB Tutorial Book - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="ISMB Tutorial Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    An Introduction to Multi Modal Analysis using Networks
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Section1_intro.html">Section 1 - Network Basics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Section1.html">Section 1</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Section2_intro.html">Section 2: Network Analysis</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Section2/Part1.html">Part 1: Over-representation and Enrichment Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Section2/Part2.html">Part 2: Similarity Network Fusion</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Section3_intro.html">Section 3 - SNF + GNN’s</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Section3/Part1.html"><font color="darkblue"> Part 1 : Message Passing </font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Section3/Part2.html"><font color="darkblue"> Part 2 : Problem Formulation / Patient Similarity Network Generation </font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Section3/Part3.html"><font color="darkblue"> Part 3 : Smoking Network Classification using Graph Convolutional Networks</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Section3/Part4.html"><font color="darkblue"> Part 4 : Similarity Network Fusion with Graph Convolutional Networks</font></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ConceptGlossary.html">Concept Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../functions_definitions.html">Custom Function Definitions</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Barry8197/ISMB_Test" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Barry8197/ISMB_Test/issues/new?title=Issue%20on%20page%20%2FSection1/Part1.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Section1/Part1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><font color='darkblue'>Retrieval of Protein-Protein Interactions from STRING</font></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><font color="darkblue">Retrieval of Protein-Protein Interactions from STRING</font></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-the-protein-protein-interaction-network"><font color="darkblue">Generating the Protein-Protein Interaction Network</font></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#node-degree"><font color="darkblue">Node Degree</font></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#closeness-centrality"><font color="darkblue">Closeness Centrality</font></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-coefficient"><font color="darkblue">Clustering Coefficient</font></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-the-network"><font color="darkblue">Clustering the Network</font></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-graph-with-clusters-coloured"><font color="darkblue">Plot the Graph with Clusters Coloured</font></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#gene-set-enrichement-analysis-example"><font color="darkblue">Gene Set Enrichement Analysis Example</font></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-using-the-pantherdb-api-for-enrichment-analysis"><font color="darkblue">(Optional) Using the PantherDB API for Enrichment Analysis</font></a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setting Up the Programming Environment</span>
+
+<span class="c1"># handling www based requests (like APIs)</span>
+<span class="kn">import</span> <span class="nn">urllib</span> <span class="k">as</span> <span class="nn">ul</span>
+
+<span class="c1"># standard Python data handling modules</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="c1"># working with networks</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+
+<span class="c1"># working with gene set enrichment analysis (GSEA)</span>
+<span class="kn">import</span> <span class="nn">gseapy</span> <span class="k">as</span> <span class="nn">gp</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For Step1 you can either use the fully automated approcah using Steps 1a, and 1b, or working from files you generate from the KEGG and String-DB websites as described in Step 1c.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># need to pull in the gene lists here</span>
+<span class="n">geneSymbols</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../networks/gene_symbols.csv&#39;</span><span class="p">)</span>
+
+<span class="n">geneSymbols</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gene_symbol</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A1BG</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A1BG-AS1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A2M</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A2M-AS1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A2ML1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">As the STRING API isn&#39;t really designed to deal with genome scale calls we have downloaded the entire protein interaction dataset</span>
+<span class="sd">for human and the mapping file that STRING use to map other gene identiers to their internal identifiers.</span>
+
+<span class="sd">https://string-db.org/cgi/download</span>
+
+<span class="sd">We will use pandas merge functions to map the HGNC gene symbols to the corresponding STRING identifiers.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># read in the interactions file</span>
+<span class="n">interactions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../networks/9606.protein.links.full.v12.0.txt&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+
+<span class="c1"># read in the mapping file</span>
+<span class="c1"># mapping = pd.read_csv(&#39;../networks/9606.protein.aliases.v12.0.HGNC.txt&#39;, sep=&#39;\t&#39;, header=None)</span>
+<span class="n">mapping</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../networks/9606.protein.aliases.v12.0.txt&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="c1">#put in place column headings</span>
+<span class="n">mapping</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;stringID&#39;</span><span class="p">,</span> <span class="s1">&#39;alias&#39;</span><span class="p">,</span> <span class="s1">&#39;source&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">interactions</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>protein1</th>
+      <th>protein2</th>
+      <th>neighborhood</th>
+      <th>neighborhood_transferred</th>
+      <th>fusion</th>
+      <th>cooccurence</th>
+      <th>homology</th>
+      <th>coexpression</th>
+      <th>coexpression_transferred</th>
+      <th>experiments</th>
+      <th>experiments_transferred</th>
+      <th>database</th>
+      <th>database_transferred</th>
+      <th>textmining</th>
+      <th>textmining_transferred</th>
+      <th>combined_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>9606.ENSP00000000233</td>
+      <td>9606.ENSP00000356607</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>45</td>
+      <td>0</td>
+      <td>134</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>81</td>
+      <td>173</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>9606.ENSP00000000233</td>
+      <td>9606.ENSP00000427567</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>128</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>70</td>
+      <td>154</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9606.ENSP00000000233</td>
+      <td>9606.ENSP00000253413</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>49</td>
+      <td>111</td>
+      <td>0</td>
+      <td>49</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>69</td>
+      <td>151</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>9606.ENSP00000000233</td>
+      <td>9606.ENSP00000493357</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>56</td>
+      <td>0</td>
+      <td>0</td>
+      <td>53</td>
+      <td>0</td>
+      <td>0</td>
+      <td>433</td>
+      <td>81</td>
+      <td>471</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>9606.ENSP00000000233</td>
+      <td>9606.ENSP00000324127</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>46</td>
+      <td>0</td>
+      <td>0</td>
+      <td>153</td>
+      <td>91</td>
+      <td>201</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mapping</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>stringID</th>
+      <th>alias</th>
+      <th>source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>#string_protein_id</td>
+      <td>alias</td>
+      <td>source</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>9606.ENSP00000000233</td>
+      <td>2B6H</td>
+      <td>Ensembl_PDB</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9606.ENSP00000000233</td>
+      <td>2B6H</td>
+      <td>UniProt_DR_PDB</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>9606.ENSP00000000233</td>
+      <td>381</td>
+      <td>Ensembl_HGNC_entrez_id</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>9606.ENSP00000000233</td>
+      <td>381</td>
+      <td>KEGG_GENEID</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># merge the geneSymbols with the mapping file on the gene_symbol column in the former and the alias in the latter</span>
+<span class="n">mappedGenes</span> <span class="o">=</span> <span class="n">geneSymbols</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;gene_symbol&#39;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;alias&#39;</span><span class="p">)</span>
+
+<span class="n">mappedGenes</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gene_symbol</th>
+      <th>stringID</th>
+      <th>alias</th>
+      <th>source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A1BG</td>
+      <td>9606.ENSP00000263100</td>
+      <td>A1BG</td>
+      <td>BioMart_HUGO</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A1BG</td>
+      <td>9606.ENSP00000263100</td>
+      <td>A1BG</td>
+      <td>Ensembl_EntrezGene</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A1BG</td>
+      <td>9606.ENSP00000263100</td>
+      <td>A1BG</td>
+      <td>Ensembl_HGNC</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A1BG</td>
+      <td>9606.ENSP00000263100</td>
+      <td>A1BG</td>
+      <td>Ensembl_HGNC_symbol</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A1BG</td>
+      <td>9606.ENSP00000263100</td>
+      <td>A1BG</td>
+      <td>Ensembl_UniProt</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># only retain the gene_symbol and stringID columns and make the rows unique</span>
+<span class="n">mappedGenes</span> <span class="o">=</span> <span class="n">mappedGenes</span><span class="p">[[</span><span class="s1">&#39;gene_symbol&#39;</span><span class="p">,</span> <span class="s1">&#39;stringID&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+
+<span class="c1"># print the length of the geneSymbols dataframe</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mappedGenes</span><span class="p">))</span>
+
+<span class="n">mappedGenes</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">It&#39;s important to understand how successful mappings are so we need to look at where these have failed.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># calulate the proportion of unique gene symbols that have been mapped</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mappedGenes</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">geneSymbols</span><span class="p">))</span>
+
+<span class="c1"># we have lost some genes so we need to understand why</span>
+<span class="c1"># find the gene symbols that are in geneSymbols but not in mappedGenes</span>
+<span class="n">missing</span> <span class="o">=</span> <span class="n">geneSymbols</span><span class="p">[</span><span class="o">~</span><span class="n">geneSymbols</span><span class="o">.</span><span class="n">gene_symbol</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">mappedGenes</span><span class="o">.</span><span class="n">gene_symbol</span><span class="p">)]</span>
+
+<span class="n">missing</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16974
+0.7505637850983861
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gene_symbol</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>A1BG-AS1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A2M-AS1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>A2MP1</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>AACSP1</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>AADACP1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># now we&#39;re going to use the unqiue list of string Ids from above and find every interaction where both partners are in the list</span>
+<span class="c1"># we need to remember that we need to catch both a&gt;b and b&gt;a interactions</span>
+
+<span class="c1"># get the unique list of string IDs</span>
+<span class="n">uniqueStrings</span> <span class="o">=</span> <span class="n">mappedGenes</span><span class="o">.</span><span class="n">stringID</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+
+<span class="c1"># filter the interactions dataframe to only include rows where the protein1 and protein2 columns are in the uniqueStrings list</span>
+<span class="n">filteredInteractions</span> <span class="o">=</span> <span class="n">interactions</span><span class="p">[</span><span class="n">interactions</span><span class="o">.</span><span class="n">protein1</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">uniqueStrings</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">interactions</span><span class="o">.</span><span class="n">protein2</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">uniqueStrings</span><span class="p">)]</span>
+
+<span class="c1"># print the length of the filteredInteractions dataframe</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">filteredInteractions</span><span class="p">))</span>
+
+<span class="n">filteredInteractions</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11247934
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>protein1</th>
+      <th>protein2</th>
+      <th>neighborhood</th>
+      <th>neighborhood_transferred</th>
+      <th>fusion</th>
+      <th>cooccurence</th>
+      <th>homology</th>
+      <th>coexpression</th>
+      <th>coexpression_transferred</th>
+      <th>experiments</th>
+      <th>experiments_transferred</th>
+      <th>database</th>
+      <th>database_transferred</th>
+      <th>textmining</th>
+      <th>textmining_transferred</th>
+      <th>combined_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>9606.ENSP00000000233</td>
+      <td>9606.ENSP00000356607</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>45</td>
+      <td>0</td>
+      <td>134</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>81</td>
+      <td>173</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>9606.ENSP00000000233</td>
+      <td>9606.ENSP00000427567</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>128</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>70</td>
+      <td>154</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9606.ENSP00000000233</td>
+      <td>9606.ENSP00000253413</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>49</td>
+      <td>111</td>
+      <td>0</td>
+      <td>49</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>69</td>
+      <td>151</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>9606.ENSP00000000233</td>
+      <td>9606.ENSP00000493357</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>56</td>
+      <td>0</td>
+      <td>0</td>
+      <td>53</td>
+      <td>0</td>
+      <td>0</td>
+      <td>433</td>
+      <td>81</td>
+      <td>471</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>9606.ENSP00000000233</td>
+      <td>9606.ENSP00000324127</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>46</td>
+      <td>0</td>
+      <td>0</td>
+      <td>153</td>
+      <td>91</td>
+      <td>201</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#lets take a look at a histogram of the combined score using seaborn</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">filteredInteractions</span><span class="o">.</span><span class="n">combined_score</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1">#report the min/max of the combined score</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">filteredInteractions</span><span class="o">.</span><span class="n">combined_score</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">filteredInteractions</span><span class="o">.</span><span class="n">combined_score</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+
+<span class="c1"># create a plot using seaborn where we vary the cut-off for the combined score on the x-axis and the number of interactions that pass that cut-off on the y-axis</span>
+
+<span class="c1"># generate the x-axis values</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">50</span><span class="p">)]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">filteredInteractions</span><span class="p">[</span><span class="n">filteredInteractions</span><span class="o">.</span><span class="n">combined_score</span> <span class="o">&gt;</span> <span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+
+<span class="c1"># create the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Combined Score&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of Interactions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/ian/miniconda3/envs/ismb24/lib/python3.10/site-packages/seaborn/_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
+  with pd.option_context(&#39;mode.use_inf_as_na&#39;, True):
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>150
+999
+</pre></div>
+</div>
+<img alt="../_images/54319d02834bc4c699ad62413b9e93e801abbce863d90a2d993510ec5cdf049f.png" src="../_images/54319d02834bc4c699ad62413b9e93e801abbce863d90a2d993510ec5cdf049f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># find the inflection point of the above curve</span>
+<span class="c1"># we can see that the curve is relatively flat until a combined score of 400</span>
+<span class="c1"># we will use this as our cut-off</span>
+<span class="n">cutoff</span> <span class="o">=</span> <span class="mi">800</span>
+
+<span class="c1"># filter the interactions dataframe to only include rows where the combined_score column is greater than the cutoff</span>
+<span class="n">filteredInteractions</span> <span class="o">=</span> <span class="n">filteredInteractions</span><span class="p">[</span><span class="n">filteredInteractions</span><span class="o">.</span><span class="n">combined_score</span> <span class="o">&gt;</span> <span class="n">cutoff</span><span class="p">]</span>
+
+<span class="c1"># print the length of the filteredInteractions dataframe</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">filteredInteractions</span><span class="p">))</span>
+
+<span class="n">filteredInteractions</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>277386
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>protein1</th>
+      <th>protein2</th>
+      <th>neighborhood</th>
+      <th>neighborhood_transferred</th>
+      <th>fusion</th>
+      <th>cooccurence</th>
+      <th>homology</th>
+      <th>coexpression</th>
+      <th>coexpression_transferred</th>
+      <th>experiments</th>
+      <th>experiments_transferred</th>
+      <th>database</th>
+      <th>database_transferred</th>
+      <th>textmining</th>
+      <th>textmining_transferred</th>
+      <th>combined_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>85</th>
+      <td>9606.ENSP00000000233</td>
+      <td>9606.ENSP00000158762</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>47</td>
+      <td>0</td>
+      <td>0</td>
+      <td>91</td>
+      <td>0</td>
+      <td>0</td>
+      <td>804</td>
+      <td>91</td>
+      <td>825</td>
+    </tr>
+    <tr>
+      <th>160</th>
+      <td>9606.ENSP00000000233</td>
+      <td>9606.ENSP00000262305</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>625</td>
+      <td>139</td>
+      <td>0</td>
+      <td>0</td>
+      <td>865</td>
+      <td>46</td>
+      <td>952</td>
+    </tr>
+    <tr>
+      <th>489</th>
+      <td>9606.ENSP00000000233</td>
+      <td>9606.ENSP00000480301</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>49</td>
+      <td>0</td>
+      <td>0</td>
+      <td>62</td>
+      <td>0</td>
+      <td>0</td>
+      <td>828</td>
+      <td>52</td>
+      <td>835</td>
+    </tr>
+    <tr>
+      <th>533</th>
+      <td>9606.ENSP00000000233</td>
+      <td>9606.ENSP00000249923</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>56</td>
+      <td>124</td>
+      <td>0</td>
+      <td>157</td>
+      <td>500</td>
+      <td>0</td>
+      <td>573</td>
+      <td>166</td>
+      <td>846</td>
+    </tr>
+    <tr>
+      <th>546</th>
+      <td>9606.ENSP00000000233</td>
+      <td>9606.ENSP00000306010</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>983</td>
+      <td>49</td>
+      <td>0</td>
+      <td>780</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0</td>
+      <td>57</td>
+      <td>0</td>
+      <td>888</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="retrieval-of-protein-protein-interactions-from-string">
+<h1><font color='darkblue'>Retrieval of Protein-Protein Interactions from STRING</font><a class="headerlink" href="#retrieval-of-protein-protein-interactions-from-string" title="Link to this heading">#</a></h1>
+<p>The details of the String-DB API can be found here - <a class="reference external" href="https://string-db.org/help/api/">https://string-db.org/help/api/</a></p>
+<p>APIs have specific formats required for their query URLs and it getting these correct in your code can take a little time until you get used to them. In this case we need to concatenate (stitch together) our gene IDs using a ‘%0D’ string. This is actually the encoding for a line-return which is in effect mimicking the one gene per line entry that you would paste into the web page.</p>
+</section>
+<section id="generating-the-protein-protein-interaction-network">
+<h1><font color='darkblue'>Generating the Protein-Protein Interaction Network</font><a class="headerlink" href="#generating-the-protein-protein-interaction-network" title="Link to this heading">#</a></h1>
+<p>Next we are going to use the NetworkX Python library to create the protein-protein interaction network.</p>
+<p>NetworkX - Network Analysis in Python - <a class="reference external" href="https://networkx.org/documentation/stable/index.html">https://networkx.org/documentation/stable/index.html</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a simple network view of the interactions using the NetworkX library</span>
+<span class="c1"># https://networkx.org/documentation/stable/index.html</span>
+
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+ <span class="c1">#Create an empty graph</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+
+<span class="c1"># add all nodes</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">filteredInteractions</span><span class="p">[</span><span class="s1">&#39;protein1&#39;</span><span class="p">])</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="n">filteredInteractions</span><span class="p">[</span><span class="s1">&#39;protein2&#39;</span><span class="p">]))</span> 
+
+<span class="c1"># add the edges (connections) to the network</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">edge1</span> <span class="p">,</span> <span class="n">edge2</span>  <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">filteredInteractions</span><span class="p">[</span><span class="s1">&#39;protein1&#39;</span><span class="p">]</span> <span class="p">,</span> <span class="n">filteredInteractions</span><span class="p">[</span><span class="s1">&#39;protein2&#39;</span><span class="p">])</span> <span class="p">:</span> <span class="c1">#add all edge to the network</span>
+    <span class="n">edges</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">edge1</span> <span class="p">,</span> <span class="n">edge2</span> <span class="p">))</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+
+<span class="c1">#save the graph in gml format</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">write_gml</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="s2">&quot;smokingPPI.gml&quot;</span><span class="p">)</span>
+
+<span class="c1"># export the graph as a list of edges</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">write_edgelist</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s2">&quot;smokingPPIedgelist.csv&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+
+<span class="c1"># # draw the network with a force directed layout specify plot size and node size and thin light gray edges</span>
+<span class="c1"># plt.figure(figsize=(15,15))</span>
+<span class="c1"># nx.draw(G, pos=nx.spring_layout(G,k=2), with_labels=True,node_size=100,edge_color=&#39;gray&#39;,node_color=&#39;lightblue&#39;,width=0.5)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="node-degree">
+<h1><font color='darkblue'>Node Degree</font><a class="headerlink" href="#node-degree" title="Link to this heading">#</a></h1>
+<p>Node degree is simply the number of connections a node has. Nodes with higher degree are often called <code class="docutils literal notranslate"><span class="pre">hub</span></code> nodes because they have many connections to other members of the network.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">density</span><span class="p">(</span><span class="n">G</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.1775980724091977
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#sort the genes (node names) by degree</span>
+<span class="n">sorted_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># print out the top10 using prettytable</span>
+<span class="kn">from</span> <span class="nn">prettytable</span> <span class="kn">import</span> <span class="n">PrettyTable</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">PrettyTable</span><span class="p">()</span>
+<span class="n">x</span><span class="o">.</span><span class="n">field_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Gene&quot;</span><span class="p">,</span><span class="s2">&quot;Degree&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">gene</span> <span class="ow">in</span> <span class="n">sorted_list</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">gene</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="closeness-centrality">
+<h1><font color='darkblue'>Closeness Centrality</font><a class="headerlink" href="#closeness-centrality" title="Link to this heading">#</a></h1>
+<p>This is a measure of how close a node is to the centre of the network. The closer a node is to the centre the shorter its path to all other nodes and hence its more likely to be representative of the network</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sort the genes (node names) by proximity to center</span>
+<span class="n">sorted_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">closeness_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+
+<span class="c1"># print out the top10 using prettytable</span>
+<span class="kn">from</span> <span class="nn">prettytable</span> <span class="kn">import</span> <span class="n">PrettyTable</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">PrettyTable</span><span class="p">()</span>
+<span class="n">x</span><span class="o">.</span><span class="n">field_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Gene&quot;</span><span class="p">,</span><span class="s2">&quot;Closeness&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">gene</span> <span class="ow">in</span> <span class="n">sorted_list</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">gene</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="clustering-coefficient">
+<h1><font color='darkblue'>Clustering Coefficient</font><a class="headerlink" href="#clustering-coefficient" title="Link to this heading">#</a></h1>
+<p>The clustering coefficient is a measure which combines centrality and degree. It measures the number of triangles a node can form (‘the friend of my friend is my friend’). If a node has more common friends with other nodes it more likely to representative of the network</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sort the genes (node names) by clustering coefficient</span>
+<span class="n">sorted_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">clustering</span><span class="p">(</span><span class="n">G</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># print out the top10 using prettytable</span>
+<span class="kn">from</span> <span class="nn">prettytable</span> <span class="kn">import</span> <span class="n">PrettyTable</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">PrettyTable</span><span class="p">()</span>
+<span class="n">x</span><span class="o">.</span><span class="n">field_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Gene&quot;</span><span class="p">,</span><span class="s2">&quot;Clustering&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">gene</span> <span class="ow">in</span> <span class="n">sorted_list</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">gene</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="clustering-the-network">
+<h1><font color='darkblue'>Clustering the Network</font><a class="headerlink" href="#clustering-the-network" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">from</span> <span class="nn">prettytable</span> <span class="kn">import</span> <span class="n">PrettyTable</span>
+
+<span class="c1"># we&#39;re going to cluster the networkx modularity clustering algorithm</span>
+<span class="n">communities</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">community</span><span class="o">.</span><span class="n">modularity_max</span><span class="o">.</span><span class="n">greedy_modularity_communities</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+<span class="c1"># print the number of communities</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The network has &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">communities</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39; communities.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># create sub-grpahs for each community</span>
+<span class="n">subgraphs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">community</span> <span class="ow">in</span> <span class="n">communities</span><span class="p">:</span>
+    <span class="n">subgraphs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">subgraph</span><span class="p">(</span><span class="n">community</span><span class="p">))</span>
+    
+<span class="c1"># print the number of nodes in each community</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">subgraph</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">subgraphs</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Community &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; has &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">subgraph</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">())</span><span class="o">+</span><span class="s1">&#39; nodes.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-the-graph-with-clusters-coloured">
+<h1><font color='darkblue'>Plot the Graph with Clusters Coloured</font><a class="headerlink" href="#plot-the-graph-with-clusters-coloured" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a dict with the gene_id as key and community membership list as value</span>
+<span class="n">communityDict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+<span class="c1"># loop through the communities</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">community</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">communities</span><span class="p">):</span>
+    <span class="c1"># loop through the diseases in the community</span>
+    <span class="k">for</span> <span class="n">gene_id</span> <span class="ow">in</span> <span class="n">community</span><span class="p">:</span>
+        <span class="c1"># add the disease and community to the dictionary</span>
+        <span class="n">communityDict</span><span class="p">[</span><span class="n">gene_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+
+<span class="c1"># plot the graph with the communities coloured</span>
+<span class="c1"># create a list of 18 colors</span>
+<span class="n">communityColours</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span><span class="s1">&#39;#ff7f0e&#39;</span><span class="p">,</span><span class="s1">&#39;#2ca02c&#39;</span><span class="p">]</span>
+
+<span class="c1"># create a list of the node colours</span>
+<span class="n">nodeColours</span> <span class="o">=</span> <span class="p">[</span><span class="n">communityColours</span><span class="p">[</span><span class="n">communityDict</span><span class="p">[</span><span class="n">node</span><span class="p">]]</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">()]</span>
+
+<span class="c1"># create a list of the node labels</span>
+<span class="n">nodeLabels</span> <span class="o">=</span> <span class="p">{</span><span class="n">node</span><span class="p">:</span><span class="n">node</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">()}</span>
+
+<span class="c1"># plot the graph</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># set the figure size</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+
+<span class="c1"># draw the graph separating nodes by their community</span>
+
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="n">nodeColours</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use enrichr to perform gene set enrichment analysis on the communities</span>
+
+<span class="c1">#create a separate gene list from communityDict dictionary for each community</span>
+<span class="n">community1_genes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">community2_genes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">community3_genes</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># loop through the dictionary</span>
+<span class="k">for</span> <span class="n">gene_id</span><span class="p">,</span> <span class="n">community</span> <span class="ow">in</span> <span class="n">communityDict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="c1"># add the gene to the appropriate community list</span>
+    <span class="k">if</span> <span class="n">community</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">community1_genes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gene_id</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">community</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">community2_genes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gene_id</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">community</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">community3_genes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gene_id</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">communityORA</span><span class="p">(</span><span class="n">genes</span><span class="p">):</span>
+    <span class="c1"># perform ORA against the Hallmark gene sets for each community</span>
+    <span class="n">enr</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">enrichr</span><span class="p">(</span><span class="n">gene_list</span><span class="o">=</span><span class="n">genes</span><span class="p">,</span> <span class="c1"># perform enrichment analysis using gsea</span>
+                    <span class="n">gene_sets</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;MSigDB_Hallmark_2020&#39;</span><span class="p">],</span>
+                    <span class="n">organism</span><span class="o">=</span><span class="s1">&#39;human&#39;</span><span class="p">,</span> <span class="c1"># don&#39;t forget to set organism to the one you desired! e.g. Yeast</span>
+                    <span class="n">outdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># don&#39;t write to disk</span>
+                    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">enr</span>
+
+<span class="c1"># perform ORA for each community</span>
+<span class="n">community1_enr</span> <span class="o">=</span> <span class="n">communityORA</span><span class="p">(</span><span class="n">community1_genes</span><span class="p">)</span>
+<span class="n">community2_enr</span> <span class="o">=</span> <span class="n">communityORA</span><span class="p">(</span><span class="n">community2_genes</span><span class="p">)</span>
+<span class="n">community3_enr</span> <span class="o">=</span> <span class="n">communityORA</span><span class="p">(</span><span class="n">community3_genes</span><span class="p">)</span>
+
+<span class="c1"># print the top 10 results for each community using prettytable</span>
+<span class="kn">from</span> <span class="nn">prettytable</span> <span class="kn">import</span> <span class="n">PrettyTable</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">PrettyTable</span><span class="p">()</span>
+<span class="n">x</span><span class="o">.</span><span class="n">field_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Community 1&quot;</span><span class="p">,</span><span class="s2">&quot;Community 2&quot;</span><span class="p">,</span><span class="s2">&quot;Community 3&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">add_row</span><span class="p">([</span><span class="n">community1_enr</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;Term&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="n">community2_enr</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;Term&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="n">community3_enr</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;Term&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="gene-set-enrichement-analysis-example">
+<h1><font color='darkblue'>Gene Set Enrichement Analysis Example</font><a class="headerlink" href="#gene-set-enrichement-analysis-example" title="Link to this heading">#</a></h1>
+<p>In order to perform <a class="reference external" href="https://gseapy.readthedocs.io/en/latest/index.html">GSEApy</a> we are going to use some suitable data. In this case some gene expression measurements for Parkinson’s Disease from:</p>
+<ul class="simple">
+<li><p>Lewandowski NM et al.Polyamine pathway contributes to the pathogenesis of Parkinson disease.</p></li>
+<li><p>Proc Natl Acad Sci U S A. 2010 Sep 28;107(39):16970-5. <a class="reference external" href="https://doi.org/10.1073/pnas.1011751107">doi: 10.1073/pnas.1011751107</a>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note this is crude as we are simply using normalised gene expression values, not for example performing differential gene expression analysis</span>
+<span class="c1"># we will return to this data in the coming weeks when we look at how we analyse gene expression data to find potentially important genes</span>
+
+<span class="c1"># we first read in the gene expression data which was measured from people with Parkinson&#39;s disease and healthy controls</span>
+<span class="n">genExp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/expression/PD_Expr.tsv&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># # select rows where &#39;IDENTIFIER&#39; is in the gene_ids list</span>
+<span class="c1"># genExp = genExp.loc[genExp[&#39;IDENTIFIER&#39;].isin(gene_symbols)]</span>
+
+<span class="c1"># change column names &#39;ID_Ref&#39; to &#39;Name&#39; and &#39;IDENTIFIER&#39; to &#39;GENES&#39;</span>
+<span class="n">genExp</span> <span class="o">=</span> <span class="n">genExp</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;ID_REF&#39;</span><span class="p">:</span><span class="s1">&#39;NAME&#39;</span><span class="p">,</span><span class="s1">&#39;IDENTIFIER&#39;</span><span class="p">:</span><span class="s1">&#39;GENES&#39;</span><span class="p">})</span>
+
+<span class="c1"># drop the &#39;NAME&#39; column</span>
+<span class="n">genExp</span> <span class="o">=</span> <span class="n">genExp</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="s1">&#39;NAME&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#make the GENES column the index</span>
+<span class="n">genExp</span> <span class="o">=</span> <span class="n">genExp</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;GENES&#39;</span><span class="p">)</span>
+
+<span class="c1"># how big is the dataframe</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The dataframe has &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">genExp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39; rows and &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">genExp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39; columns.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># show the top of the dataframe</span>
+<span class="n">genExp</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># we next need to specify which columns (samples are from PD patients and which are from controls)</span>
+
+<span class="n">control</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GSM488132&#39;</span><span class="p">,</span><span class="s1">&#39;GSM488118&#39;</span><span class="p">,</span><span class="s1">&#39;GSM488116&#39;</span><span class="p">,</span><span class="s1">&#39;GSM488114&#39;</span><span class="p">,</span><span class="s1">&#39;GSM488112&#39;</span><span class="p">,</span><span class="s1">&#39;GSM488131&#39;</span><span class="p">,</span><span class="s1">&#39;GSM488117&#39;</span><span class="p">,</span><span class="s1">&#39;GSM488115&#39;</span><span class="p">,</span><span class="s1">&#39;GSM488113&#39;</span><span class="p">,</span><span class="s1">&#39;GSM488111&#39;</span><span class="p">]</span>
+<span class="n">parkinsons</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GSM488130&#39;</span><span class="p">,</span><span class="s1">&#39;GSM488128&#39;</span><span class="p">,</span><span class="s1">&#39;GSM488126&#39;</span><span class="p">,</span><span class="s1">&#39;GSM488124&#39;</span><span class="p">,</span><span class="s1">&#39;GSM488122&#39;</span><span class="p">,</span><span class="s1">&#39;GSM488120&#39;</span><span class="p">,</span><span class="s1">&#39;GSM488129&#39;</span><span class="p">,</span><span class="s1">&#39;GSM488127&#39;</span><span class="p">,</span><span class="s1">&#39;GSM488125&#39;</span><span class="p">,</span><span class="s1">&#39;GSM488123&#39;</span><span class="p">,</span><span class="s1">&#39;GSM488121&#39;</span><span class="p">,</span><span class="s1">&#39;GSM488119&#39;</span><span class="p">]</span>
+
+<span class="c1"># create a class list where the class is &#39;control&#39; if the sample is in the control list and &#39;pd&#39; if it is in the pd list</span>
+<span class="n">classes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">genExp</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">control</span><span class="p">:</span>
+        <span class="n">classes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;control&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">parkinsons</span><span class="p">:</span>
+        <span class="n">classes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;parkinsons&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+<span class="c1"># print the number of samples in each class</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;There are &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">classes</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;control&#39;</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39; control samples and &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">classes</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;parkinsons&#39;</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39; PD samples.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># perform GSEA for each community against the union of the other commmunites</span>
+
+<span class="c1"># suppress warnings</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="c1"># #list the available MSigDB libraries</span>
+<span class="c1"># libraries = gp.get_library_name()</span>
+
+<span class="c1"># #pick a random library from libraries using random.choice</span>
+<span class="c1"># gene_sets = np.random.choice(libraries)</span>
+
+<span class="c1"># #print the library name</span>
+<span class="c1"># print(&#39;The library we will use is &#39;+gene_sets)</span>
+
+<span class="n">gene_sets</span> <span class="o">=</span> <span class="s1">&#39;KEGG_2019_Human&#39;</span>
+
+<span class="c1">#perform GSEA</span>
+<span class="n">gs_res</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">gsea</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">genExp</span><span class="p">,</span>
+                 <span class="n">gene_sets</span><span class="o">=</span><span class="n">gene_sets</span><span class="p">,</span>
+                 <span class="bp">cls</span><span class="o">=</span> <span class="n">classes</span><span class="p">,</span>
+                 <span class="n">permutation_num</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                 <span class="n">outdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">method</span><span class="o">=</span><span class="s1">&#39;signal_to_noise&#39;</span><span class="p">,</span>
+                 <span class="n">threads</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span> <span class="mi">7</span><span class="p">)</span>
+
+<span class="n">gs_res</span><span class="o">.</span><span class="n">res2d</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot the GSEA curves</span>
+<span class="n">terms</span> <span class="o">=</span> <span class="n">gs_res</span><span class="o">.</span><span class="n">res2d</span><span class="o">.</span><span class="n">Term</span>
+<span class="n">axs</span> <span class="o">=</span> <span class="n">gs_res</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">terms</span><span class="p">[:</span><span class="mi">5</span><span class="p">],</span> <span class="n">show_ranking</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">legend_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;loc&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">0</span><span class="p">)},</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gseapy</span> <span class="kn">import</span> <span class="n">heatmap</span>
+<span class="c1"># plotting heatmap</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">genes</span> <span class="o">=</span> <span class="n">gs_res</span><span class="o">.</span><span class="n">res2d</span><span class="o">.</span><span class="n">Lead_genes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+<span class="c1"># Make sure that ``ofname`` is not None, if you want to save your figure to disk</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">heatmap</span><span class="p">(</span><span class="n">df</span> <span class="o">=</span> <span class="n">gs_res</span><span class="o">.</span><span class="n">heatmat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">genes</span><span class="p">],</span> <span class="n">z_score</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="c1"># label the x axis with the class label of the sample</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">classes</span><span class="p">,</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span><span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">seaborn</span> <span class="kn">import</span> <span class="n">clustermap</span>
+<span class="c1"># clustermap</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">genes</span> <span class="o">=</span> <span class="n">gs_res</span><span class="o">.</span><span class="n">res2d</span><span class="o">.</span><span class="n">Lead_genes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+<span class="c1"># Make sure that ``ofname`` is not None, if you want to save your figure to disk</span>
+<span class="c1"># ax = clustermap(data = gs_res.heatmat.loc[genes], z_score=0, figsize=(14,4),metric=&#39;correlation&#39;,method=&#39;average&#39;)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">clustermap</span><span class="p">(</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">gs_res</span><span class="o">.</span><span class="n">heatmat</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">genes</span><span class="p">],</span>
+    <span class="n">pivot_kws</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
+    <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">,</span>
+    <span class="n">z_score</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="n">dendrogram_ratio</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+    <span class="n">colors_ratio</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span>
+    <span class="n">cbar_pos</span><span class="o">=</span><span class="p">(</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span>
+    <span class="n">tree_kws</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># label the x axis with the class label of the sample</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">ax_heatmap</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">classes</span><span class="p">,</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span><span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gseapy</span> <span class="kn">import</span> <span class="n">dotplot</span>
+<span class="c1"># to save your figure, make sure that ``ofname`` is not None</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">dotplot</span><span class="p">(</span><span class="n">gs_res</span><span class="o">.</span><span class="n">res2d</span><span class="p">,</span>
+             <span class="n">column</span><span class="o">=</span><span class="s2">&quot;FDR q-val&quot;</span><span class="p">,</span>
+             <span class="n">title</span><span class="o">=</span><span class="s1">&#39;KEGG_2021_Human&#39;</span><span class="p">,</span>
+             <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">viridis</span><span class="p">,</span>
+             <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+             <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">cutoff</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="optional-using-the-pantherdb-api-for-enrichment-analysis">
+<h1><font color='darkblue'>(Optional) Using the PantherDB API for Enrichment Analysis</font><a class="headerlink" href="#optional-using-the-pantherdb-api-for-enrichment-analysis" title="Link to this heading">#</a></h1>
+<p>PantherDB API details - <a class="reference external" href="http://pantherdb.org/services/details.jsp">http://pantherdb.org/services/details.jsp</a></p>
+<p>Functionality and Parameter testing - <a class="reference external" href="http://pantherdb.org/services/openAPISpec.jsp">http://pantherdb.org/services/openAPISpec.jsp</a></p>
+<p>This is quite hard work so you might decide it’s simplest (and quicker) at this stage to use the website functionality above).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># results are returned in JSON format so we need to load a Python module to handle this</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="c1"># the PantherDB API offers this function to find out what annotated resources it has available</span>
+<span class="n">query_url</span> <span class="o">=</span> <span class="s1">&#39;http://pantherdb.org/services/oai/pantherdb/supportedannotdatasets&#39;</span>
+
+<span class="c1"># execute the query</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">ul</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">query_url</span><span class="p">)</span>
+
+<span class="c1"># load the results returning a Python dictionary</span>
+<span class="n">annotationSets</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="n">annotations</span> <span class="o">=</span> <span class="n">annotationSets</span><span class="p">[</span><span class="s1">&#39;search&#39;</span><span class="p">][</span><span class="s1">&#39;annotation_data_sets&#39;</span><span class="p">][</span><span class="s1">&#39;annotation_data_type&#39;</span><span class="p">]</span>
+
+<span class="c1"># we can just iterate through these to see the annotation sources available</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">annotations</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Annotation Set Label = &#39;</span><span class="o">+</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;, annotDataSet string to use below = &#39;</span><span class="o">+</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># using the list of Entrez Gene IDs generated above (entrezgene_id) create a query string for the API</span>
+<span class="c1"># these need to be comma separated</span>
+<span class="n">genes</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="n">gene_ids</span><span class="p">))</span>
+
+<span class="c1"># use the PantherDB API - NB that GO:0008150 is the accession for the &quot;Biological Process&quot; clade of the Gene Ontology from above</span>
+<span class="n">query_url</span> <span class="o">=</span> <span class="s2">&quot;http://pantherdb.org/services/oai/pantherdb/enrich/overrep?&amp;geneInputList=&quot;</span><span class="o">+</span><span class="n">genes</span><span class="o">+</span><span class="s2">&quot;&amp;organism=9606&amp;annotDataSet=GO:0008150&amp;enrichmentTestType=FISHER&amp;correction=FDR&quot;</span>
+
+<span class="c1"># capture the results (NB this returns in JSON format)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">ul</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">query_url</span><span class="p">)</span>
+
+<span class="c1"># load the results from JSON to Python dictionary</span>
+<span class="n">enrichment_result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’re now going to format that into something human readable. There are many ways to do this, but this is a quick and (fairly) simple solution. Please do feel free to try your own.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># extract the actual result component</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">enrichment_result</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">][</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
+
+<span class="c1"># how long is the background list (in this case it is the default, the whole genome)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">),</span> <span class="s2">&quot;terms in reference list&quot;</span><span class="p">)</span>
+
+<span class="c1"># we&#39;re going to print this in a nice looking ASCII table</span>
+<span class="kn">from</span> <span class="nn">prettytable</span> <span class="kn">import</span> <span class="n">PrettyTable</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">PrettyTable</span><span class="p">()</span>
+
+<span class="n">x</span><span class="o">.</span><span class="n">field_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;GO Term&quot;</span><span class="p">,</span> <span class="s2">&quot;Expected&quot;</span><span class="p">,</span> <span class="s2">&quot;Fold enrichment&quot;</span><span class="p">,</span> <span class="s2">&quot;raw P value&quot;</span><span class="p">,</span> <span class="s2">&quot;FDR&quot;</span><span class="p">,</span> <span class="s2">&quot;Term label&quot;</span><span class="p">]</span>
+
+<span class="c1"># Sort in order of false discovery rate i.e. multiple testing correction</span>
+<span class="n">results</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;fdr&#39;</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># show the top10 results</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
+    <span class="n">fdr</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;fdr&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">fdr</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
+        <span class="c1"># Print result line</span>
+        <span class="n">term_id</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;term&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">term_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">term_id</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">current_row</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">term_id</span><span class="p">,</span>
+                <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;expected&#39;</span><span class="p">])),</span>  <span class="c1"># Convert float to string for printing</span>
+                <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;fold_enrichment&#39;</span><span class="p">])),</span>
+                <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:.3g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;pValue&#39;</span><span class="p">])),</span>
+                <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:.3g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;fdr&#39;</span><span class="p">])),</span>
+                <span class="n">r</span><span class="p">[</span><span class="s1">&#39;term&#39;</span><span class="p">][</span><span class="s2">&quot;label&quot;</span><span class="p">]</span>
+            <span class="p">]</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">current_row</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># that was quite painful</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Section1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><font color="darkblue">Retrieval of Protein-Protein Interactions from STRING</font></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-the-protein-protein-interaction-network"><font color="darkblue">Generating the Protein-Protein Interaction Network</font></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#node-degree"><font color="darkblue">Node Degree</font></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#closeness-centrality"><font color="darkblue">Closeness Centrality</font></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-coefficient"><font color="darkblue">Clustering Coefficient</font></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-the-network"><font color="darkblue">Clustering the Network</font></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-graph-with-clusters-coloured"><font color="darkblue">Plot the Graph with Clusters Coloured</font></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#gene-set-enrichement-analysis-example"><font color="darkblue">Gene Set Enrichement Analysis Example</font></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-using-the-pantherdb-api-for-enrichment-analysis"><font color="darkblue">(Optional) Using the PantherDB API for Enrichment Analysis</font></a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By https://biomedicalinformaticsgroup.github.io/
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

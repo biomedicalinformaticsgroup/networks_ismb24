@@ -1,0 +1,2734 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Section 2 &#8212; ISMB Tutorial Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Section1/Part2';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="ISMB Tutorial Book - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="ISMB Tutorial Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    An Introduction to Multi Modal Analysis using Networks
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Section1_intro.html">Section 1 - Network Basics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Section1.html">Section 1</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Section2_intro.html">Section 2: Network Analysis</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Section2/Part1.html">Part 1: Over-representation and Enrichment Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Section2/Part2.html">Part 2: Similarity Network Fusion</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Section3_intro.html">Section 3 - SNF + GNN’s</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Section3/Part1.html"><font color="darkblue"> Part 1 : Message Passing </font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Section3/Part2.html"><font color="darkblue"> Part 2 : Problem Formulation / Patient Similarity Network Generation </font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Section3/Part3.html"><font color="darkblue"> Part 3 : Smoking Network Classification using Graph Convolutional Networks</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Section3/Part4.html"><font color="darkblue"> Part 4 : Similarity Network Fusion with Graph Convolutional Networks</font></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ConceptGlossary.html">Concept Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../functions_definitions.html">Custom Function Definitions</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Barry8197/ISMB_Test" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Barry8197/ISMB_Test/issues/new?title=Issue%20on%20page%20%2FSection1/Part2.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Section1/Part2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Section 2</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Section 2</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structuring-biomedical-data-using-networks">Structuring Biomedical Data Using Networks</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#workshop-agenda-working-with-asd-data-and-network-analysis">Workshop Agenda: Working with ASD Data and Network Analysis</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-management">1. Data Management</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#network-generation">2. Network Generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#network-sparsification">3. Network Sparsification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-add-sfari-genes-as-labels-and-show-some-visualization-techniquesion-for-progressing-to-gene-networks">TODO add SFARI genes as labels and show some visualization techniquesion for progressing to gene networks.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-networks">4. Types of Networks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrating-other-datasets">5. Integrating Other Datasets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autism-spectrum-disorder-data">Autism Spectrum Disorder data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-for-na-handling-missing-data-outlier-check">1.3 Check for NA, handling missing data, outlier check</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-missing-data">Handling Missing data ??</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-low-priority">TODO: low priority</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-heterogeneity">Data heterogeneity</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-consider-to-drop-genes-based-on-low-expression-value">TODO: consider to DROP GENES BASED ON LOW EXPRESSION VALUE?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-ensg-to-gene-name">TODO: ensg to gene name</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-what-kind-of-clustering-happens-in-the-following-heatmaps">TODO: what kind of clustering happens in the following heatmaps</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sparsification-of-complex-graphs">Sparsification of complex graphs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#based-on-simple-metrics">Based on simple metrics</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-density-networkx-function-for-a-series-of-threshold-plot-it-and-move-on-based-on-that">TODO: density (networkx function) for a series of threshold, plot it and move on based on that</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-networkxs-dedensification-metohd">check networkxs dedensification metohd</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bicorr-and-knn">Bicorr and KNN</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#storing-generated-networks">Storing generated networks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generation-scotland">Generation Scotland</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-pip-network-using-string">Setting up PIP network using String</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="section-2">
+<h1>Section 2<a class="headerlink" href="#section-2" title="Link to this heading">#</a></h1>
+<section id="structuring-biomedical-data-using-networks">
+<h2>Structuring Biomedical Data Using Networks<a class="headerlink" href="#structuring-biomedical-data-using-networks" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>talk about features of biomedical datasets and the issues around working with them</p></li>
+<li><p>heterogeneity of data types</p></li>
+<li><p>outliers, noise, missing values</p></li>
+<li><p>network construction decisions - filtering, kNN, similarity calulation - effects of different data modalities</p></li>
+<li><p>introduce some of the key data types - transcriptomics, methylation etc.</p></li>
+<li><p>introduce GenScot study and describe the data</p></li>
+<li><p>notebooks doing the initial processing of example data set(s) culminating with the GenScot set</p></li>
+<li><p>emerge from sessions with a selection of networks to work on later in the workshop</p></li>
+</ul>
+</section>
+</section>
+<section id="workshop-agenda-working-with-asd-data-and-network-analysis">
+<h1>Workshop Agenda: Working with ASD Data and Network Analysis<a class="headerlink" href="#workshop-agenda-working-with-asd-data-and-network-analysis" title="Link to this heading">#</a></h1>
+<section id="data-management">
+<h2>1. Data Management<a class="headerlink" href="#data-management" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>1.1 Saving Data</strong>: Techniques for efficient data storage.</p></li>
+<li><p><strong>1.2 Loading Data</strong>: Best practices for importing data.</p></li>
+<li><p><strong>1.3 Data Cleaning</strong>:</p>
+<ul>
+<li><p>Checking for and handling missing data.</p></li>
+<li><p>Outlier detection and remediation.</p></li>
+</ul>
+</li>
+<li><p><strong>1.4 Data Visualization</strong>:</p>
+<ul>
+<li><p>Creating metadata plots for basic analysis of patient numbers.</p></li>
+<li><p>Evaluating features through simple plots.</p></li>
+</ul>
+</li>
+<li><p><strong>1.5 Assessing Data Quality</strong>:</p>
+<ul>
+<li><p>Checking for heterogeneity in the data.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="network-generation">
+<h2>2. Network Generation<a class="headerlink" href="#network-generation" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>2.1 Correlation Matrix</strong>: Construction and analysis.</p></li>
+<li><p><strong>2.2 Data Preprocessing</strong>:</p>
+<ul>
+<li><p>Scaling and normalization.</p></li>
+<li><p>Log transformation.</p></li>
+<li><p>Analyzing variable distribution.</p></li>
+</ul>
+</li>
+<li><p><strong>2.3 Correlation Measures</strong>:</p>
+<ul>
+<li><p>Pearson, Spearman, and Euclidean correlations.</p></li>
+<li><p>Absolute biweight midcorrelation.</p></li>
+<li><p>Log-transformed Pearson correlation.</p></li>
+</ul>
+</li>
+<li><p><strong>2.4 Outputting the Adjacency Matrix</strong>: From correlation to network structure.</p></li>
+</ul>
+</section>
+<section id="network-sparsification">
+<h2>3. Network Sparsification<a class="headerlink" href="#network-sparsification" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>3.1 Thresholding Methods</strong>:</p>
+<ul>
+<li><p>Thresholding by degree.</p></li>
+<li><p>Thresholding by closeness.</p></li>
+<li><p>Thresholding by edge weight.</p></li>
+</ul>
+</li>
+<li><p><strong>3.2 k-Nearest Neighbors (KNN)</strong>:</p>
+<ul>
+<li><p>Basic KNN sparsification.</p></li>
+<li><p>KNN combined with thresholding.</p></li>
+</ul>
+</li>
+<li><p><strong>3.3 Advanced Sparsification Techniques</strong>:</p>
+<ul>
+<li><p>Maximizing edge weight retention.</p></li>
+</ul>
+</li>
+<li><p><strong>3.4 Managing Graph Objects</strong>:</p>
+<ul>
+<li><p>Selecting the optimal graph representat</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="todo-add-sfari-genes-as-labels-and-show-some-visualization-techniquesion-for-progressing-to-gene-networks">
+<h2>TODO add SFARI genes as labels and show some visualization techniquesion for progressing to gene networks.<a class="headerlink" href="#todo-add-sfari-genes-as-labels-and-show-some-visualization-techniquesion-for-progressing-to-gene-networks" title="Link to this heading">#</a></h2>
+</section>
+<section id="types-of-networks">
+<h2>4. Types of Networks<a class="headerlink" href="#types-of-networks" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>4.1 Gene Correlation Networks</strong>: Building and analyzing.</p></li>
+<li><p><strong>4.2 Weighted Gene Co-expression Network Analysis (WGCNA)</strong>:</p>
+<ul>
+<li><p>Building networks analogous to Protein-Protein Interaction (PPI) networks.</p></li>
+</ul>
+</li>
+<li><p><strong>4.3 Patient Similarity Networks</strong>: Exploring new methodologies for patient data.</p></li>
+</ul>
+</section>
+<section id="integrating-other-datasets">
+<h2>5. Integrating Other Datasets<a class="headerlink" href="#integrating-other-datasets" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>5.1 Data Integration</strong>:</p>
+<ul>
+<li><p>Techniques for incorA sessions to enhance understanding and engagement.
+r datasets</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="data">
+<h2>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>ScotGen,</p></li>
+<li><p>ASD transcriptomic,</p></li>
+<li><p>Synaptic PPI</p></li>
+</ul>
+</section>
+<section id="autism-spectrum-disorder-data">
+<h2>Autism Spectrum Disorder data<a class="headerlink" href="#autism-spectrum-disorder-data" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import used libraries</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\cdt_data\ASD_magdalena\DS_10283_3827\RNASeq\RNASeq\RNAseq_ASD_datExpr.csv&quot;</span><span class="p">)</span>
+
+<span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Unnamed: 0&#39;</span><span class="p">:</span> <span class="s1">&#39;Patient_ID&#39;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># data = data.head(100)</span>
+
+<span class="c1"># Transpose the data so that genes are columns and rows are observations</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Patient_ID&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># data = data.iloc[:, :1000]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Patient_ID</th>
+      <th>ENSG00000000003</th>
+      <th>ENSG00000000005</th>
+      <th>ENSG00000000419</th>
+      <th>ENSG00000000457</th>
+      <th>ENSG00000000460</th>
+      <th>ENSG00000000938</th>
+      <th>ENSG00000000971</th>
+      <th>ENSG00000001036</th>
+      <th>ENSG00000001084</th>
+      <th>ENSG00000001167</th>
+      <th>...</th>
+      <th>ENSG00000273489</th>
+      <th>ENSG00000273490</th>
+      <th>ENSG00000273491</th>
+      <th>ENSG00000273492</th>
+      <th>ENSG00000273493</th>
+      <th>__no_feature</th>
+      <th>__ambiguous</th>
+      <th>__too_low_aQual</th>
+      <th>__not_aligned</th>
+      <th>__alignment_not_unique</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>01_052914</th>
+      <td>63</td>
+      <td>1</td>
+      <td>105</td>
+      <td>284</td>
+      <td>72</td>
+      <td>24</td>
+      <td>159</td>
+      <td>155</td>
+      <td>715</td>
+      <td>488</td>
+      <td>...</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>68</td>
+      <td>3</td>
+      <td>12726121</td>
+      <td>324319</td>
+      <td>0</td>
+      <td>0</td>
+      <td>5842658</td>
+    </tr>
+    <tr>
+      <th>01_053014</th>
+      <td>73</td>
+      <td>3</td>
+      <td>172</td>
+      <td>243</td>
+      <td>39</td>
+      <td>21</td>
+      <td>139</td>
+      <td>139</td>
+      <td>682</td>
+      <td>445</td>
+      <td>...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>31</td>
+      <td>0</td>
+      <td>11801279</td>
+      <td>277372</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3951895</td>
+    </tr>
+    <tr>
+      <th>01_061914</th>
+      <td>100</td>
+      <td>4</td>
+      <td>127</td>
+      <td>266</td>
+      <td>55</td>
+      <td>25</td>
+      <td>71</td>
+      <td>141</td>
+      <td>669</td>
+      <td>554</td>
+      <td>...</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td>70</td>
+      <td>0</td>
+      <td>18192534</td>
+      <td>314101</td>
+      <td>0</td>
+      <td>0</td>
+      <td>7507251</td>
+    </tr>
+    <tr>
+      <th>01_072114</th>
+      <td>80</td>
+      <td>0</td>
+      <td>85</td>
+      <td>280</td>
+      <td>63</td>
+      <td>67</td>
+      <td>154</td>
+      <td>123</td>
+      <td>526</td>
+      <td>437</td>
+      <td>...</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>23</td>
+      <td>1</td>
+      <td>19509561</td>
+      <td>231035</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3863531</td>
+    </tr>
+    <tr>
+      <th>01_072214</th>
+      <td>72</td>
+      <td>0</td>
+      <td>146</td>
+      <td>296</td>
+      <td>50</td>
+      <td>28</td>
+      <td>433</td>
+      <td>192</td>
+      <td>642</td>
+      <td>543</td>
+      <td>...</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>31</td>
+      <td>2</td>
+      <td>11825201</td>
+      <td>285657</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4125572</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>41_072214</th>
+      <td>81</td>
+      <td>2</td>
+      <td>126</td>
+      <td>193</td>
+      <td>55</td>
+      <td>61</td>
+      <td>192</td>
+      <td>135</td>
+      <td>513</td>
+      <td>516</td>
+      <td>...</td>
+      <td>26</td>
+      <td>0</td>
+      <td>0</td>
+      <td>36</td>
+      <td>1</td>
+      <td>19612339</td>
+      <td>239329</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4656268</td>
+    </tr>
+    <tr>
+      <th>41_082014</th>
+      <td>64</td>
+      <td>2</td>
+      <td>106</td>
+      <td>222</td>
+      <td>41</td>
+      <td>27</td>
+      <td>129</td>
+      <td>131</td>
+      <td>434</td>
+      <td>423</td>
+      <td>...</td>
+      <td>9</td>
+      <td>0</td>
+      <td>0</td>
+      <td>29</td>
+      <td>3</td>
+      <td>14594164</td>
+      <td>238705</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3922692</td>
+    </tr>
+    <tr>
+      <th>45_071514</th>
+      <td>78</td>
+      <td>1</td>
+      <td>160</td>
+      <td>277</td>
+      <td>75</td>
+      <td>46</td>
+      <td>153</td>
+      <td>169</td>
+      <td>690</td>
+      <td>580</td>
+      <td>...</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>20</td>
+      <td>4</td>
+      <td>14017074</td>
+      <td>317867</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6812698</td>
+    </tr>
+    <tr>
+      <th>13_081514</th>
+      <td>72</td>
+      <td>1</td>
+      <td>78</td>
+      <td>238</td>
+      <td>90</td>
+      <td>11</td>
+      <td>61</td>
+      <td>107</td>
+      <td>707</td>
+      <td>562</td>
+      <td>...</td>
+      <td>8</td>
+      <td>0</td>
+      <td>0</td>
+      <td>24</td>
+      <td>2</td>
+      <td>18614266</td>
+      <td>275348</td>
+      <td>0</td>
+      <td>0</td>
+      <td>7636206</td>
+    </tr>
+    <tr>
+      <th>37_082014</th>
+      <td>83</td>
+      <td>0</td>
+      <td>131</td>
+      <td>162</td>
+      <td>72</td>
+      <td>42</td>
+      <td>304</td>
+      <td>163</td>
+      <td>696</td>
+      <td>679</td>
+      <td>...</td>
+      <td>6</td>
+      <td>0</td>
+      <td>0</td>
+      <td>22</td>
+      <td>1</td>
+      <td>19202943</td>
+      <td>283629</td>
+      <td>0</td>
+      <td>0</td>
+      <td>6771685</td>
+    </tr>
+  </tbody>
+</table>
+<p>88 rows × 63682 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="check-for-na-handling-missing-data-outlier-check">
+<h2>1.3 Check for NA, handling missing data, outlier check<a class="headerlink" href="#check-for-na-handling-missing-data-outlier-check" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check for missing values in each column</span>
+<span class="n">missing_values</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="c1"># Calculate the percentage of missing values for each column</span>
+<span class="n">missing_percentage</span> <span class="o">=</span> <span class="p">(</span><span class="n">missing_values</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="c1"># Create a DataFrame to hold the missing data statistics</span>
+<span class="n">missing_stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Total Missing&#39;</span><span class="p">:</span> <span class="n">missing_values</span><span class="p">,</span> <span class="s1">&#39;Percentage&#39;</span><span class="p">:</span> <span class="n">missing_percentage</span><span class="p">})</span>
+
+<span class="c1"># Filter to display only columns with missing values</span>
+<span class="n">missing_stats</span> <span class="o">=</span> <span class="n">missing_stats</span><span class="p">[</span><span class="n">missing_stats</span><span class="p">[</span><span class="s1">&#39;Total Missing&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Print out the missing values statistics for columns with missing data</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">missing_stats</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Missing values in columns:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">missing_stats</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No missing values found in the dataset.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No missing values found in the dataset.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check for negative values</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Calculate the mean of each column</span>
+<span class="n">means</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="c1"># Create a list of column IDs (integer index)</span>
+<span class="n">column_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+
+<span class="c1"># Plotting</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">column_ids</span><span class="p">,</span> <span class="n">means</span><span class="p">)</span>
+
+<span class="c1"># Setting the x-axis to a log scale</span>
+<span class="c1">#plt.yscale(&#39;log&#39;)</span>
+
+<span class="c1"># Labeling the axes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Column ID (log scale)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Mean of column&#39;</span><span class="p">)</span>
+
+<span class="c1"># Adding a title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Scatter Plot of Column Means vs. Log-Scaled Column IDs&#39;</span><span class="p">)</span>
+
+<span class="c1"># Adjust xticks to label each point with the corresponding column name</span>
+<span class="c1">#plt.xticks(column_ids, df.columns)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ca42e464fbe9530434616144cff5478880457426125c650d82694b605d7c9e16.png" src="../_images/ca42e464fbe9530434616144cff5478880457426125c650d82694b605d7c9e16.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sort the means in descending order and get the top 10</span>
+<span class="n">top_10_columns</span> <span class="o">=</span> <span class="n">means</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Print the results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top 10 columns based on their mean values:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">top_10_columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Top 10 columns based on their mean values:
+Patient_ID
+__no_feature              1.554640e+07
+__alignment_not_unique    6.160270e+06
+ENSG00000265150           5.270622e+05
+ENSG00000258486           3.581358e+05
+ENSG00000202198           3.081574e+05
+__ambiguous               2.858661e+05
+ENSG00000251562           1.753168e+05
+ENSG00000210082           1.675279e+05
+ENSG00000198804           1.607942e+05
+ENSG00000259001           1.111658e+05
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sort the means in ascending order and get the bottom 10</span>
+<span class="n">bottom_10_columns</span> <span class="o">=</span> <span class="n">means</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Print the results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bottom 10 columns based on their mean values:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bottom_10_columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bottom 10 columns based on their mean values:
+Patient_ID
+ENSG00000221266    0.0
+ENSG00000262812    0.0
+ENSG00000262811    0.0
+ENSG00000262809    0.0
+ENSG00000234454    0.0
+ENSG00000262808    0.0
+ENSG00000262806    0.0
+ENSG00000262805    0.0
+ENSG00000234448    0.0
+ENSG00000234443    0.0
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List columns that start with &quot;__&quot;</span>
+<span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;__&quot;</span>
+<span class="n">columns_starting_with_prefix</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">col</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">prefix</span><span class="p">)]</span>
+
+<span class="c1"># Print the results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Columns starting with &#39;__&#39;:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">columns_starting_with_prefix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Columns starting with &#39;__&#39;:
+[&#39;__no_feature&#39;, &#39;__ambiguous&#39;, &#39;__too_low_aQual&#39;, &#39;__not_aligned&#39;, &#39;__alignment_not_unique&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># drop weird columns</span>
+<span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="n">columns_starting_with_prefix</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Patient_ID</th>
+      <th>ENSG00000000003</th>
+      <th>ENSG00000000005</th>
+      <th>ENSG00000000419</th>
+      <th>ENSG00000000457</th>
+      <th>ENSG00000000460</th>
+      <th>ENSG00000000938</th>
+      <th>ENSG00000000971</th>
+      <th>ENSG00000001036</th>
+      <th>ENSG00000001084</th>
+      <th>ENSG00000001167</th>
+      <th>...</th>
+      <th>ENSG00000273484</th>
+      <th>ENSG00000273485</th>
+      <th>ENSG00000273486</th>
+      <th>ENSG00000273487</th>
+      <th>ENSG00000273488</th>
+      <th>ENSG00000273489</th>
+      <th>ENSG00000273490</th>
+      <th>ENSG00000273491</th>
+      <th>ENSG00000273492</th>
+      <th>ENSG00000273493</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>01_052914</th>
+      <td>63</td>
+      <td>1</td>
+      <td>105</td>
+      <td>284</td>
+      <td>72</td>
+      <td>24</td>
+      <td>159</td>
+      <td>155</td>
+      <td>715</td>
+      <td>488</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>10</td>
+      <td>52</td>
+      <td>8</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>68</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>01_053014</th>
+      <td>73</td>
+      <td>3</td>
+      <td>172</td>
+      <td>243</td>
+      <td>39</td>
+      <td>21</td>
+      <td>139</td>
+      <td>139</td>
+      <td>682</td>
+      <td>445</td>
+      <td>...</td>
+      <td>0</td>
+      <td>2</td>
+      <td>9</td>
+      <td>70</td>
+      <td>7</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>31</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>01_061914</th>
+      <td>100</td>
+      <td>4</td>
+      <td>127</td>
+      <td>266</td>
+      <td>55</td>
+      <td>25</td>
+      <td>71</td>
+      <td>141</td>
+      <td>669</td>
+      <td>554</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>16</td>
+      <td>203</td>
+      <td>16</td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td>70</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>01_072114</th>
+      <td>80</td>
+      <td>0</td>
+      <td>85</td>
+      <td>280</td>
+      <td>63</td>
+      <td>67</td>
+      <td>154</td>
+      <td>123</td>
+      <td>526</td>
+      <td>437</td>
+      <td>...</td>
+      <td>0</td>
+      <td>2</td>
+      <td>21</td>
+      <td>32</td>
+      <td>20</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>23</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>01_072214</th>
+      <td>72</td>
+      <td>0</td>
+      <td>146</td>
+      <td>296</td>
+      <td>50</td>
+      <td>28</td>
+      <td>433</td>
+      <td>192</td>
+      <td>642</td>
+      <td>543</td>
+      <td>...</td>
+      <td>0</td>
+      <td>3</td>
+      <td>13</td>
+      <td>66</td>
+      <td>12</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>31</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>41_072214</th>
+      <td>81</td>
+      <td>2</td>
+      <td>126</td>
+      <td>193</td>
+      <td>55</td>
+      <td>61</td>
+      <td>192</td>
+      <td>135</td>
+      <td>513</td>
+      <td>516</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>16</td>
+      <td>66</td>
+      <td>15</td>
+      <td>26</td>
+      <td>0</td>
+      <td>0</td>
+      <td>36</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>41_082014</th>
+      <td>64</td>
+      <td>2</td>
+      <td>106</td>
+      <td>222</td>
+      <td>41</td>
+      <td>27</td>
+      <td>129</td>
+      <td>131</td>
+      <td>434</td>
+      <td>423</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>12</td>
+      <td>38</td>
+      <td>16</td>
+      <td>9</td>
+      <td>0</td>
+      <td>0</td>
+      <td>29</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>45_071514</th>
+      <td>78</td>
+      <td>1</td>
+      <td>160</td>
+      <td>277</td>
+      <td>75</td>
+      <td>46</td>
+      <td>153</td>
+      <td>169</td>
+      <td>690</td>
+      <td>580</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>7</td>
+      <td>69</td>
+      <td>20</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>20</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>13_081514</th>
+      <td>72</td>
+      <td>1</td>
+      <td>78</td>
+      <td>238</td>
+      <td>90</td>
+      <td>11</td>
+      <td>61</td>
+      <td>107</td>
+      <td>707</td>
+      <td>562</td>
+      <td>...</td>
+      <td>0</td>
+      <td>3</td>
+      <td>10</td>
+      <td>48</td>
+      <td>21</td>
+      <td>8</td>
+      <td>0</td>
+      <td>0</td>
+      <td>24</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>37_082014</th>
+      <td>83</td>
+      <td>0</td>
+      <td>131</td>
+      <td>162</td>
+      <td>72</td>
+      <td>42</td>
+      <td>304</td>
+      <td>163</td>
+      <td>696</td>
+      <td>679</td>
+      <td>...</td>
+      <td>0</td>
+      <td>4</td>
+      <td>16</td>
+      <td>24</td>
+      <td>8</td>
+      <td>6</td>
+      <td>0</td>
+      <td>0</td>
+      <td>22</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>88 rows × 63677 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="handling-missing-data">
+<h2>Handling Missing data ??<a class="headerlink" href="#handling-missing-data" title="Link to this heading">#</a></h2>
+<section id="todo-low-priority">
+<h3>TODO: low priority<a class="headerlink" href="#todo-low-priority" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_plots</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">num_plots</span>
+
+<span class="ne">NameError</span>: name &#39;num_plots&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="data-heterogeneity">
+<h2>Data heterogeneity<a class="headerlink" href="#data-heterogeneity" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select numerical columns</span>
+<span class="n">numerical_columns</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;float64&#39;</span><span class="p">,</span> <span class="s1">&#39;int64&#39;</span><span class="p">])</span>
+
+<span class="c1"># Calculate the mean of each column</span>
+<span class="n">means</span> <span class="o">=</span> <span class="n">numerical_columns</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="c1"># Get the top 10 and bottom 10 columns based on mean values</span>
+<span class="n">top_10_columns</span> <span class="o">=</span> <span class="n">means</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">bottom_10_columns</span> <span class="o">=</span> <span class="n">means</span><span class="o">.</span><span class="n">nsmallest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="c1"># Combine top 10 and bottom 10 columns for plotting</span>
+<span class="n">columns_to_plot</span> <span class="o">=</span> <span class="n">top_10_columns</span> <span class="o">+</span> <span class="n">bottom_10_columns</span>
+
+<span class="c1"># Filter the numerical columns to only include those to plot</span>
+<span class="n">filtered_numerical_columns</span> <span class="o">=</span> <span class="n">numerical_columns</span><span class="p">[</span><span class="n">columns_to_plot</span><span class="p">]</span>
+
+<span class="c1"># Calculate the number of rows needed for subplots based on the number of selected columns</span>
+<span class="n">num_plots</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered_numerical_columns</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">num_rows</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_plots</span> <span class="o">//</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">num_plots</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Ensure there is an extra row if there are leftovers</span>
+
+<span class="c1"># Plot histograms for each selected numerical column</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">num_rows</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">num_rows</span><span class="p">))</span>  <span class="c1"># Adjust width and height as needed</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Distribution of Selected Numerical Variables (Top 10 &amp; Bottom 10)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">filtered_numerical_columns</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">filtered_numerical_columns</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Value&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+
+<span class="c1"># Hide any unused axes if the number of plots isn&#39;t a perfect multiple of 4</span>
+<span class="k">if</span> <span class="n">num_plots</span> <span class="o">%</span> <span class="mi">4</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()[</span><span class="n">num_plots</span><span class="p">:]:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">rect</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">])</span>  <span class="c1"># Adjust layout to make room for the suptitle</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3c741800791351b98b5931bd99f5a5be849421b370f967db9055df171d7ea3fb.png" src="../_images/3c741800791351b98b5931bd99f5a5be849421b370f967db9055df171d7ea3fb.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="todo-consider-to-drop-genes-based-on-low-expression-value">
+<h1>TODO: consider to DROP GENES BASED ON LOW EXPRESSION VALUE?<a class="headerlink" href="#todo-consider-to-drop-genes-based-on-low-expression-value" title="Link to this heading">#</a></h1>
+<p>yes</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For categorical data, you can use bar plots to visualize the frequency of each category</span>
+<span class="n">categorical_columns</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+<span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">categorical_columns</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Distribution of </span><span class="si">{</span><span class="n">column</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">numerical_columns</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;float64&#39;</span><span class="p">,</span> <span class="s1">&#39;int64&#39;</span><span class="p">])</span>
+
+<span class="c1"># Determine the number of rows and columns for the subplot grid</span>
+<span class="n">columns_per_row</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># Number of columns in each row of subplots</span>
+<span class="n">num_columns</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">numerical_columns</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">num_rows</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_columns</span> <span class="o">//</span> <span class="n">columns_per_row</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">num_columns</span> <span class="o">%</span> <span class="n">columns_per_row</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Create a figure with subplots in a grid</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">num_rows</span><span class="p">,</span> <span class="n">columns_per_row</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">num_rows</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Outliers in Numerical Variables&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="c1"># Flatten axes array to simplify the loop logic</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">numerical_columns</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+    <span class="c1"># Plot boxplot for each column</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">vert</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># &#39;vert=False&#39; makes the boxplot horizontal</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Values&#39;</span><span class="p">)</span>
+
+<span class="c1"># Hide unused axes if the number of plots isn&#39;t a perfect multiple of the number of columns per row</span>
+<span class="k">if</span> <span class="n">num_columns</span> <span class="o">%</span> <span class="n">columns_per_row</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">[</span><span class="n">num_columns</span><span class="p">:]:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">rect</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">])</span>  <span class="c1"># Adjust the layout to make room for the suptitle</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/04a0b538f4755b6f234d075fd5ee69514f9c706b92ea1316c7eded3f8530369c.png" src="../_images/04a0b538f4755b6f234d075fd5ee69514f9c706b92ea1316c7eded3f8530369c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">10000</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="todo-ensg-to-gene-name">
+<h1>TODO: ensg to gene name<a class="headerlink" href="#todo-ensg-to-gene-name" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Normalizing data - Log transformation</span>
+<span class="c1"># Adding a pseudocount to avoid log(0) which is undefined</span>
+<span class="k">def</span> <span class="nf">log_transform</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="c1"># Log transformation (log2(x + 1))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">data</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">min_max_scale</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="c1"># Min-Max scaling</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">data</span> <span class="o">-</span> <span class="n">data</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">data</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dictionary to store different correlation matrices</span>
+<span class="n">correlation_matrices</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># Original data correlation (if applicable/necessary)</span>
+<span class="n">correlation_matrices</span><span class="p">[</span><span class="s1">&#39;original&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>
+
+<span class="c1"># Log transformed data correlation</span>
+<span class="n">normalized_log</span> <span class="o">=</span> <span class="n">log_transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">correlation_matrices</span><span class="p">[</span><span class="s1">&#39;log_transformed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">normalized_log</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>
+
+<span class="c1"># Min-Max scaled data correlation</span>
+<span class="n">normalized_min_max</span> <span class="o">=</span> <span class="n">min_max_scale</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">correlation_matrices</span><span class="p">[</span><span class="s1">&#39;min_max_scaled&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">normalized_min_max</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>
+
+<span class="c1"># Access and use a specific correlation matrix</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Correlation matrix - Log Transformed:&quot;</span><span class="p">)</span>
+<span class="c1">#print(correlation_matrices[&#39;log_transformed&#39;])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlation matrix - Log Transformed:
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Spearman correlation</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">pdist</span><span class="p">,</span> <span class="n">squareform</span>
+
+
+<span class="n">correlation_matrices</span><span class="p">[</span><span class="s1">&#39;spearman&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;spearman&#39;</span><span class="p">)</span>
+
+<span class="c1"># Euclidean distance - converting distance matrix to a DataFrame for compatibility</span>
+<span class="n">euclidean_distances</span> <span class="o">=</span> <span class="n">squareform</span><span class="p">(</span><span class="n">pdist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">))</span>
+<span class="n">correlation_matrices</span><span class="p">[</span><span class="s1">&#39;euclidean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">euclidean_distances</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="c1"># Now you can access and use the Spearman correlation matrix or the Euclidean distance matrix</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Spearman Correlation Matrix:&quot;</span><span class="p">)</span>
+<span class="c1">#print(correlation_matrices[&#39;spearman&#39;])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Euclidean Distance Matrix:&quot;</span><span class="p">)</span>
+<span class="c1">#print(correlation_matrices[&#39;euclidean&#39;])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Spearman Correlation Matrix:
+
+Euclidean Distance Matrix:
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: FIX ABS_BICORR</span>
+
+<span class="k">def</span> <span class="nf">abs_bicorr</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="p">:</span> 
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">_get_numeric_data</span><span class="p">()</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">cols</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">mat</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">na_value</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">mat</span> <span class="o">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="n">K</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>
+    <span class="n">correl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">K</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span>
+
+    <span class="n">bicorr</span> <span class="o">=</span> <span class="n">astropy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">biweight_midcovariance</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="p">)</span> <span class="p">:</span> 
+        <span class="n">correl</span><span class="p">[</span><span class="n">i</span> <span class="p">,</span> <span class="p">:</span> <span class="p">]</span> <span class="o">=</span> <span class="n">bicorr</span><span class="p">[</span><span class="n">i</span> <span class="p">,</span> <span class="p">:]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">bicorr</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">bicorr</span><span class="p">))</span>
+        
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">correl</span> <span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">idx</span> <span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span> <span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="todo-what-kind-of-clustering-happens-in-the-following-heatmaps">
+<h1>TODO: what kind of clustering happens in the following heatmaps<a class="headerlink" href="#todo-what-kind-of-clustering-happens-in-the-following-heatmaps" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="k">def</span> <span class="nf">plot_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">ax</span><span class="p">):</span>
+    <span class="c1"># Heatmap of the correlation or distance matrix</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">cbar_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;shrink&#39;</span><span class="p">:</span> <span class="mf">.5</span><span class="p">},</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="c1"># Plot each matrix</span>
+<span class="n">plot_matrix</span><span class="p">(</span><span class="n">correlation_matrices</span><span class="p">[</span><span class="s1">&#39;original&#39;</span><span class="p">],</span> <span class="s1">&#39;Original Pearson Correlation&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">plot_matrix</span><span class="p">(</span><span class="n">correlation_matrices</span><span class="p">[</span><span class="s1">&#39;log_transformed&#39;</span><span class="p">],</span> <span class="s1">&#39;Log Transformed Pearson Correlation&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">plot_matrix</span><span class="p">(</span><span class="n">correlation_matrices</span><span class="p">[</span><span class="s1">&#39;min_max_scaled&#39;</span><span class="p">],</span> <span class="s1">&#39;Min-Max Scaled Pearson Correlation&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">plot_matrix</span><span class="p">(</span><span class="n">correlation_matrices</span><span class="p">[</span><span class="s1">&#39;spearman&#39;</span><span class="p">],</span> <span class="s1">&#39;Spearman Correlation&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">plot_matrix</span><span class="p">(</span><span class="n">correlation_matrices</span><span class="p">[</span><span class="s1">&#39;euclidean&#39;</span><span class="p">],</span> <span class="s1">&#39;Euclidean Distance&#39;</span><span class="p">,</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Hide the unused subplot (if any)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\sebestyenkamp\anaconda3\envs\ismbenv\Lib\site-packages\seaborn\matrix.py:260: FutureWarning: Format strings passed to MaskedConstant are ignored, but in future may error or produce different behavior
+  annotation = (&quot;{:&quot; + self.fmt + &quot;}&quot;).format(val)
+C:\Users\sebestyenkamp\anaconda3\envs\ismbenv\Lib\site-packages\seaborn\matrix.py:260: FutureWarning: Format strings passed to MaskedConstant are ignored, but in future may error or produce different behavior
+  annotation = (&quot;{:&quot; + self.fmt + &quot;}&quot;).format(val)
+C:\Users\sebestyenkamp\anaconda3\envs\ismbenv\Lib\site-packages\seaborn\matrix.py:260: FutureWarning: Format strings passed to MaskedConstant are ignored, but in future may error or produce different behavior
+  annotation = (&quot;{:&quot; + self.fmt + &quot;}&quot;).format(val)
+C:\Users\sebestyenkamp\anaconda3\envs\ismbenv\Lib\site-packages\seaborn\matrix.py:260: FutureWarning: Format strings passed to MaskedConstant are ignored, but in future may error or produce different behavior
+  annotation = (&quot;{:&quot; + self.fmt + &quot;}&quot;).format(val)
+</pre></div>
+</div>
+<img alt="../_images/5847ce6ece6d6887ea1b648ca56e66e2f9cb2e329fb062cf76cc664946beb4af.png" src="../_images/5847ce6ece6d6887ea1b648ca56e66e2f9cb2e329fb062cf76cc664946beb4af.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Alternatively use WGCNA ?</span>
+<span class="c1"># https://github.com/mortazavilab/PyWGCNA?tab=readme-ov-file</span>
+<span class="c1"># https://en.wikipedia.org/wiki/Weighted_correlation_network_analysis#:~:text=Weighted%20correlation%20network%20analysis%2C%20also,on%20pairwise%20correlations%20between%20variables.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a graph from the adjacency matrix</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_pandas_adjacency</span><span class="p">(</span><span class="n">correlation_matrices</span><span class="p">[</span><span class="s1">&#39;original&#39;</span><span class="p">])</span>
+
+<span class="c1"># Plot the network</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="c1"># Position nodes using the spring layout algorithm for nice aesthetics</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="c1"># Draw nodes and edges</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="c1"># Draw node labels</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">font_family</span><span class="o">=</span><span class="s1">&#39;sans-serif&#39;</span><span class="p">)</span>
+
+<span class="c1"># Remove the axis</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Gene Regulatory Network (GRN)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">correlation_matrices</span><span class="p">[</span><span class="s1">&#39;original&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Patient_ID</th>
+      <th>ENSG00000000003</th>
+      <th>ENSG00000000005</th>
+      <th>ENSG00000000419</th>
+      <th>ENSG00000000457</th>
+      <th>ENSG00000000460</th>
+      <th>ENSG00000000938</th>
+      <th>ENSG00000000971</th>
+      <th>ENSG00000001036</th>
+      <th>ENSG00000001084</th>
+      <th>ENSG00000001167</th>
+      <th>...</th>
+      <th>ENSG00000155621</th>
+      <th>ENSG00000155622</th>
+      <th>ENSG00000155629</th>
+      <th>ENSG00000155636</th>
+      <th>ENSG00000155640</th>
+      <th>ENSG00000155657</th>
+      <th>ENSG00000155659</th>
+      <th>ENSG00000155660</th>
+      <th>ENSG00000155666</th>
+      <th>ENSG00000155714</th>
+    </tr>
+    <tr>
+      <th>Patient_ID</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>ENSG00000000003</th>
+      <td>1.000000</td>
+      <td>-0.042486</td>
+      <td>0.298026</td>
+      <td>0.223362</td>
+      <td>0.291175</td>
+      <td>0.305384</td>
+      <td>0.423688</td>
+      <td>0.658827</td>
+      <td>0.462417</td>
+      <td>0.432857</td>
+      <td>...</td>
+      <td>0.353418</td>
+      <td>NaN</td>
+      <td>0.481082</td>
+      <td>0.283031</td>
+      <td>0.052522</td>
+      <td>0.246133</td>
+      <td>0.453718</td>
+      <td>0.339164</td>
+      <td>-0.164747</td>
+      <td>-0.096215</td>
+    </tr>
+    <tr>
+      <th>ENSG00000000005</th>
+      <td>-0.042486</td>
+      <td>1.000000</td>
+      <td>0.177769</td>
+      <td>0.162953</td>
+      <td>-0.112138</td>
+      <td>0.003452</td>
+      <td>0.035166</td>
+      <td>0.039170</td>
+      <td>-0.020925</td>
+      <td>-0.210681</td>
+      <td>...</td>
+      <td>-0.273364</td>
+      <td>NaN</td>
+      <td>0.044157</td>
+      <td>-0.032397</td>
+      <td>-0.008614</td>
+      <td>-0.001983</td>
+      <td>0.010526</td>
+      <td>-0.111242</td>
+      <td>-0.028133</td>
+      <td>0.143119</td>
+    </tr>
+    <tr>
+      <th>ENSG00000000419</th>
+      <td>0.298026</td>
+      <td>0.177769</td>
+      <td>1.000000</td>
+      <td>0.597557</td>
+      <td>0.093545</td>
+      <td>-0.007350</td>
+      <td>0.067359</td>
+      <td>0.335385</td>
+      <td>0.428808</td>
+      <td>0.222787</td>
+      <td>...</td>
+      <td>0.167196</td>
+      <td>NaN</td>
+      <td>0.181603</td>
+      <td>0.297941</td>
+      <td>0.111203</td>
+      <td>-0.171529</td>
+      <td>0.062529</td>
+      <td>0.359968</td>
+      <td>0.163283</td>
+      <td>0.165181</td>
+    </tr>
+    <tr>
+      <th>ENSG00000000457</th>
+      <td>0.223362</td>
+      <td>0.162953</td>
+      <td>0.597557</td>
+      <td>1.000000</td>
+      <td>0.277404</td>
+      <td>-0.159248</td>
+      <td>-0.048439</td>
+      <td>0.203196</td>
+      <td>0.380732</td>
+      <td>-0.009258</td>
+      <td>...</td>
+      <td>-0.040278</td>
+      <td>NaN</td>
+      <td>0.005829</td>
+      <td>0.476490</td>
+      <td>0.187316</td>
+      <td>-0.156072</td>
+      <td>-0.020087</td>
+      <td>-0.038488</td>
+      <td>0.480332</td>
+      <td>0.239516</td>
+    </tr>
+    <tr>
+      <th>ENSG00000000460</th>
+      <td>0.291175</td>
+      <td>-0.112138</td>
+      <td>0.093545</td>
+      <td>0.277404</td>
+      <td>1.000000</td>
+      <td>0.242848</td>
+      <td>0.223986</td>
+      <td>0.484996</td>
+      <td>0.109299</td>
+      <td>0.368052</td>
+      <td>...</td>
+      <td>0.340127</td>
+      <td>NaN</td>
+      <td>0.402731</td>
+      <td>0.459763</td>
+      <td>0.238576</td>
+      <td>0.000228</td>
+      <td>0.440603</td>
+      <td>0.246293</td>
+      <td>0.382062</td>
+      <td>0.123713</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>ENSG00000155657</th>
+      <td>0.246133</td>
+      <td>-0.001983</td>
+      <td>-0.171529</td>
+      <td>-0.156072</td>
+      <td>0.000228</td>
+      <td>-0.035157</td>
+      <td>0.076859</td>
+      <td>-0.024595</td>
+      <td>0.082845</td>
+      <td>0.153609</td>
+      <td>...</td>
+      <td>0.086302</td>
+      <td>NaN</td>
+      <td>-0.077452</td>
+      <td>0.117541</td>
+      <td>0.213879</td>
+      <td>1.000000</td>
+      <td>-0.100157</td>
+      <td>-0.023396</td>
+      <td>-0.007390</td>
+      <td>-0.009455</td>
+    </tr>
+    <tr>
+      <th>ENSG00000155659</th>
+      <td>0.453718</td>
+      <td>0.010526</td>
+      <td>0.062529</td>
+      <td>-0.020087</td>
+      <td>0.440603</td>
+      <td>0.749756</td>
+      <td>0.537771</td>
+      <td>0.726786</td>
+      <td>0.009087</td>
+      <td>0.197822</td>
+      <td>...</td>
+      <td>0.086919</td>
+      <td>NaN</td>
+      <td>0.944830</td>
+      <td>0.059042</td>
+      <td>0.239810</td>
+      <td>-0.100157</td>
+      <td>1.000000</td>
+      <td>0.462384</td>
+      <td>-0.123507</td>
+      <td>0.052848</td>
+    </tr>
+    <tr>
+      <th>ENSG00000155660</th>
+      <td>0.339164</td>
+      <td>-0.111242</td>
+      <td>0.359968</td>
+      <td>-0.038488</td>
+      <td>0.246293</td>
+      <td>0.671194</td>
+      <td>0.495571</td>
+      <td>0.649149</td>
+      <td>0.234953</td>
+      <td>0.475681</td>
+      <td>...</td>
+      <td>0.339656</td>
+      <td>NaN</td>
+      <td>0.621980</td>
+      <td>-0.089353</td>
+      <td>0.261522</td>
+      <td>-0.023396</td>
+      <td>0.462384</td>
+      <td>1.000000</td>
+      <td>-0.149444</td>
+      <td>0.131492</td>
+    </tr>
+    <tr>
+      <th>ENSG00000155666</th>
+      <td>-0.164747</td>
+      <td>-0.028133</td>
+      <td>0.163283</td>
+      <td>0.480332</td>
+      <td>0.382062</td>
+      <td>-0.175985</td>
+      <td>-0.134946</td>
+      <td>-0.111260</td>
+      <td>-0.000727</td>
+      <td>0.070078</td>
+      <td>...</td>
+      <td>-0.011481</td>
+      <td>NaN</td>
+      <td>-0.169196</td>
+      <td>0.405690</td>
+      <td>0.332056</td>
+      <td>-0.007390</td>
+      <td>-0.123507</td>
+      <td>-0.149444</td>
+      <td>1.000000</td>
+      <td>0.215877</td>
+    </tr>
+    <tr>
+      <th>ENSG00000155714</th>
+      <td>-0.096215</td>
+      <td>0.143119</td>
+      <td>0.165181</td>
+      <td>0.239516</td>
+      <td>0.123713</td>
+      <td>0.066601</td>
+      <td>0.053891</td>
+      <td>0.076962</td>
+      <td>0.138693</td>
+      <td>0.054943</td>
+      <td>...</td>
+      <td>0.077277</td>
+      <td>NaN</td>
+      <td>0.057555</td>
+      <td>0.116627</td>
+      <td>0.166077</td>
+      <td>-0.009455</td>
+      <td>0.052848</td>
+      <td>0.131492</td>
+      <td>0.215877</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>10000 rows × 10000 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assuming &#39;filtered_correlation_matrix&#39; is your thresholded correlation matrix from previous steps</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="c1"># Convert the filtered correlation matrix into an adjacency matrix for the graph</span>
+<span class="c1"># We consider correlations above the threshold as edges in the network</span>
+
+<span class="c1"># Create an identity matrix of the same size as the correlation matrix</span>
+<span class="n">identity_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">correlation_matrix</span><span class="p">))</span>
+
+<span class="c1"># Create the adjacency matrix by converting the correlation matrix to binary based on the threshold</span>
+<span class="c1"># and subtracting the identity matrix to remove self-connections</span>
+<span class="n">adjacency_matrix</span> <span class="o">=</span> <span class="p">(</span><span class="n">correlation_matrix</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="o">-</span> <span class="n">identity_matrix</span>
+
+<span class="c1"># Convert adjacency matrix to an integer type, if necessary</span>
+<span class="n">adjacency_matrix</span> <span class="o">=</span> <span class="n">adjacency_matrix</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># Ensure no negative values after subtraction (in case of numerical issues)</span>
+<span class="n">adjacency_matrix</span><span class="p">[</span><span class="n">adjacency_matrix</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Replace zeros with NaN</span>
+<span class="n">adjacency_matrix</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Drop all rows and columns that only contain NaN</span>
+<span class="n">adjacency_matrix</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Drop rows that have all NaN</span>
+<span class="n">adjacency_matrix</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Drop columns that have all NaN</span>
+
+<span class="c1"># Optionally, replace NaNs back with zeros if needed for other processing</span>
+<span class="n">adjacency_matrix</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">#adjacency_matrix = (correlation_matrix &gt; threshold).astype(int)-np.eye</span>
+<span class="c1"># print(adjacency_matrix)</span>
+
+<span class="c1"># Create a graph from the adjacency matrix</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_pandas_adjacency</span><span class="p">(</span><span class="n">adjacency_matrix</span><span class="p">)</span>
+
+<span class="c1"># Plot the network</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="c1"># Position nodes using the spring layout algorithm for nice aesthetics</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="c1"># Draw nodes and edges</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="c1"># Draw node labels</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">font_family</span><span class="o">=</span><span class="s1">&#39;sans-serif&#39;</span><span class="p">)</span>
+
+<span class="c1"># Remove the axis</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Gene Regulatory Network (GRN)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/792dca508e8324bb75b558b8630bc3f71321d921a2330f6596011f9dd7dbd809.png" src="../_images/792dca508e8324bb75b558b8630bc3f71321d921a2330f6596011f9dd7dbd809.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># G.edges(data=True)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># how many edges and nodes in the graph?</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The graph has &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">())</span><span class="o">+</span><span class="s1">&#39; edges and &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">())</span><span class="o">+</span><span class="s1">&#39; nodes.&#39;</span><span class="p">)</span>
+
+<span class="c1"># divide the number of edges by the number of nodes to get the average degree</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The average degree of the graph is &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">()</span><span class="o">/</span><span class="n">G</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">())</span><span class="o">+</span><span class="s1">&#39;.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The graph has 776 edges and 88 nodes.
+The average degree of the graph is 8.818181818181818.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Selecting a soft-thresholding power, this is usually done through analysis of the scale-free fit index</span>
+<span class="c1"># For demonstration, we will assume a power of 6</span>
+<span class="c1"># power = 6</span>
+<span class="c1"># adjacency_matrix = np.power(correlation_matrix, power)</span>
+
+<span class="c1"># Creating a networkx graph from the adjacency matrix</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_numpy_array</span><span class="p">(</span><span class="n">adjacency_matrix</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
+
+<span class="c1"># Relabel nodes to correspond to gene names</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">relabel_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">correlation_matrix</span><span class="o">.</span><span class="n">columns</span><span class="p">)))</span>
+
+<span class="c1"># Visualizing the network</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Preliminary Gene Co-expression Network&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Please note: This is a simplistic approach. The WGCNA package in R provides much more</span>
+<span class="c1"># sophisticated methods for network construction and module detection.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/35640738e3bf8b34adbfe34a766faf8dbda6e7f6e4caceff9f4ad25af74098d4.png" src="../_images/35640738e3bf8b34adbfe34a766faf8dbda6e7f6e4caceff9f4ad25af74098d4.png" />
+</div>
+</div>
+<section id="sparsification-of-complex-graphs">
+<h2>Sparsification of complex graphs<a class="headerlink" href="#sparsification-of-complex-graphs" title="Link to this heading">#</a></h2>
+<section id="based-on-simple-metrics">
+<h3>Based on simple metrics<a class="headerlink" href="#based-on-simple-metrics" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the sparsification functions</span>
+<span class="k">def</span> <span class="nf">remove_by_closeness</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.3</span><span class="p">):</span>
+    <span class="n">closeness</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">closeness_centrality</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+    <span class="c1"># Create a copy to modify</span>
+    <span class="n">modified_graph</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">gene</span><span class="p">,</span> <span class="n">centrality</span> <span class="ow">in</span> <span class="n">closeness</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">centrality</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">:</span>
+            <span class="n">modified_graph</span><span class="o">.</span><span class="n">remove_node</span><span class="p">(</span><span class="n">gene</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">modified_graph</span>
+
+<span class="k">def</span> <span class="nf">remove_by_degree</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">min_degree</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">degrees</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">degree</span><span class="p">())</span>
+    <span class="c1"># Create a copy to modify</span>
+    <span class="n">modified_graph</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">gene</span><span class="p">,</span> <span class="n">degree</span> <span class="ow">in</span> <span class="n">degrees</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">degree</span> <span class="o">&lt;</span> <span class="n">min_degree</span><span class="p">:</span>
+            <span class="n">modified_graph</span><span class="o">.</span><span class="n">remove_node</span><span class="p">(</span><span class="n">gene</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">modified_graph</span>
+
+<span class="c1"># Initialize a dictionary to store graphs</span>
+<span class="n">graphs</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">graphs</span><span class="p">[</span><span class="s1">&#39;original&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># Store the original graph</span>
+
+<span class="c1"># Sparsification by weight threshold</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">filtered_edges</span> <span class="o">=</span> <span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">]</span>
+<span class="n">graphs</span><span class="p">[</span><span class="s1">&#39;threshold_0.5&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">graphs</span><span class="p">[</span><span class="s1">&#39;threshold_0.5&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">filtered_edges</span><span class="p">)</span>
+
+<span class="c1"># Sparsification by top percentage of weights</span>
+<span class="n">top_percentage</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Top 10%</span>
+<span class="n">sorted_edges</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">top_edges_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sorted_edges</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">top_percentage</span> <span class="o">/</span> <span class="mi">100</span><span class="p">))</span>
+<span class="n">graphs</span><span class="p">[</span><span class="s1">&#39;top_10_percent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="n">graphs</span><span class="p">[</span><span class="s1">&#39;top_10_percent&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">sorted_edges</span><span class="p">[:</span><span class="n">top_edges_count</span><span class="p">])</span>
+
+<span class="c1"># Apply closeness centrality sparsification</span>
+<span class="n">graphs</span><span class="p">[</span><span class="s1">&#39;closeness_below_0.3&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">remove_by_closeness</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Apply degree sparsification</span>
+<span class="n">graphs</span><span class="p">[</span><span class="s1">&#39;degree_below_3&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">remove_by_degree</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">min_degree</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="todo-density-networkx-function-for-a-series-of-threshold-plot-it-and-move-on-based-on-that">
+<h1>TODO: density (networkx function) for a series of threshold, plot it and move on based on that<a class="headerlink" href="#todo-density-networkx-function-for-a-series-of-threshold-plot-it-and-move-on-based-on-that" title="Link to this heading">#</a></h1>
+<section id="check-networkxs-dedensification-metohd">
+<h2>check networkxs dedensification metohd<a class="headerlink" href="#check-networkxs-dedensification-metohd" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">display_graphs</span><span class="p">(</span><span class="n">graph_dict</span><span class="p">):</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">graph_dict</span><span class="p">[</span><span class="s1">&#39;original&#39;</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># k=2 for more spaced out layout</span>
+    
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">graph</span> <span class="ow">in</span> <span class="n">graph_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+        <span class="c1"># Draw the graph using the specified options</span>
+        <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">display_graphs</span><span class="p">(</span><span class="n">graphs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d75e03bd0da98ab99ba973eee9be0b278941c277e1cd56cc2d2ba2ba0e0f95ce.png" src="../_images/d75e03bd0da98ab99ba973eee9be0b278941c277e1cd56cc2d2ba2ba0e0f95ce.png" />
+<img alt="../_images/0997d3c479fce9ac910b3f2047d5d89dc5c29f54777f2ae8f7faa499e259b309.png" src="../_images/0997d3c479fce9ac910b3f2047d5d89dc5c29f54777f2ae8f7faa499e259b309.png" />
+<img alt="../_images/2bb6041b2aabbd66a14fb29094f758bb83a2b54fa02d575394ede0080f04dc31.png" src="../_images/2bb6041b2aabbd66a14fb29094f758bb83a2b54fa02d575394ede0080f04dc31.png" />
+<img alt="../_images/4d1eeca9c092ff87531822cc0a7205eef8011eb7a90b4c6e7a57acbd814eda83.png" src="../_images/4d1eeca9c092ff87531822cc0a7205eef8011eb7a90b4c6e7a57acbd814eda83.png" />
+<img alt="../_images/eb1d3c91f229867ffe9427ce7fdd173112c94a47529dcd8b9aeac3819df74e59.png" src="../_images/eb1d3c91f229867ffe9427ce7fdd173112c94a47529dcd8b9aeac3819df74e59.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">54</span><span class="p">],</span> <span class="n">line</span> <span class="mi">15</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="c1"># Function to display graphs (optional for debugging or visual inspection)</span>
+<span class="ne">---&gt; </span><span class="mi">15</span> <span class="n">display_graphs</span><span class="p">(</span><span class="n">graphs</span><span class="p">)</span>
+
+<span class="nn">Cell In[54], line 8,</span> in <span class="ni">display_graphs</span><span class="nt">(graph_dict)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1"># Draw the graph using the specified options</span>
+<span class="ne">----&gt; </span><span class="mi">8</span> <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>         <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nn">File ~\anaconda3\envs\ismbenv\Lib\site-packages\networkx\drawing\nx_pylab.py:121,</span> in <span class="ni">draw</span><span class="nt">(G, pos, ax, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">118</span> <span class="k">if</span> <span class="s2">&quot;with_labels&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwds</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">119</span>     <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;with_labels&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;labels&quot;</span> <span class="ow">in</span> <span class="n">kwds</span>
+<span class="ne">--&gt; </span><span class="mi">121</span> <span class="n">draw_networkx</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">122</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">123</span> <span class="n">plt</span><span class="o">.</span><span class="n">draw_if_interactive</span><span class="p">()</span>
+
+<span class="nn">File ~\anaconda3\envs\ismbenv\Lib\site-packages\networkx\drawing\nx_pylab.py:304,</span> in <span class="ni">draw_networkx</span><span class="nt">(G, pos, arrows, with_labels, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">301</span>     <span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">drawing</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>  <span class="c1"># default to spring layout</span>
+<span class="g g-Whitespace">    </span><span class="mi">303</span> <span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="o">**</span><span class="n">node_kwds</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">304</span> <span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">arrows</span><span class="o">=</span><span class="n">arrows</span><span class="p">,</span> <span class="o">**</span><span class="n">edge_kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">305</span> <span class="k">if</span> <span class="n">with_labels</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">306</span>     <span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="o">**</span><span class="n">label_kwds</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\envs\ismbenv\Lib\site-packages\networkx\drawing\nx_pylab.py:656,</span> in <span class="ni">draw_networkx_edges</span><span class="nt">(G, pos, edgelist, width, edge_color, style, alpha, arrowstyle, arrowsize, edge_cmap, edge_vmin, edge_vmax, ax, arrows, label, node_size, nodelist, node_shape, connectionstyle, min_source_margin, min_target_margin)</span>
+<span class="g g-Whitespace">    </span><span class="mi">650</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">    </span><span class="mi">652</span> <span class="c1"># The default behavior is to use LineCollection to draw edges for</span>
+<span class="g g-Whitespace">    </span><span class="mi">653</span> <span class="c1"># undirected graphs (for performance reasons) and use FancyArrowPatches</span>
+<span class="g g-Whitespace">    </span><span class="mi">654</span> <span class="c1"># for directed graphs.</span>
+<span class="g g-Whitespace">    </span><span class="mi">655</span> <span class="c1"># The `arrows` keyword can be used to override the default behavior</span>
+<span class="ne">--&gt; </span><span class="mi">656</span> <span class="n">use_linecollection</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">G</span><span class="o">.</span><span class="n">is_directed</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">657</span> <span class="k">if</span> <span class="n">arrows</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">658</span>     <span class="n">use_linecollection</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">arrows</span>
+
+<span class="ne">AttributeError</span>: &#39;dict&#39; object has no attribute &#39;is_directed&#39;
+</pre></div>
+</div>
+<img alt="../_images/94e6329786bff473e6825e1c01c9077d083f684a080149586eec7d13095a2344.png" src="../_images/94e6329786bff473e6825e1c01c9077d083f684a080149586eec7d13095a2344.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># draw the network with a force directed layout specify plot size and node size and thin light gray edges</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">graphs</span><span class="p">[</span><span class="s1">&#39;original&#39;</span><span class="p">],</span> <span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">node_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ed5e0c3789160c87fba78c6d2c7f07d9c9a95af5a086322203726646916fcb0f.png" src="../_images/ed5e0c3789160c87fba78c6d2c7f07d9c9a95af5a086322203726646916fcb0f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">graphs</span><span class="p">[</span><span class="s1">&#39;threshold_0.5&#39;</span><span class="p">],</span> <span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">node_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4d1c25e1f35bda1851bdcc92d9e7dbfadfe4d6b07cfd31b7e2fe9eaaae4a45bb.png" src="../_images/4d1c25e1f35bda1851bdcc92d9e7dbfadfe4d6b07cfd31b7e2fe9eaaae4a45bb.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">graphs</span><span class="p">[</span><span class="s1">&#39;top_10_percent&#39;</span><span class="p">],</span> <span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">node_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a74fc1fdd25dfcb3b0ca9af76c1c54c6f791f344a9ef9753e7fc23504e30b37c.png" src="../_images/a74fc1fdd25dfcb3b0ca9af76c1c54c6f791f344a9ef9753e7fc23504e30b37c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To iterate over all matrices and print them</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">matrix</span> <span class="ow">in</span> <span class="n">correlation_matrices</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> Correlation Matrix:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># draw the network with a force directed layout specify plot size and node size and thin light gray edges</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">node_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f39d48a76f40f31ec4c1b5f5c190ebe1af06dab3add2740a92a547786428b233.png" src="../_images/f39d48a76f40f31ec4c1b5f5c190ebe1af06dab3add2740a92a547786428b233.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="bicorr-and-knn">
+<h1>Bicorr and KNN<a class="headerlink" href="#bicorr-and-knn" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_k_neighbours</span><span class="p">(</span><span class="n">df</span> <span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="p">:</span> 
+    <span class="n">k_neighbours</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">w1</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="p">:</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dataframe should be a similarity matrix of max value 1&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">values</span> <span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="p">:</span> 
+            <span class="n">neighbours</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">node</span><span class="p">]</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_list</span><span class="p">()[</span><span class="mi">1</span><span class="p">:]</span> <span class="c1">#Exclude the node itself</span>
+            <span class="n">k_neighbours</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">neighbours</span>
+        
+    <span class="k">return</span> <span class="n">k_neighbours</span>
+
+<span class="k">def</span> <span class="nf">plot_knn_network</span><span class="p">(</span><span class="n">df</span> <span class="p">,</span> <span class="n">K</span> <span class="p">,</span> <span class="n">labels</span> <span class="p">,</span> <span class="n">node_colours</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;skyblue&#39;</span><span class="p">]</span> <span class="p">,</span> <span class="n">node_size</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span> <span class="p">:</span> 
+    <span class="c1"># Get K-nearest neighbours for each node</span>
+    <span class="n">k_neighbours</span> <span class="o">=</span> <span class="n">get_k_neighbours</span><span class="p">(</span><span class="n">df</span> <span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">K</span><span class="p">)</span>
+    
+    <span class="c1"># Create a NetworkX graph</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+    
+        <span class="c1"># Add nodes to the graph</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+    <span class="c1"># Add edges based on the k-nearest neighbours</span>
+    <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">neighbours</span> <span class="ow">in</span> <span class="n">k_neighbours</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">neighbours</span><span class="p">:</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="n">node_size</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="n">node_colours</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">G</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">apply_knn_sparsification</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply kNN sparsification to the graph G.</span>
+<span class="sd">    :param G: A NetworkX graph where edges have a &#39;weight&#39; attribute.</span>
+<span class="sd">    :param k: The number of nearest neighbors to retain for each node.</span>
+<span class="sd">    :param mode: &#39;distance&#39; (smaller is closer) or &#39;similarity&#39; (larger is closer).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Create a new graph to store the sparsified version</span>
+    <span class="n">sparsified_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+    
+    <span class="c1"># Iterate over all nodes and apply kNN selection</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
+        <span class="n">neighbors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">node</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>  <span class="c1"># Get all neighbors and their edge data</span>
+        <span class="c1"># Sort neighbors according to weight, which could represent distance or similarity</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;distance&#39;</span><span class="p">:</span>
+            <span class="c1"># For distance, closer neighbors have smaller weights; keep the smallest</span>
+            <span class="n">neighbors</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span>
+            <span class="n">chosen_neighbors</span> <span class="o">=</span> <span class="n">neighbors</span><span class="p">[:</span><span class="n">k</span><span class="p">]</span>  <span class="c1"># Pick k smallest</span>
+        <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;similarity&#39;</span><span class="p">:</span>
+            <span class="c1"># For similarity, closer neighbors have larger weights; keep the largest</span>
+            <span class="n">neighbors</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">chosen_neighbors</span> <span class="o">=</span> <span class="n">neighbors</span><span class="p">[:</span><span class="n">k</span><span class="p">]</span>  <span class="c1"># Pick k largest</span>
+
+        <span class="c1"># Add edges from the node to its k-nearest neighbors</span>
+        <span class="k">for</span> <span class="n">neighbor</span><span class="p">,</span> <span class="n">edge_data</span> <span class="ow">in</span> <span class="n">chosen_neighbors</span><span class="p">:</span>
+            <span class="n">sparsified_graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">edge_data</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">sparsified_graph</span>
+
+<span class="c1"># Example usage:</span>
+<span class="c1"># Assuming &#39;G&#39; is your original graph and each edge has a &#39;weight&#39; attribute</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># Number of neighbors</span>
+<span class="n">sparsified_G</span> <span class="o">=</span> <span class="n">apply_knn_sparsification</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">)</span>  <span class="c1"># Adjust mode based on your data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">sparsified_G</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># k=2 increases the space between nodes</span>
+
+<span class="c1"># Now, draw the graph with the specified node and edge aesthetics</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">sparsified_G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;kNN Sparsified Network&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6e5fe69cff6c897b0dfcabb8b0349867d7beed61be0c878685beb2b51253201e.png" src="../_images/6e5fe69cff6c897b0dfcabb8b0349867d7beed61be0c878685beb2b51253201e.png" />
+</div>
+</div>
+<section id="storing-generated-networks">
+<h2>Storing generated networks<a class="headerlink" href="#storing-generated-networks" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simple way to store them is in a pickle file</span>
+
+<span class="c1"># Serialize and store the graph</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;my_network_graph.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># and then loading it back to a NetworkX Graph object from the pickle file</span>
+
+<span class="c1"># Load the graph</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;my_network_graph.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">G_loaded</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="c1"># Inspect the loaded graph</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nodes:&quot;</span><span class="p">,</span> <span class="n">G_loaded</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Edges:&quot;</span><span class="p">,</span> <span class="n">G_loaded</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="generation-scotland">
+<h2>Generation Scotland<a class="headerlink" href="#generation-scotland" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../ISMB_GS_Data.pkl&#39;</span> <span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span> <span class="p">:</span> 
+    <span class="n">loaded_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w1</span> <span class="o">=</span> <span class="n">loaded_data</span><span class="p">[</span><span class="s1">&#39;DNAm_w1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">w3</span> <span class="o">=</span> <span class="n">loaded_data</span><span class="p">[</span><span class="s1">&#39;DNAm_w3&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">phenotypes</span> <span class="o">=</span> <span class="n">loaded_data</span><span class="p">[</span><span class="s1">&#39;Phenotypes&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setting Up the Programming Environment</span>
+<span class="c1"># %pip install networkx</span>
+
+<span class="c1"># import modules for use in the notebook</span>
+
+<span class="c1"># handling www based requests (like APIs)</span>
+<span class="kn">import</span> <span class="nn">urllib</span> <span class="k">as</span> <span class="nn">ul</span>
+
+<span class="c1"># standard Python data handling modules</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="c1"># working with networks</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="setting-up-pip-network-using-string">
+<h1>Setting up PIP network using String<a class="headerlink" href="#setting-up-pip-network-using-string" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a concatenated list of gene names as strings</span>
+<span class="c1"># note we are taking gene names from the &#39;gene&#39; column of the dataframe we obtained from the EWAS catalog and filtered</span>
+<span class="c1"># to common CpG and Gene sites above. The join function then concatenates them using the &#39;%0D&#39; string</span>
+<span class="c1"># to stitch them all together. This string will be used to help us build the API query URL.</span>
+<span class="n">external_gene_names</span> <span class="o">=</span> <span class="s1">&#39;%0D&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="n">df_filt</span><span class="p">[</span><span class="s1">&#39;gene&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">300</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()))</span>
+
+<span class="c1"># pass the list of Gene Names to the String-DB API return the String-IDs</span>
+<span class="c1"># we first form the query url using the &#39;get_string_ids&#39; API function which takes a list of identifiers and</span>
+<span class="c1"># converts them into the internal String-DB accession IDs. This massively speeds up the search and allows us to</span>
+<span class="c1"># search for more than 10 at once which is an API restriction for other API functions if String-DB internal accessions </span>
+<span class="c1"># aren&#39;t used.</span>
+<span class="n">query_url</span> <span class="o">=</span> <span class="s1">&#39;https://string-db.org/api/tsv-no-header/get_string_ids?identifiers=&#39;</span><span class="o">+</span><span class="n">external_gene_names</span><span class="o">+</span><span class="s1">&#39;&amp;species=9606&amp;format=only-ids&#39;</span>
+
+<span class="c1"># use the urllib library to retrieve the String-DB internal IDs</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">ul</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">query_url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+
+<span class="c1"># now we want to query String-DB to retrieve interactions from this list of String-DB IDs</span>
+<span class="c1"># we create a concatenated list of stringdbIDs in much the same way as above for the Entrez Gene IDs</span>
+<span class="n">stringdbIDs</span> <span class="o">=</span> <span class="s1">&#39;%0D&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span>
+
+<span class="c1"># again we build the query for interactions using the String-DB IDs</span>
+<span class="n">query_url</span> <span class="o">=</span> <span class="s1">&#39;https://string-db.org/api/tsv/network?identifiers=&#39;</span><span class="o">+</span><span class="n">stringdbIDs</span><span class="o">+</span><span class="s1">&#39;&amp;species=9606&#39;</span>
+
+<span class="c1"># again using urllib to retrieve the interactions these are returned in a standard tab delimied text format</span>
+<span class="n">interactions</span> <span class="o">=</span> <span class="n">ul</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">query_url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="c1"># we need to split the result by these &#39;tabs&#39; (\t - is used to identfy them)</span>
+<span class="n">int_test</span> <span class="o">=</span> <span class="p">[</span><span class="n">interaction</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">interaction</span> <span class="ow">in</span> <span class="n">interactions</span><span class="p">]</span>
+
+<span class="c1"># we extract the field names from the first row</span>
+<span class="n">column_names</span> <span class="o">=</span> <span class="n">int_test</span><span class="p">[:</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># create a Pandas dataframe of the interaction data we have just retrieved from String-DB</span>
+<span class="n">interactions_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">int_test</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">column_names</span><span class="p">)</span>
+
+<span class="c1"># delete the first row that held the fieldnames but we no longer need</span>
+<span class="n">interactions_df</span> <span class="o">=</span> <span class="n">interactions_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># remove any duplicate rows</span>
+<span class="n">final_interactions</span> <span class="o">=</span> <span class="n">interactions_df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+
+<span class="c1"># show the top of the protein-protein interaction table</span>
+<span class="n">final_interactions</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Section1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Section 2</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structuring-biomedical-data-using-networks">Structuring Biomedical Data Using Networks</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#workshop-agenda-working-with-asd-data-and-network-analysis">Workshop Agenda: Working with ASD Data and Network Analysis</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-management">1. Data Management</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#network-generation">2. Network Generation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#network-sparsification">3. Network Sparsification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-add-sfari-genes-as-labels-and-show-some-visualization-techniquesion-for-progressing-to-gene-networks">TODO add SFARI genes as labels and show some visualization techniquesion for progressing to gene networks.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-networks">4. Types of Networks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrating-other-datasets">5. Integrating Other Datasets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autism-spectrum-disorder-data">Autism Spectrum Disorder data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-for-na-handling-missing-data-outlier-check">1.3 Check for NA, handling missing data, outlier check</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-missing-data">Handling Missing data ??</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-low-priority">TODO: low priority</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-heterogeneity">Data heterogeneity</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-consider-to-drop-genes-based-on-low-expression-value">TODO: consider to DROP GENES BASED ON LOW EXPRESSION VALUE?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-ensg-to-gene-name">TODO: ensg to gene name</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-what-kind-of-clustering-happens-in-the-following-heatmaps">TODO: what kind of clustering happens in the following heatmaps</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sparsification-of-complex-graphs">Sparsification of complex graphs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#based-on-simple-metrics">Based on simple metrics</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-density-networkx-function-for-a-series-of-threshold-plot-it-and-move-on-based-on-that">TODO: density (networkx function) for a series of threshold, plot it and move on based on that</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-networkxs-dedensification-metohd">check networkxs dedensification metohd</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bicorr-and-knn">Bicorr and KNN</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#storing-generated-networks">Storing generated networks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generation-scotland">Generation Scotland</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-pip-network-using-string">Setting up PIP network using String</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By https://biomedicalinformaticsgroup.github.io/
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

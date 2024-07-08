@@ -1,0 +1,23 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: GettingStarted
+- file: Section1_intro
+  sections:
+  - file: Section1/Part1
+  - file: Section1/Part2
+- file: Section2_intro
+  sections: 
+  - file: Section2/Part1
+  - file: Section2/Part2
+- file: Section3_intro
+  sections:
+  - file: Section3/Part1
+  - file: Section3/Part2
+  - file: Section3/Part3
+  - file: Section3/Part4
+- file: ConceptGlossary
+- file: functions_definitions

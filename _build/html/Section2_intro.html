@@ -1,0 +1,667 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Section 2: Network Analysis &#8212; ISMB Tutorial Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Section2_intro';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Part 1: Over-representation and Enrichment Analysis" href="Section2/Part1.html" />
+    <link rel="prev" title="Part 2 - Patient similarity networks" href="Section1/Section1-PSN.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="ISMB Tutorial Book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="ISMB Tutorial Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    An Introduction to Multi Modal Analysis using Networks
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Section1_intro.html">Section 1 - Network Basics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Section1/Section1.html">Part 1 - Introduction to Biomedical Networks</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="Section1/Section1-PSN.html">Part 2 - Patient similarity networks</a></li>
+
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Section 2: Network Analysis</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Section2/Part1.html">Part 1: Over-representation and Enrichment Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Section2/Part2.html">Part 2: Similarity Network Fusion</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Section3_intro.html">Section 3 - SNF + GNN’s</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Section3/Part1.html"><font color="darkblue"> Part 1 : Message Passing </font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Section3/Part2.html"><font color="darkblue"> Part 2 : Problem Formulation / Patient Similarity Network Generation </font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Section3/Part3.html"><font color="darkblue"> Part 3 : Smoking Network Classification using Graph Convolutional Networks</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Section3/Part4.html"><font color="darkblue"> Part 4 : Similarity Network Fusion with Graph Convolutional Networks</font></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ConceptGlossary.html">Concept Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions_definitions.html">Custom Function Definitions</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Barry8197/ISMB_Test" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Barry8197/ISMB_Test/issues/new?title=Issue%20on%20page%20%2FSection2_intro.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Section2_intro.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Section 2: Network Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-over-representation-and-enrichment-analysis">Part 1: Over-representation and Enrichment Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#over-representation-analysis-ora">Over Representation Analysis (ORA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ora-on-gene-expression-network-clusters">ORA on gene expression network clusters</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-on-gene-correlation-network">Clustering on Gene Correlation Network</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-ora-on-each-community">Perform ORA on Each Community</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gene-set-enrichment-analysis-gsea">Gene Set Enrichment Analysis (GSEA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualising-gsea-results">Visualising GSEA Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#barcode-enrichment-plot">Barcode Enrichment Plot</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-visualisation">Heatmap Visualisation</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#clustermap-visualisation">Clustermap Visualisation</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#dot-plot-visualisation">Dot Plot Visualisation</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gsea-on-clusters">GSEA on Clusters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-similarity-network-fusion">Part 2: Similarity Network Fusion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-on-individual-patient-networks">Clustering on Individual Patient Networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-network-fusion-snf">Similarity Network Fusion (SNF)</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="section-2-network-analysis">
+<h1>Section 2: Network Analysis<a class="headerlink" href="#section-2-network-analysis" title="Link to this heading">#</a></h1>
+<section id="part-1-over-representation-and-enrichment-analysis">
+<h2>Part 1: Over-representation and Enrichment Analysis<a class="headerlink" href="#part-1-over-representation-and-enrichment-analysis" title="Link to this heading">#</a></h2>
+<section id="over-representation-analysis-ora">
+<h3>Over Representation Analysis (ORA)<a class="headerlink" href="#over-representation-analysis-ora" title="Link to this heading">#</a></h3>
+<p>Over-representation analysis (ORA) is a method used to identify which predefined gene sets are disproportionately represented in a given set of genes compared to what would be expected by random chance <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2615629/">(Huang et al., 2009)</a>. We recommend using Over-representation analysis (ORA) only when Gene Set Enrichment Analysis (GSEA) is not suitable. Although we are using the <code class="docutils literal notranslate"><span class="pre">gseapy</span></code> library for ORA in this the tutorial, it’s important to note that ORA and GSEA are distinct methods.</p>
+<section id="ora-on-gene-expression-network-clusters">
+<h4>ORA on gene expression network clusters<a class="headerlink" href="#ora-on-gene-expression-network-clusters" title="Link to this heading">#</a></h4>
+<section id="clustering-on-gene-correlation-network">
+<h5>Clustering on Gene Correlation Network<a class="headerlink" href="#clustering-on-gene-correlation-network" title="Link to this heading">#</a></h5>
+<p>We use community detection algorithm to identify communities in the network:
+<br />
+The <code class="docutils literal notranslate"><span class="pre">greedy_modularity_communities</span></code> function in NetworkX implements a community detection algorithm that optimises modularity using a greedy approach. It iteratively merges pairs of nodes or communities that result in the largest increase in modularity until no further improvement is possible. Modularity measures the density of links inside communities compared to links between communities, aiming to maximise this value to identify densely connected groups within the network.</p>
+</section>
+<section id="perform-ora-on-each-community">
+<h5>Perform ORA on Each Community<a class="headerlink" href="#perform-ora-on-each-community" title="Link to this heading">#</a></h5>
+<p>Performing ORA on individual clusters can help in understanding distinct biological significance of each cluster, revealing how certain pathways or functions are associated with specific subsets of genes and potentially uncovering biological themes that may be missed.</p>
+</section>
+</section>
+</section>
+<section id="gene-set-enrichment-analysis-gsea">
+<h3>Gene Set Enrichment Analysis (GSEA)<a class="headerlink" href="#gene-set-enrichment-analysis-gsea" title="Link to this heading">#</a></h3>
+<p>Gene Set Enrichment Analysis (GSEA) is a genome-wide expression analysis method designed to interpret expression profiles focusing on pre-defined gene sets. These gene sets are curated based on prior biological knowledge, such as published information about biochemical pathways or patterns of coexpression observed in previous experiment studies. The genes can be ordered in a ranked list, according to their differential expression between the classes. The primary objective of GSEA is to assess whether the genes within a given gene set tend to occur toward the top (or bottom) of the ranked list. This ranking is based on the correlation between gene expression and a particular phenotypic class distinction. By evaluating the distribution of gene set members within the ranked list, GSEA identifies whether the set is correlated with the phenotypic class, thus providing insights into underlying biological mechanisms. This method contrasts with traditional single-gene analysis by focusing on the collective behavior of gene sets, thereby uncovering biologically significant patterns that might be overlooked when examining individual genes in isolation. We use <code class="docutils literal notranslate"><span class="pre">gseapy</span></code> to perform GSEA on <code class="docutils literal notranslate"><span class="pre">KEGG_2021_Human</span></code> assigned classes based on a phenotypic attribute (e.g., smoking status). (ref)</p>
+<section id="visualising-gsea-results">
+<h4>Visualising GSEA Results<a class="headerlink" href="#visualising-gsea-results" title="Link to this heading">#</a></h4>
+<p>Once you have performed GSEA, the next step is to visualise the results. Visualisation helps in interpreting the biological significance of the enriched gene sets. Here, we visualise GSEA results with Barcode Enrichment Plot, Heatmap, Clustermap, and Dot Plot.</p>
+<section id="barcode-enrichment-plot">
+<h5>Barcode Enrichment Plot<a class="headerlink" href="#barcode-enrichment-plot" title="Link to this heading">#</a></h5>
+<p>Barcode Enrichment Plot shows the positions of members of a given gene set in a ranked list of enrichment scores for the top enriched terms. The scores are ranked left to right from smallest to largest. The ranked scores are represented by a shaded bar, forming a pattern like a barcode.</p>
+</section>
+<section id="heatmap-visualisation">
+<h5>Heatmap Visualisation<a class="headerlink" href="#heatmap-visualisation" title="Link to this heading">#</a></h5>
+<p><code class="docutils literal notranslate"><span class="pre">gseapy</span></code> provides a heatmap function to visualise the expression levels of the leading-edge genes. The heatmap provides a visual representation of how these genes are expressed across different samples in relation to their assigned phenotypic classes.</p>
+</section>
+<section id="clustermap-visualisation">
+<h5>Clustermap Visualisation<a class="headerlink" href="#clustermap-visualisation" title="Link to this heading">#</a></h5>
+<p>The function <code class="docutils literal notranslate"><span class="pre">clustermap</span></code> from <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> is used to create a clustered heatmap. It not only shows the expression levels of the leading-edge genes but also clusters them based on similarity, providing additional insights into gene expression patterns. The cluster map includes dendrograms, which show the hierarchical clustering of both genes and samples, helping to identify groups of co-expressed genes and similar samples.</p>
+</section>
+<section id="dot-plot-visualisation">
+<h5>Dot Plot Visualisation<a class="headerlink" href="#dot-plot-visualisation" title="Link to this heading">#</a></h5>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">dotplot</span></code> function in <code class="docutils literal notranslate"><span class="pre">gseapy</span></code> to create a visual representation of the GSEA results. Here we use “FDR q-val” to determine the dot sizes, which represents the false discovery rate adjusted p-values. We display normalised enrichment score (NES) value as the x-axis.</p>
+</section>
+</section>
+<section id="gsea-on-clusters">
+<h4>GSEA on Clusters<a class="headerlink" href="#gsea-on-clusters" title="Link to this heading">#</a></h4>
+<p>Similarly to ORA, GSEA can also be performed on individual communities after clustering. This allows for a more granular analysis, revealing pathways and functions that are enriched within particular subgroups of the data.</p>
+</section>
+</section>
+</section>
+<section id="part-2-similarity-network-fusion">
+<h2>Part 2: Similarity Network Fusion<a class="headerlink" href="#part-2-similarity-network-fusion" title="Link to this heading">#</a></h2>
+<p>In Part 1, we worked with a gene expression network, where each node represents a gene. In Part 2, our focus shifts to Patient Networks. In patient networks, each node represents an individual patient. Unlike gene networks that represent molecular interactions, patient networks encode similarities and differences between patients, based on various modalities of data such as gene expression profiles and DNA methylation patterns.</p>
+<a class="reference internal image-reference" href="_images/SNF.png"><img alt="fishy" class="align-center" src="_images/SNF.png" style="width: 1200px;" /></a>
+<section id="clustering-on-individual-patient-networks">
+<h3>Clustering on Individual Patient Networks<a class="headerlink" href="#clustering-on-individual-patient-networks" title="Link to this heading">#</a></h3>
+<p>We can apply clustering methods to patient networks to identify patterns in relation to a phenotypic attribute (e.g., smoking status)</p>
+</section>
+<section id="similarity-network-fusion-snf">
+<h3>Similarity Network Fusion (SNF)<a class="headerlink" href="#similarity-network-fusion-snf" title="Link to this heading">#</a></h3>
+<p>In Patient Network analysis, we often want to combine patient data based on multiple modalities. Similarity network fusion (SNF) uses networks of patients as a basis for integration between multiple modalities. SNF consists of two main steps:</p>
+<ol class="arabic simple">
+<li><p>Construction of a sample-similarity network for each data type</p></li>
+<li><p>Integration of these networks into a single similarity network using a nonlinear combination method.</p></li>
+</ol>
+<p>We use the Python library <code class="docutils literal notranslate"><span class="pre">snfpy</span></code> for similarity network fusion (SNF). We perform K-nearest neighbors procedure on each adjacency matrices to create and fuse similarity networks.</p>
+</section>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Section1/Section1-PSN.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Part 2 - Patient similarity networks</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Section2/Part1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Part 1: Over-representation and Enrichment Analysis</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-over-representation-and-enrichment-analysis">Part 1: Over-representation and Enrichment Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#over-representation-analysis-ora">Over Representation Analysis (ORA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ora-on-gene-expression-network-clusters">ORA on gene expression network clusters</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-on-gene-correlation-network">Clustering on Gene Correlation Network</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-ora-on-each-community">Perform ORA on Each Community</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gene-set-enrichment-analysis-gsea">Gene Set Enrichment Analysis (GSEA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualising-gsea-results">Visualising GSEA Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#barcode-enrichment-plot">Barcode Enrichment Plot</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-visualisation">Heatmap Visualisation</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#clustermap-visualisation">Clustermap Visualisation</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#dot-plot-visualisation">Dot Plot Visualisation</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gsea-on-clusters">GSEA on Clusters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-similarity-network-fusion">Part 2: Similarity Network Fusion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-on-individual-patient-networks">Clustering on Individual Patient Networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-network-fusion-snf">Similarity Network Fusion (SNF)</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By https://biomedicalinformaticsgroup.github.io/
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

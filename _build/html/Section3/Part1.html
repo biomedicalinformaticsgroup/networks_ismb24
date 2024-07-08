@@ -1,0 +1,1202 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Part 1 : Message Passing &#8212; ISMB Tutorial Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Section3/Part1';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Part 2 : Problem Formulation / Patient Similarity Network Generation" href="Part2.html" />
+    <link rel="prev" title="Section 3 - SNF + GNN’s" href="../Section3_intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="ISMB Tutorial Book - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="ISMB Tutorial Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    An Introduction to Multi Modal Analysis using Networks
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Section1_intro.html">Section 1 - Network Basics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Section1/Section1.html">Part 1 - Introduction to Biomedical Networks</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../Section1/Section1-PSN.html">Part 2 - Patient similarity networks</a></li>
+
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Section2_intro.html">Section 2: Network Analysis</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Section2/Part1.html">Part 1: Over-representation and Enrichment Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Section2/Part2.html">Part 2: Similarity Network Fusion</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Section3_intro.html">Section 3 - SNF + GNN’s</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#"><font color="darkblue"> Part 1 : Message Passing </font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Part2.html"><font color="darkblue"> Part 2 : Problem Formulation / Patient Similarity Network Generation </font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Part3.html"><font color="darkblue"> Part 3 : Smoking Network Classification using Graph Convolutional Networks</font></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Part4.html"><font color="darkblue"> Part 4 : Similarity Network Fusion with Graph Convolutional Networks</font></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ConceptGlossary.html">Concept Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../functions_definitions.html">Custom Function Definitions</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Barry8197/ISMB_Test" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Barry8197/ISMB_Test/issues/new?title=Issue%20on%20page%20%2FSection3/Part1.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Section3/Part1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><font color='darkblue'> Part 1 : Message Passing </font></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#message-passing-features"><font color="darkblue">Message Passing Features </font></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#message-passing-function"><font color="darkblue">Message Passing Function </font></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-aggregation"><font color="darkblue">Mean Aggregation </font></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#message-passing-key-takeaways"><font color="darkblue">Message Passing Key Takeaways </font></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="part-1-message-passing">
+<h1><font color='darkblue'> Part 1 : Message Passing </font><a class="headerlink" href="#part-1-message-passing" title="Link to this heading">#</a></h1>
+<p>In this notebook we will go step by step through message passing, the foundation of GNN learning.</p>
+<p>We will use the Toy example of the Karate Club dataset first introduced in Section 1.</p>
+<p>We will see how we can propagate information and how nodes can learn from their neighbours in the most simple of instances</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">mpatches</span>
+
+<span class="c1"># Create Karate Club graph</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">karate_club_graph</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gen_graph_legend</span><span class="p">(</span><span class="n">node_colours</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate a legend for a graph based on node colors and attributes.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - node_colours (pd.Series): A series of node colors.</span>
+<span class="sd">    - G (networkx.Graph): The graph object.</span>
+<span class="sd">    - attr (str): The attribute to use for labeling.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - patches (list): A list of matplotlib patches representing the legend.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">patches</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">lab</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">node_colours</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(),</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">attr</span><span class="p">))</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()):</span>
+        <span class="n">patches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">lab</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">patches</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate a node colour for each club in karate club</span>
+<span class="n">node_colours</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G</span> <span class="p">,</span> <span class="s1">&#39;club&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Mr. Hi&#39;</span> <span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Officer&#39;</span> <span class="p">,</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">)</span>
+
+<span class="c1"># Draw Network</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="c1"># so we produce the same network each time as the layout is a stochastic algorithm</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span> <span class="p">,</span> <span class="n">with_labels</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">,</span> <span class="n">node_color</span> <span class="o">=</span> <span class="n">node_colours</span><span class="p">)</span> <span class="c1"># draw our network</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Karate Club Graph&#39;</span><span class="p">)</span>
+<span class="n">legend_handles</span> <span class="o">=</span> <span class="n">gen_graph_legend</span><span class="p">(</span><span class="n">node_colours</span> <span class="p">,</span> <span class="n">G</span> <span class="p">,</span> <span class="s1">&#39;club&#39;</span><span class="p">)</span> <span class="c1"># Generate legend labels from function above</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span> <span class="o">=</span> <span class="n">legend_handles</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/dfb306c689c5fa602daa8d0d4f7d1fde85cf4026945e7ee69d46957a8a8ff390.png" src="../_images/dfb306c689c5fa602daa8d0d4f7d1fde85cf4026945e7ee69d46957a8a8ff390.png" />
+</div>
+</div>
+<section id="message-passing-features">
+<h2><font color='darkblue'>Message Passing Features </font><a class="headerlink" href="#message-passing-features" title="Link to this heading">#</a></h2>
+<p>We need to specify node features which each node will pass on. In this simple use case we are going to embed the answer in the node feature. We will one-hot encode each club. e.g. Mr Hi’s club will be [0,1] and Officer club will be [1,0]. We will mask the participation of some members club by encoding them as [0.5 , 0.5], making it equally likely they belong to each club.</p>
+<p>Can we re-identify these members clubs by performing simple message passing over the network?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add node features to our network</span>
+
+<span class="n">unknown_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span> <span class="p">)</span> <span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1"># randomly select ten nodes for our test set</span>
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span> <span class="p">:</span> 
+    <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">unknown_nodes</span> <span class="p">:</span> 
+        <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">])</span> <span class="c1"># mask node features as 50/50 chance of being Mr. Hi or Mr. Officer</span>
+        <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;club&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Masked&#39;</span>
+    <span class="k">else</span> <span class="p">:</span> 
+        <span class="k">if</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;club&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Mr. Hi&#39;</span> <span class="p">:</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span> <span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="c1"># Embed Mr. Hi as [0,1]</span>
+        <span class="k">elif</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;club&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Officer&#39;</span> <span class="p">:</span> 
+            <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span> <span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="c1"># Embed Mr. Officer as [1,0]</span>
+        <span class="k">else</span> <span class="p">:</span> 
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No club or group found for node&#39;</span><span class="p">)</span>
+            
+<span class="c1"># Access updated node features after one iteration</span>
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Node:&quot;</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="s2">&quot;Feature:&quot;</span><span class="p">,</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">])</span>
+    
+<span class="c1"># Draw our updated network</span>
+<span class="n">node_colours</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G</span> <span class="p">,</span> <span class="s1">&#39;feature&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;str&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span> <span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;0.5&#39;</span> <span class="p">,</span> <span class="s1">&#39;grey&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span> <span class="p">,</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">)</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span> <span class="p">,</span> <span class="n">with_labels</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">,</span> <span class="n">node_color</span> <span class="o">=</span> <span class="n">node_colours</span><span class="p">)</span> <span class="c1"># draw our network</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Karate Club Graph with hidden memberships&#39;</span><span class="p">)</span> 
+<span class="n">legend_handles</span> <span class="o">=</span> <span class="n">gen_graph_legend</span><span class="p">(</span><span class="n">node_colours</span> <span class="p">,</span> <span class="n">G</span> <span class="p">,</span> <span class="s1">&#39;club&#39;</span><span class="p">)</span> <span class="c1"># Generate legend labels from function above</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span> <span class="o">=</span> <span class="n">legend_handles</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node: 0 Feature: [0.5 0.5]
+Node: 1 Feature: [0 1]
+Node: 2 Feature: [0 1]
+Node: 3 Feature: [0 1]
+Node: 4 Feature: [0 1]
+Node: 5 Feature: [0 1]
+Node: 6 Feature: [0.5 0.5]
+Node: 7 Feature: [0.5 0.5]
+Node: 8 Feature: [0.5 0.5]
+Node: 9 Feature: [1 0]
+Node: 10 Feature: [0.5 0.5]
+Node: 11 Feature: [0 1]
+Node: 12 Feature: [0 1]
+Node: 13 Feature: [0 1]
+Node: 14 Feature: [1 0]
+Node: 15 Feature: [1 0]
+Node: 16 Feature: [0.5 0.5]
+Node: 17 Feature: [0 1]
+Node: 18 Feature: [1 0]
+Node: 19 Feature: [0 1]
+Node: 20 Feature: [1 0]
+Node: 21 Feature: [0 1]
+Node: 22 Feature: [1 0]
+Node: 23 Feature: [0.5 0.5]
+Node: 24 Feature: [0.5 0.5]
+Node: 25 Feature: [1 0]
+Node: 26 Feature: [1 0]
+Node: 27 Feature: [1 0]
+Node: 28 Feature: [1 0]
+Node: 29 Feature: [1 0]
+Node: 30 Feature: [1 0]
+Node: 31 Feature: [1 0]
+Node: 32 Feature: [1 0]
+Node: 33 Feature: [1 0]
+</pre></div>
+</div>
+<img alt="../_images/4a10c2b101a5247bb9b5010744bafe161176977f79226c22a4ac0cac8c6b801a.png" src="../_images/4a10c2b101a5247bb9b5010744bafe161176977f79226c22a4ac0cac8c6b801a.png" />
+</div>
+</div>
+</section>
+<section id="message-passing-function">
+<h2><font color='darkblue'>Message Passing Function </font><a class="headerlink" href="#message-passing-function" title="Link to this heading">#</a></h2>
+<p>As defined, message passing consists of three main steps. Message propagation, aggregation and update.</p>
+<ul class="simple">
+<li><p>We need each node to pass or propogate their features to their neighbours.</p></li>
+<li><p>Each node then aggregates these messages using median aggregation</p></li>
+<li><p>Each node updates their node features with the aggregate message</p></li>
+</ul>
+<p>Can you define two functions, the first message passing propogates and aggregates node messages and a second function which then updates the node features</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define message passing function</span>
+<span class="k">def</span> <span class="nf">message_passing</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">G</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Perform message passing for a given node in a graph.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    node (int): The node for which message passing is performed.</span>
+<span class="sd">    G (networkx.Graph): The graph containing the node and its neighbors.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    numpy.ndarray: The aggregated message from the neighboring nodes.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">    - This function gathers the messages for a single node and will be used in the message_passing_iteration.</span>
+<span class="sd">    - The function performs propagation and aggregation.</span>
+<span class="sd">    - Propagation: Gather the node features of all neighboring nodes.</span>
+<span class="sd">    - Aggregation: Aggregate the gathered messages using median aggregation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">neighbors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">neighbors</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        #################################################</span>
+<span class="sd">                       YOUR CODE HERE</span>
+<span class="sd">        #################################################</span>
+<span class="sd">        </span>
+<span class="sd">        Note. This function gathers the messages for a single node and will be useed</span>
+<span class="sd">        to iterate over in the message_passing_iteration</span>
+<span class="sd">        </span>
+<span class="sd">        In this function you will need to : </span>
+<span class="sd">            1. Create a nested list of the node features of neighbouring nodes hint : </span>
+<span class="sd">            use list comprehension &amp; G.nodes[neighbor][&#39;feature&#39;] to extract the feature</span>
+<span class="sd">            2. Aggregate these messages for each node using np.median() or likewise</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">neighbor_features</span> <span class="o">=</span> <span class="p">[</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">neighbor</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">]</span>
+        <span class="n">aggregated_message</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">neighbor_features</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">aggregated_message</span>
+
+
+<span class="c1"># Perform message passing iteration</span>
+<span class="k">def</span> <span class="nf">message_passing_iteration</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Perform message passing iteration on a graph.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - G (networkx.Graph): The input graph.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - None</span>
+
+<span class="sd">    Description:</span>
+<span class="sd">    This function performs message passing iteration on a graph.</span>
+<span class="sd">      It iterates through all nodes in the graph and updates their</span>
+<span class="sd">      features based on the aggregated message from neighboring nodes.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">    - The function `message_passing` is defined above.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">updated_features</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    #################################################</span>
+<span class="sd">                   YOUR CODE HERE</span>
+<span class="sd">    #################################################</span>
+<span class="sd">    </span>
+<span class="sd">    We will now update our node features with the updated features dictionary</span>
+<span class="sd">    </span>
+<span class="sd">    In this function you will need to : </span>
+<span class="sd">        1. Iterate through all nodes</span>
+<span class="sd">        2. create a dictionary where each node is a key and the aggregated message is the value</span>
+<span class="sd">        3. Iterate through the dictionary created above. hint use updated_features.items()</span>
+<span class="sd">        4. Update each nodes features</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
+        <span class="n">updated_features</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">message_passing</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">G</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">updated_features</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example of one iteration of message passing</span>
+<span class="n">message_passing_iteration</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+<span class="c1"># Access updated node features after one iteration</span>
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Node:&quot;</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="s2">&quot;Feature:&quot;</span><span class="p">,</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">])</span>
+    
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">node_colours_message</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G</span> <span class="p">,</span> <span class="s1">&#39;feature&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="kc">True</span> <span class="p">,</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="kc">False</span> <span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="c1"># Assign node colours based on node features</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span> <span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">with_labels</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">,</span> <span class="n">node_color</span> <span class="o">=</span> <span class="n">node_colours_message</span><span class="p">)</span> <span class="c1"># draw our network</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Karate Club Graph after 1 iteration of Message Passing&#39;</span><span class="p">)</span>
+
+<span class="n">G_true</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">karate_club_graph</span><span class="p">()</span> <span class="c1"># Get back original karate club graph</span>
+<span class="n">node_colours_true</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G_true</span> <span class="p">,</span> <span class="s1">&#39;club&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Mr. Hi&#39;</span> <span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Officer&#39;</span> <span class="p">,</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">)</span> <span class="c1"># Assign node colours based on true club membership</span>
+<span class="c1"># Draw Network</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G_true</span> <span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">,</span> <span class="n">with_labels</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">,</span> <span class="n">node_color</span> <span class="o">=</span> <span class="n">node_colours_true</span><span class="p">)</span> <span class="c1"># draw our network</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;True Karate Club Graph&#39;</span><span class="p">)</span>
+<span class="n">legend_handles</span> <span class="o">=</span> <span class="n">gen_graph_legend</span><span class="p">(</span><span class="n">node_colours_true</span> <span class="p">,</span> <span class="n">G_true</span> <span class="p">,</span> <span class="s1">&#39;club&#39;</span><span class="p">)</span> <span class="c1"># Generate legend labels </span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span> <span class="o">=</span> <span class="n">legend_handles</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span> <span class="o">=</span> <span class="n">legend_handles</span><span class="p">)</span>
+
+<span class="c1"># Adjust layout</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node: 0 Feature: [0. 1.]
+Node: 1 Feature: [0. 1.]
+Node: 2 Feature: [0.5 0.5]
+Node: 3 Feature: [0. 1.]
+Node: 4 Feature: [0.5 0.5]
+Node: 5 Feature: [0.5 0.5]
+Node: 6 Feature: [0.25 0.75]
+Node: 7 Feature: [0. 1.]
+Node: 8 Feature: [1. 0.]
+Node: 9 Feature: [0.5 0.5]
+Node: 10 Feature: [0. 1.]
+Node: 11 Feature: [0.5 0.5]
+Node: 12 Feature: [0.25 0.75]
+Node: 13 Feature: [0. 1.]
+Node: 14 Feature: [1. 0.]
+Node: 15 Feature: [1. 0.]
+Node: 16 Feature: [0.25 0.75]
+Node: 17 Feature: [0.25 0.75]
+Node: 18 Feature: [1. 0.]
+Node: 19 Feature: [0.5 0.5]
+Node: 20 Feature: [1. 0.]
+Node: 21 Feature: [0.25 0.75]
+Node: 22 Feature: [1. 0.]
+Node: 23 Feature: [1. 0.]
+Node: 24 Feature: [1. 0.]
+Node: 25 Feature: [0.5 0.5]
+Node: 26 Feature: [1. 0.]
+Node: 27 Feature: [0.5 0.5]
+Node: 28 Feature: [1. 0.]
+Node: 29 Feature: [1. 0.]
+Node: 30 Feature: [0.75 0.25]
+Node: 31 Feature: [1. 0.]
+Node: 32 Feature: [1. 0.]
+Node: 33 Feature: [1. 0.]
+</pre></div>
+</div>
+<img alt="../_images/1e75718d3ea6ee238cece2dedbe61441ff9792c4ee4fbeabf46219d7e29efbab.png" src="../_images/1e75718d3ea6ee238cece2dedbe61441ff9792c4ee4fbeabf46219d7e29efbab.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example of 100 iterations of message passing</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="p">:</span> 
+    <span class="n">message_passing_iteration</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    
+<span class="c1"># Access updated node features after one iteration</span>
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Node:&quot;</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="s2">&quot;Feature:&quot;</span><span class="p">,</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">])</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">node_colours_message</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G</span> <span class="p">,</span> <span class="s1">&#39;feature&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="kc">True</span> <span class="p">,</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="kc">False</span> <span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="c1"># Assign node colours based on node features</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span> <span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">with_labels</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">,</span> <span class="n">node_color</span> <span class="o">=</span> <span class="n">node_colours_message</span><span class="p">)</span> <span class="c1"># draw our network</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Karate Club Graph after 100 iterations of Message Passing&#39;</span><span class="p">)</span>
+
+<span class="n">G_true</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">karate_club_graph</span><span class="p">()</span> <span class="c1"># Get back original karate club graph</span>
+<span class="n">node_colours_true</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G_true</span> <span class="p">,</span> <span class="s1">&#39;club&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Mr. Hi&#39;</span> <span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Officer&#39;</span> <span class="p">,</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">)</span> <span class="c1"># Assign node colours based on true club membership</span>
+<span class="c1"># Draw Network</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G_true</span> <span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">,</span> <span class="n">with_labels</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">,</span> <span class="n">node_color</span> <span class="o">=</span> <span class="n">node_colours_true</span><span class="p">)</span>  <span class="c1"># draw our network</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;True Karate Club Graph&#39;</span><span class="p">)</span>
+<span class="n">legend_handles</span> <span class="o">=</span> <span class="n">gen_graph_legend</span><span class="p">(</span><span class="n">node_colours_true</span> <span class="p">,</span> <span class="n">G_true</span> <span class="p">,</span> <span class="s1">&#39;club&#39;</span><span class="p">)</span> <span class="c1"># Generate legend labels</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span> <span class="o">=</span> <span class="n">legend_handles</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span> <span class="o">=</span> <span class="n">legend_handles</span><span class="p">)</span>
+
+<span class="c1"># Adjust layout</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node: 0 Feature: [0.25 0.75]
+Node: 1 Feature: [0.25 0.75]
+Node: 2 Feature: [0.5 0.5]
+Node: 3 Feature: [0.25 0.75]
+Node: 4 Feature: [0.23706055 0.76293945]
+Node: 5 Feature: [0.23706055 0.76293945]
+Node: 6 Feature: [0.23706055 0.76293945]
+Node: 7 Feature: [0.25 0.75]
+Node: 8 Feature: [1.00000000e+00 1.97215226e-31]
+Node: 9 Feature: [0.75 0.25]
+Node: 10 Feature: [0.23706055 0.76293945]
+Node: 11 Feature: [0.25 0.75]
+Node: 12 Feature: [0.25 0.75]
+Node: 13 Feature: [0.25 0.75]
+Node: 14 Feature: [1. 0.]
+Node: 15 Feature: [1. 0.]
+Node: 16 Feature: [0.23706055 0.76293945]
+Node: 17 Feature: [0.25 0.75]
+Node: 18 Feature: [1. 0.]
+Node: 19 Feature: [0.25 0.75]
+Node: 20 Feature: [1. 0.]
+Node: 21 Feature: [0.25 0.75]
+Node: 22 Feature: [1. 0.]
+Node: 23 Feature: [1. 0.]
+Node: 24 Feature: [1. 0.]
+Node: 25 Feature: [1. 0.]
+Node: 26 Feature: [1. 0.]
+Node: 27 Feature: [1. 0.]
+Node: 28 Feature: [1. 0.]
+Node: 29 Feature: [1. 0.]
+Node: 30 Feature: [1. 0.]
+Node: 31 Feature: [1. 0.]
+Node: 32 Feature: [1. 0.]
+Node: 33 Feature: [1. 0.]
+</pre></div>
+</div>
+<img alt="../_images/10a676e14ea1e05e93e37003eaafeab02d905b640752a9354a822bc4f7ca1398.png" src="../_images/10a676e14ea1e05e93e37003eaafeab02d905b640752a9354a822bc4f7ca1398.png" />
+</div>
+</div>
+<p>Above we can see that we are able to reclaim the karate club assignments by sharing each nodes belief about their own club.</p>
+<p>Although we mislabel node 8, in general, the message passing algorithm is a very efficient method to update beliefs about unknown node labels.</p>
+<p>In practice, in a supervised learning setting, we will not be giving the node label as the node feature. Instead, we hope that our node feature will be an accurate representation of that nodes label. For example, our node features could be an altered gene expression in a patient with cancer. In this example, for an informative cancer network we can see envision how we will be better able to identify new cancer patients if the messages they receive are from other similar cancer patients, but more on this later.</p>
+<p>The main difference between Graph Neural Network architectures is how they perform message passing and how they aggregate messages. Previously, we looked at a median aggregation, next we want to repeat the above using mean aggregation</p>
+</section>
+<section id="mean-aggregation">
+<h2><font color='darkblue'>Mean Aggregation </font><a class="headerlink" href="#mean-aggregation" title="Link to this heading">#</a></h2>
+<p>What happens if we change the aggregation function from median to sum or mean. For sum we can easily envision how our current features would explode greater that the 0.5 threshold for all nodes but what about mean?</p>
+<p>First, we will alter our node features which encodes the Officer club as [-1,0]. Introducing the -1 in hope to control the behaviour of the message passing and reaching an equillibrium with mean aggregation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unknown_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span> <span class="p">)</span> <span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1"># randomly select ten nodes for our test set</span>
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span> <span class="p">:</span> 
+    <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">unknown_nodes</span> <span class="p">:</span> 
+        <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># mask node features as 50/50 chance of being Mr. Hi or Mr. Officer</span>
+        <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;club&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Masked&#39;</span>
+    <span class="k">else</span> <span class="p">:</span> 
+        <span class="k">if</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;club&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Mr. Hi&#39;</span> <span class="p">:</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span> <span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="c1"># Embed Mr. Hi as [0,1]</span>
+        <span class="k">elif</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;club&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Officer&#39;</span> <span class="p">:</span> 
+            <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span> <span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="c1"># Embed Mr. Officer as [-1,0]</span>
+        <span class="k">else</span> <span class="p">:</span> 
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No club or group found for node&#39;</span><span class="p">)</span>
+            
+<span class="c1"># Access updated node features after one iteration</span>
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Node:&quot;</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="s2">&quot;Feature:&quot;</span><span class="p">,</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">])</span>
+    
+<span class="c1"># Draw our updated network</span>
+<span class="n">node_colours</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G</span> <span class="p">,</span> <span class="s1">&#39;feature&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;str&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-0.5&#39;</span> <span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span> <span class="p">,</span> <span class="s1">&#39;grey&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;0.5&#39;</span> <span class="p">,</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">)</span> <span class="c1"># Assign node colours based on node features</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span> <span class="p">,</span> <span class="n">with_labels</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">,</span> <span class="n">node_color</span> <span class="o">=</span> <span class="n">node_colours</span><span class="p">)</span>     <span class="c1"># draw our network</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Karate Club Graph with hidden memberships&#39;</span><span class="p">)</span>
+<span class="n">legend_handles</span> <span class="o">=</span> <span class="n">gen_graph_legend</span><span class="p">(</span><span class="n">node_colours</span> <span class="p">,</span> <span class="n">G</span> <span class="p">,</span> <span class="s1">&#39;club&#39;</span><span class="p">)</span>    <span class="c1"># Generate legend labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span> <span class="o">=</span> <span class="n">legend_handles</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node: 0 Feature: [0 0]
+Node: 1 Feature: [0 1]
+Node: 2 Feature: [0 1]
+Node: 3 Feature: [0 1]
+Node: 4 Feature: [0 1]
+Node: 5 Feature: [0 1]
+Node: 6 Feature: [0 0]
+Node: 7 Feature: [0 0]
+Node: 8 Feature: [0 0]
+Node: 9 Feature: [-1  0]
+Node: 10 Feature: [0 0]
+Node: 11 Feature: [0 1]
+Node: 12 Feature: [0 1]
+Node: 13 Feature: [0 1]
+Node: 14 Feature: [-1  0]
+Node: 15 Feature: [-1  0]
+Node: 16 Feature: [0 0]
+Node: 17 Feature: [0 1]
+Node: 18 Feature: [-1  0]
+Node: 19 Feature: [0 1]
+Node: 20 Feature: [-1  0]
+Node: 21 Feature: [0 1]
+Node: 22 Feature: [-1  0]
+Node: 23 Feature: [0 0]
+Node: 24 Feature: [0 0]
+Node: 25 Feature: [-1  0]
+Node: 26 Feature: [-1  0]
+Node: 27 Feature: [-1  0]
+Node: 28 Feature: [-1  0]
+Node: 29 Feature: [-1  0]
+Node: 30 Feature: [-1  0]
+Node: 31 Feature: [-1  0]
+Node: 32 Feature: [-1  0]
+Node: 33 Feature: [-1  0]
+</pre></div>
+</div>
+<img alt="../_images/7b499f32d9d21b3eff6c6e6a83d3b22b1245036fa6ae8304600f2b3e701c108b.png" src="../_images/7b499f32d9d21b3eff6c6e6a83d3b22b1245036fa6ae8304600f2b3e701c108b.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define message passing function</span>
+<span class="k">def</span> <span class="nf">message_passing</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">G</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Perform message passing on a node in a graph.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    node (any): The node to perform message passing on.</span>
+<span class="sd">    G (networkx.Graph): The graph containing the node and its neighbors.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    any: The aggregated message from the node&#39;s neighbors.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">neighbors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">neighbors</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        #################################################</span>
+<span class="sd">                       YOUR CODE HERE</span>
+<span class="sd">        #################################################</span>
+<span class="sd">        </span>
+<span class="sd">        Re-implement the above code but using np.mean() or likewise instead of median</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">neighbor_features</span> <span class="o">=</span> <span class="p">[</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">neighbor</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">]</span>
+        <span class="n">aggregated_message</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">neighbor_features</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">aggregated_message</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example of one iteration of message passing</span>
+<span class="n">message_passing_iteration</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+<span class="c1"># Access updated node features after one iteration</span>
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Node:&quot;</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="s2">&quot;Feature:&quot;</span><span class="p">,</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">])</span>
+    
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">node_colours_message</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G</span> <span class="p">,</span> <span class="s1">&#39;feature&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="kc">True</span> <span class="p">,</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="kc">False</span> <span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="c1"># Assign node colours based on node features</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span> <span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">with_labels</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">,</span> <span class="n">node_color</span> <span class="o">=</span> <span class="n">node_colours_message</span><span class="p">)</span> <span class="c1"># draw our network</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Karate Club Graph after 1 iteration of Message Passing&#39;</span><span class="p">)</span>
+
+<span class="n">G_true</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">karate_club_graph</span><span class="p">()</span> <span class="c1"># Get back original karate club graph</span>
+<span class="n">node_colours_true</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G_true</span> <span class="p">,</span> <span class="s1">&#39;club&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Mr. Hi&#39;</span> <span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Officer&#39;</span> <span class="p">,</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">)</span> <span class="c1"># Assign node colours based on true club membership</span>
+<span class="c1"># Draw Network</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G_true</span> <span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">,</span> <span class="n">with_labels</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">,</span> <span class="n">node_color</span> <span class="o">=</span> <span class="n">node_colours_true</span><span class="p">)</span> <span class="c1"># draw our network</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;True Karate Club Graph&#39;</span><span class="p">)</span>
+<span class="n">legend_handles</span> <span class="o">=</span> <span class="n">gen_graph_legend</span><span class="p">(</span><span class="n">node_colours_true</span> <span class="p">,</span> <span class="n">G_true</span> <span class="p">,</span> <span class="s1">&#39;club&#39;</span><span class="p">)</span> <span class="c1"># Generate legend labels</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span> <span class="o">=</span> <span class="n">legend_handles</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span> <span class="o">=</span> <span class="n">legend_handles</span><span class="p">)</span>
+
+<span class="c1"># Adjust layout</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node: 0 Feature: [-0.0625  0.6875]
+Node: 1 Feature: [-0.11111111  0.66666667]
+Node: 2 Feature: [-0.4  0.3]
+Node: 3 Feature: [0.         0.66666667]
+Node: 4 Feature: [0. 0.]
+Node: 5 Feature: [0. 0.]
+Node: 6 Feature: [0.  0.5]
+Node: 7 Feature: [0.   0.75]
+Node: 8 Feature: [-0.6  0.2]
+Node: 9 Feature: [-0.5  0.5]
+Node: 10 Feature: [0.         0.66666667]
+Node: 11 Feature: [0. 0.]
+Node: 12 Feature: [0.  0.5]
+Node: 13 Feature: [-0.2  0.6]
+Node: 14 Feature: [-1.  0.]
+Node: 15 Feature: [-1.  0.]
+Node: 16 Feature: [0.  0.5]
+Node: 17 Feature: [0.  0.5]
+Node: 18 Feature: [-1.  0.]
+Node: 19 Feature: [-0.33333333  0.33333333]
+Node: 20 Feature: [-1.  0.]
+Node: 21 Feature: [0.  0.5]
+Node: 22 Feature: [-1.  0.]
+Node: 23 Feature: [-1.  0.]
+Node: 24 Feature: [-1.  0.]
+Node: 25 Feature: [-0.33333333  0.        ]
+Node: 26 Feature: [-1.  0.]
+Node: 27 Feature: [-0.25  0.25]
+Node: 28 Feature: [-0.66666667  0.33333333]
+Node: 29 Feature: [-0.75  0.  ]
+Node: 30 Feature: [-0.5   0.25]
+Node: 31 Feature: [-0.66666667  0.        ]
+Node: 32 Feature: [-0.75        0.08333333]
+Node: 33 Feature: [-0.76470588  0.11764706]
+</pre></div>
+</div>
+<img alt="../_images/b7cff00deac36cf3aba28e68d81b52992d76291c3eb7b98ae81bd24cbe4c381e.png" src="../_images/b7cff00deac36cf3aba28e68d81b52992d76291c3eb7b98ae81bd24cbe4c381e.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example of 100 iterations of message passing</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="p">:</span> 
+    <span class="n">message_passing_iteration</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    
+<span class="c1"># Access updated node features after one iteration</span>
+<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Node:&quot;</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="s2">&quot;Feature:&quot;</span><span class="p">,</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">])</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">node_colours_message</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G</span> <span class="p">,</span> <span class="s1">&#39;feature&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="kc">True</span> <span class="p">,</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="kc">False</span> <span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="c1"># Assign node colours based on node features</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span> <span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">with_labels</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">,</span> <span class="n">node_color</span> <span class="o">=</span> <span class="n">node_colours_message</span><span class="p">)</span> <span class="c1"># draw our network</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Karate Club Graph after 100 iterations of Message Passing&#39;</span><span class="p">)</span>
+
+<span class="n">G_true</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">karate_club_graph</span><span class="p">()</span> <span class="c1"># Get back original karate club graph</span>
+<span class="n">node_colours_true</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G_true</span> <span class="p">,</span> <span class="s1">&#39;club&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Mr. Hi&#39;</span> <span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Officer&#39;</span> <span class="p">,</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">)</span> <span class="c1"># Assign node colours based on true club membership</span>
+<span class="c1"># Draw Network</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G_true</span> <span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">,</span> <span class="n">with_labels</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">,</span> <span class="n">node_color</span> <span class="o">=</span> <span class="n">node_colours_true</span><span class="p">)</span> <span class="c1"># draw our network</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;True Karate Club Graph&#39;</span><span class="p">)</span>
+<span class="n">legend_handles</span> <span class="o">=</span> <span class="n">gen_graph_legend</span><span class="p">(</span><span class="n">node_colours_true</span> <span class="p">,</span> <span class="n">G_true</span> <span class="p">,</span> <span class="s1">&#39;club&#39;</span><span class="p">)</span> <span class="c1"># Generate legend labels</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span> <span class="o">=</span> <span class="n">legend_handles</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span> <span class="o">=</span> <span class="n">legend_handles</span><span class="p">)</span>
+
+<span class="c1"># Adjust layout</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node: 0 Feature: [-0.42948698  0.30128216]
+Node: 1 Feature: [-0.42948708  0.30128211]
+Node: 2 Feature: [-0.42948719  0.30128205]
+Node: 3 Feature: [-0.42948705  0.30128212]
+Node: 4 Feature: [-0.42948676  0.30128227]
+Node: 5 Feature: [-0.42948671  0.3012823 ]
+Node: 6 Feature: [-0.42948671  0.3012823 ]
+Node: 7 Feature: [-0.42948706  0.30128212]
+Node: 8 Feature: [-0.42948724  0.30128202]
+Node: 9 Feature: [-0.42948729  0.301282  ]
+Node: 10 Feature: [-0.42948676  0.30128227]
+Node: 11 Feature: [-0.42948695  0.30128217]
+Node: 12 Feature: [-0.42948699  0.30128215]
+Node: 13 Feature: [-0.42948712  0.30128208]
+Node: 14 Feature: [-0.42948739  0.30128194]
+Node: 15 Feature: [-0.42948739  0.30128194]
+Node: 16 Feature: [-0.42948664  0.30128234]
+Node: 17 Feature: [-0.42948701  0.30128214]
+Node: 18 Feature: [-0.42948739  0.30128194]
+Node: 19 Feature: [-0.42948713  0.30128208]
+Node: 20 Feature: [-0.42948739  0.30128194]
+Node: 21 Feature: [-0.42948701  0.30128214]
+Node: 22 Feature: [-0.42948739  0.30128194]
+Node: 23 Feature: [-0.42948742  0.30128193]
+Node: 24 Feature: [-0.42948739  0.30128194]
+Node: 25 Feature: [-0.42948741  0.30128193]
+Node: 26 Feature: [-0.42948742  0.30128192]
+Node: 27 Feature: [-0.42948736  0.30128195]
+Node: 28 Feature: [-0.4294873   0.30128199]
+Node: 29 Feature: [-0.42948743  0.30128192]
+Node: 30 Feature: [-0.42948728  0.301282  ]
+Node: 31 Feature: [-0.42948732  0.30128198]
+Node: 32 Feature: [-0.42948738  0.30128195]
+Node: 33 Feature: [-0.42948736  0.30128196]
+</pre></div>
+</div>
+<img alt="../_images/36b1def0cccc2d58934abde697842f2a7bc45bc29c122f983a9aacea4c786bed.png" src="../_images/36b1def0cccc2d58934abde697842f2a7bc45bc29c122f983a9aacea4c786bed.png" />
+</div>
+</div>
+</section>
+<section id="message-passing-key-takeaways">
+<h2><font color='darkblue'>Message Passing Key Takeaways </font><a class="headerlink" href="#message-passing-key-takeaways" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Message passing is fast.</p></li>
+<li><p>Message passing is not perfect</p></li>
+</ol>
+<p>Can we introduce a non-linearity that allows us to mean and sum aggregate our nodes to prevent feature saturation and learn node labels from features?? -&gt; GNN’s!</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "bryanismb"
+        },
+        kernelOptions: {
+            name: "bryanismb",
+            path: "./Section3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'bryanismb'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Section3_intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Section 3 - SNF + GNN’s</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Part2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><font color='darkblue'> Part 2 : Problem Formulation / Patient Similarity Network Generation </font></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#message-passing-features"><font color="darkblue">Message Passing Features </font></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#message-passing-function"><font color="darkblue">Message Passing Function </font></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-aggregation"><font color="darkblue">Mean Aggregation </font></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#message-passing-key-takeaways"><font color="darkblue">Message Passing Key Takeaways </font></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By https://biomedicalinformaticsgroup.github.io/
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
