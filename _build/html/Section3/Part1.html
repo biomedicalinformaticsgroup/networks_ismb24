@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Part 1 : Message Passing &#8212; ISMB Tutorial Book</title>
   
@@ -18,45 +19,49 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=36754332"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Section3/Part1';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -71,9 +76,10 @@
 
   
   
-  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
+
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -114,14 +120,11 @@
 </form></div>
   </div>
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar">
-    </header>
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
   
-
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      
-      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -155,18 +158,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -179,7 +171,7 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../GettingStarted.html">Getting Started</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../Section1_intro.html">Section 1 - Network Basics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../Section1/Section1.html">Part 1 - Introduction to Biomedical Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Section1/Part1.html">Part 1 - Introduction to Biomedical Networks</a></li>
 
 
 
@@ -196,7 +188,7 @@
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="../Section1/Section1-PSN.html">Part 2 - Patient similarity networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Section1/Part2.html">Part 2 - Patient similarity networks</a></li>
 
 </ul>
 </li>
@@ -409,10 +401,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#message-passing-features"><font color="darkblue">Message Passing Features </font></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#message-passing-function"><font color="darkblue">Message Passing Function </font></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-aggregation"><font color="darkblue">Mean Aggregation </font></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#message-passing-key-takeaways"><font color="darkblue">Message Passing Key Takeaways </font></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-message-passing-features-font"><font color="darkblue">Message Passing Features </font></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-message-passing-function-font"><font color="darkblue">Message Passing Function </font></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#here-we-are-plotting-the-karate-club-network-after-one-iteration-of-message-passing-and-comparing-it-to-the-original-network">Here we are plotting the karate club network after one iteration of message passing and comparing it to the original network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#we-are-now-going-to-run-100-more-iterations-of-message-passing-to-see-if-the-node-features-converge-to-give-back-the-original-club-memberships">We are now going to run 100 more iterations of message passing to see if the node features converge to give back the original club memberships</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-mean-aggregation-font"><font color="darkblue">Mean Aggregation </font></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Here we are plotting the karate club network after one iteration of message passing and comparing it to the original network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">We are now going to run 100 more iterations of message passing to see if the node features converge to give back the original club memberships</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-message-passing-key-takeaways-font"><font color="darkblue">Message Passing Key Takeaways </font></a></li>
 </ul>
             </nav>
         </div>
@@ -422,10 +422,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article">
+                <article class="bd-article" role="main">
                   
-  <section id="part-1-message-passing">
-<h1><font color='darkblue'> Part 1 : Message Passing </font><a class="headerlink" href="#part-1-message-passing" title="Link to this heading">#</a></h1>
+  <section id="font-color-darkblue-part-1-message-passing-font">
+<h1><font color='darkblue'> Part 1 : Message Passing </font><a class="headerlink" href="#font-color-darkblue-part-1-message-passing-font" title="Permalink to this heading">#</a></h1>
 <p>In this notebook we will go step by step through message passing, the foundation of GNN learning.</p>
 <p>We will use the Toy example of the Karate Club dataset first introduced in Section 1.</p>
 <p>We will see how we can propagate information and how nodes can learn from their neighbours in the most simple of instances</p>
@@ -437,8 +437,15 @@ document.write(`
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">mpatches</span>
 
-<span class="c1"># Create Karate Club graph</span>
-<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">karate_club_graph</span><span class="p">()</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">#################################################</span>
+<span class="sd">               YOUR CODE HERE</span>
+<span class="sd">#################################################</span>
+
+<span class="sd">Load Karate Club graph from networkx package</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span>
 </pre></div>
 </div>
 </div>
@@ -470,12 +477,20 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate a node colour for each club in karate club</span>
-<span class="n">node_colours</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G</span> <span class="p">,</span> <span class="s1">&#39;club&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Mr. Hi&#39;</span> <span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Officer&#39;</span> <span class="p">,</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">#################################################</span>
+<span class="sd">               YOUR CODE HERE</span>
+<span class="sd">#################################################</span>
+
+<span class="sd">Generate a node colour for each club in karate club</span>
+
+<span class="sd">Draw the network using nx.draw and the correct parameters</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="n">node_colours</span> <span class="o">=</span> 
 
 <span class="c1"># Draw Network</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="c1"># so we produce the same network each time as the layout is a stochastic algorithm</span>
-<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span> <span class="p">,</span> <span class="n">with_labels</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">,</span> <span class="n">node_color</span> <span class="o">=</span> <span class="n">node_colours</span><span class="p">)</span> <span class="c1"># draw our network</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span> <span class="c1"># inout our graph, and node colours into network using with_labels = True</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Karate Club Graph&#39;</span><span class="p">)</span>
 <span class="n">legend_handles</span> <span class="o">=</span> <span class="n">gen_graph_legend</span><span class="p">(</span><span class="n">node_colours</span> <span class="p">,</span> <span class="n">G</span> <span class="p">,</span> <span class="s1">&#39;club&#39;</span><span class="p">)</span> <span class="c1"># Generate legend labels from function above</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span> <span class="o">=</span> <span class="n">legend_handles</span><span class="p">)</span>
@@ -483,36 +498,49 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/dfb306c689c5fa602daa8d0d4f7d1fde85cf4026945e7ee69d46957a8a8ff390.png" src="../_images/dfb306c689c5fa602daa8d0d4f7d1fde85cf4026945e7ee69d46957a8a8ff390.png" />
 </div>
-</div>
-<section id="message-passing-features">
-<h2><font color='darkblue'>Message Passing Features </font><a class="headerlink" href="#message-passing-features" title="Link to this heading">#</a></h2>
+<section id="font-color-darkblue-message-passing-features-font">
+<h2><font color='darkblue'>Message Passing Features </font><a class="headerlink" href="#font-color-darkblue-message-passing-features-font" title="Permalink to this heading">#</a></h2>
 <p>We need to specify node features which each node will pass on. In this simple use case we are going to embed the answer in the node feature. We will one-hot encode each club. e.g. Mr Hi’s club will be [0,1] and Officer club will be [1,0]. We will mask the participation of some members club by encoding them as [0.5 , 0.5], making it equally likely they belong to each club.</p>
 <p>Can we re-identify these members clubs by performing simple message passing over the network?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add node features to our network</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">#################################################</span>
+<span class="sd">               YOUR CODE HERE</span>
+<span class="sd">#################################################</span>
 
-<span class="n">unknown_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span> <span class="p">)</span> <span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1"># randomly select ten nodes for our test set</span>
+<span class="sd">Add node features to our network</span>
+
+<span class="sd">1. Embed the features [0,1] for Mr. Hi club, [1,0] for Mr. Officer and</span>
+<span class="sd">[0.5, 0.5] for the masked nodes</span>
+
+<span class="sd">2. Print each node and its corresponding feature</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="n">unknown_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span> <span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1"># randomly select ten nodes for our test set</span>
 <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span> <span class="p">:</span> 
     <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">unknown_nodes</span> <span class="p">:</span> 
-        <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">])</span> <span class="c1"># mask node features as 50/50 chance of being Mr. Hi or Mr. Officer</span>
+        <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">()</span> <span class="c1"># mask node features as 50/50 chance of being Mr. Hi or Mr. Officer</span>
         <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;club&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Masked&#39;</span>
     <span class="k">else</span> <span class="p">:</span> 
         <span class="k">if</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;club&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Mr. Hi&#39;</span> <span class="p">:</span>
-            <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span> <span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="c1"># Embed Mr. Hi as [0,1]</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">()</span> <span class="c1"># Embed Mr. Hi features as [0,1]</span>
         <span class="k">elif</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;club&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Officer&#39;</span> <span class="p">:</span> 
-            <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span> <span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="c1"># Embed Mr. Officer as [1,0]</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">()</span> <span class="c1"># Embed Mr. Officer features as [1,0]</span>
         <span class="k">else</span> <span class="p">:</span> 
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No club or group found for node&#39;</span><span class="p">)</span>
             
 <span class="c1"># Access updated node features after one iteration</span>
 <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Node:&quot;</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="s2">&quot;Feature:&quot;</span><span class="p">,</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">])</span>
-    
-<span class="c1"># Draw our updated network</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Node:&quot;</span><span class="p">,</span> <span class="p">,</span> <span class="s2">&quot;Feature:&quot;</span><span class="p">,</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Draw our updated network</span>
 <span class="n">node_colours</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G</span> <span class="p">,</span> <span class="s1">&#39;feature&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;str&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span> <span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;0.5&#39;</span> <span class="p">,</span> <span class="s1">&#39;grey&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span> <span class="p">,</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">)</span>
 
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
@@ -524,49 +552,10 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node: 0 Feature: [0.5 0.5]
-Node: 1 Feature: [0 1]
-Node: 2 Feature: [0 1]
-Node: 3 Feature: [0 1]
-Node: 4 Feature: [0 1]
-Node: 5 Feature: [0 1]
-Node: 6 Feature: [0.5 0.5]
-Node: 7 Feature: [0.5 0.5]
-Node: 8 Feature: [0.5 0.5]
-Node: 9 Feature: [1 0]
-Node: 10 Feature: [0.5 0.5]
-Node: 11 Feature: [0 1]
-Node: 12 Feature: [0 1]
-Node: 13 Feature: [0 1]
-Node: 14 Feature: [1 0]
-Node: 15 Feature: [1 0]
-Node: 16 Feature: [0.5 0.5]
-Node: 17 Feature: [0 1]
-Node: 18 Feature: [1 0]
-Node: 19 Feature: [0 1]
-Node: 20 Feature: [1 0]
-Node: 21 Feature: [0 1]
-Node: 22 Feature: [1 0]
-Node: 23 Feature: [0.5 0.5]
-Node: 24 Feature: [0.5 0.5]
-Node: 25 Feature: [1 0]
-Node: 26 Feature: [1 0]
-Node: 27 Feature: [1 0]
-Node: 28 Feature: [1 0]
-Node: 29 Feature: [1 0]
-Node: 30 Feature: [1 0]
-Node: 31 Feature: [1 0]
-Node: 32 Feature: [1 0]
-Node: 33 Feature: [1 0]
-</pre></div>
-</div>
-<img alt="../_images/4a10c2b101a5247bb9b5010744bafe161176977f79226c22a4ac0cac8c6b801a.png" src="../_images/4a10c2b101a5247bb9b5010744bafe161176977f79226c22a4ac0cac8c6b801a.png" />
-</div>
 </div>
 </section>
-<section id="message-passing-function">
-<h2><font color='darkblue'>Message Passing Function </font><a class="headerlink" href="#message-passing-function" title="Link to this heading">#</a></h2>
+<section id="font-color-darkblue-message-passing-function-font">
+<h2><font color='darkblue'>Message Passing Function </font><a class="headerlink" href="#font-color-darkblue-message-passing-function-font" title="Permalink to this heading">#</a></h2>
 <p>As defined, message passing consists of three main steps. Message propagation, aggregation and update.</p>
 <ul class="simple">
 <li><p>We need each node to pass or propogate their features to their neighbours.</p></li>
@@ -611,9 +600,7 @@ Node: 33 Feature: [1 0]
 <span class="sd">            use list comprehension &amp; G.nodes[neighbor][&#39;feature&#39;] to extract the feature</span>
 <span class="sd">            2. Aggregate these messages for each node using np.median() or likewise</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">neighbor_features</span> <span class="o">=</span> <span class="p">[</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">neighbor</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">]</span>
-        <span class="n">aggregated_message</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">neighbor_features</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        
+
         <span class="k">return</span> <span class="n">aggregated_message</span>
 
 
@@ -653,25 +640,32 @@ Node: 33 Feature: [1 0]
 <span class="sd">        3. Iterate through the dictionary created above. hint use updated_features.items()</span>
 <span class="sd">        4. Update each nodes features</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
-        <span class="n">updated_features</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">message_passing</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">G</span><span class="p">)</span>
-    
-    <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">updated_features</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example of one iteration of message passing</span>
-<span class="n">message_passing_iteration</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">#################################################</span>
+<span class="sd">               YOUR CODE HERE</span>
+<span class="sd">#################################################</span>
+
+<span class="sd">Perform a single iteration of message passing and</span>
+<span class="sd">print the updated node features</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="c1"># Example of one iteration of message passing</span>
 
 <span class="c1"># Access updated node features after one iteration</span>
-<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Node:&quot;</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="s2">&quot;Feature:&quot;</span><span class="p">,</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">])</span>
-    
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="here-we-are-plotting-the-karate-club-network-after-one-iteration-of-message-passing-and-comparing-it-to-the-original-network">
+<h3>Here we are plotting the karate club network after one iteration of message passing and comparing it to the original network<a class="headerlink" href="#here-we-are-plotting-the-karate-club-network-after-one-iteration-of-message-passing-and-comparing-it-to-the-original-network" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
 <span class="n">node_colours_message</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G</span> <span class="p">,</span> <span class="s1">&#39;feature&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="kc">True</span> <span class="p">,</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="kc">False</span> <span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="c1"># Assign node colours based on node features</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
@@ -694,58 +688,20 @@ Node: 33 Feature: [1 0]
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node: 0 Feature: [0. 1.]
-Node: 1 Feature: [0. 1.]
-Node: 2 Feature: [0.5 0.5]
-Node: 3 Feature: [0. 1.]
-Node: 4 Feature: [0.5 0.5]
-Node: 5 Feature: [0.5 0.5]
-Node: 6 Feature: [0.25 0.75]
-Node: 7 Feature: [0. 1.]
-Node: 8 Feature: [1. 0.]
-Node: 9 Feature: [0.5 0.5]
-Node: 10 Feature: [0. 1.]
-Node: 11 Feature: [0.5 0.5]
-Node: 12 Feature: [0.25 0.75]
-Node: 13 Feature: [0. 1.]
-Node: 14 Feature: [1. 0.]
-Node: 15 Feature: [1. 0.]
-Node: 16 Feature: [0.25 0.75]
-Node: 17 Feature: [0.25 0.75]
-Node: 18 Feature: [1. 0.]
-Node: 19 Feature: [0.5 0.5]
-Node: 20 Feature: [1. 0.]
-Node: 21 Feature: [0.25 0.75]
-Node: 22 Feature: [1. 0.]
-Node: 23 Feature: [1. 0.]
-Node: 24 Feature: [1. 0.]
-Node: 25 Feature: [0.5 0.5]
-Node: 26 Feature: [1. 0.]
-Node: 27 Feature: [0.5 0.5]
-Node: 28 Feature: [1. 0.]
-Node: 29 Feature: [1. 0.]
-Node: 30 Feature: [0.75 0.25]
-Node: 31 Feature: [1. 0.]
-Node: 32 Feature: [1. 0.]
-Node: 33 Feature: [1. 0.]
-</pre></div>
 </div>
-<img alt="../_images/1e75718d3ea6ee238cece2dedbe61441ff9792c4ee4fbeabf46219d7e29efbab.png" src="../_images/1e75718d3ea6ee238cece2dedbe61441ff9792c4ee4fbeabf46219d7e29efbab.png" />
-</div>
-</div>
+</section>
+<section id="we-are-now-going-to-run-100-more-iterations-of-message-passing-to-see-if-the-node-features-converge-to-give-back-the-original-club-memberships">
+<h3>We are now going to run 100 more iterations of message passing to see if the node features converge to give back the original club memberships<a class="headerlink" href="#we-are-now-going-to-run-100-more-iterations-of-message-passing-to-see-if-the-node-features-converge-to-give-back-the-original-club-memberships" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example of 100 iterations of message passing</span>
 <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="p">:</span> 
-    <span class="n">message_passing_iteration</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
     
 <span class="c1"># Access updated node features after one iteration</span>
-<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Node:&quot;</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="s2">&quot;Feature:&quot;</span><span class="p">,</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">])</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
+<span class="c1"># Plotting the updated node features and the original karate club network</span>
 <span class="n">node_colours_message</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G</span> <span class="p">,</span> <span class="s1">&#39;feature&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="kc">True</span> <span class="p">,</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="kc">False</span> <span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="c1"># Assign node colours based on node features</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span> <span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">with_labels</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">,</span> <span class="n">node_color</span> <span class="o">=</span> <span class="n">node_colours_message</span><span class="p">)</span> <span class="c1"># draw our network</span>
@@ -767,75 +723,52 @@ Node: 33 Feature: [1. 0.]
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node: 0 Feature: [0.25 0.75]
-Node: 1 Feature: [0.25 0.75]
-Node: 2 Feature: [0.5 0.5]
-Node: 3 Feature: [0.25 0.75]
-Node: 4 Feature: [0.23706055 0.76293945]
-Node: 5 Feature: [0.23706055 0.76293945]
-Node: 6 Feature: [0.23706055 0.76293945]
-Node: 7 Feature: [0.25 0.75]
-Node: 8 Feature: [1.00000000e+00 1.97215226e-31]
-Node: 9 Feature: [0.75 0.25]
-Node: 10 Feature: [0.23706055 0.76293945]
-Node: 11 Feature: [0.25 0.75]
-Node: 12 Feature: [0.25 0.75]
-Node: 13 Feature: [0.25 0.75]
-Node: 14 Feature: [1. 0.]
-Node: 15 Feature: [1. 0.]
-Node: 16 Feature: [0.23706055 0.76293945]
-Node: 17 Feature: [0.25 0.75]
-Node: 18 Feature: [1. 0.]
-Node: 19 Feature: [0.25 0.75]
-Node: 20 Feature: [1. 0.]
-Node: 21 Feature: [0.25 0.75]
-Node: 22 Feature: [1. 0.]
-Node: 23 Feature: [1. 0.]
-Node: 24 Feature: [1. 0.]
-Node: 25 Feature: [1. 0.]
-Node: 26 Feature: [1. 0.]
-Node: 27 Feature: [1. 0.]
-Node: 28 Feature: [1. 0.]
-Node: 29 Feature: [1. 0.]
-Node: 30 Feature: [1. 0.]
-Node: 31 Feature: [1. 0.]
-Node: 32 Feature: [1. 0.]
-Node: 33 Feature: [1. 0.]
-</pre></div>
-</div>
-<img alt="../_images/10a676e14ea1e05e93e37003eaafeab02d905b640752a9354a822bc4f7ca1398.png" src="../_images/10a676e14ea1e05e93e37003eaafeab02d905b640752a9354a822bc4f7ca1398.png" />
-</div>
 </div>
 <p>Above we can see that we are able to reclaim the karate club assignments by sharing each nodes belief about their own club.</p>
 <p>Although we mislabel node 8, in general, the message passing algorithm is a very efficient method to update beliefs about unknown node labels.</p>
 <p>In practice, in a supervised learning setting, we will not be giving the node label as the node feature. Instead, we hope that our node feature will be an accurate representation of that nodes label. For example, our node features could be an altered gene expression in a patient with cancer. In this example, for an informative cancer network we can see envision how we will be better able to identify new cancer patients if the messages they receive are from other similar cancer patients, but more on this later.</p>
 <p>The main difference between Graph Neural Network architectures is how they perform message passing and how they aggregate messages. Previously, we looked at a median aggregation, next we want to repeat the above using mean aggregation</p>
 </section>
-<section id="mean-aggregation">
-<h2><font color='darkblue'>Mean Aggregation </font><a class="headerlink" href="#mean-aggregation" title="Link to this heading">#</a></h2>
+</section>
+<section id="font-color-darkblue-mean-aggregation-font">
+<h2><font color='darkblue'>Mean Aggregation </font><a class="headerlink" href="#font-color-darkblue-mean-aggregation-font" title="Permalink to this heading">#</a></h2>
 <p>What happens if we change the aggregation function from median to sum or mean. For sum we can easily envision how our current features would explode greater that the 0.5 threshold for all nodes but what about mean?</p>
 <p>First, we will alter our node features which encodes the Officer club as [-1,0]. Introducing the -1 in hope to control the behaviour of the message passing and reaching an equillibrium with mean aggregation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unknown_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span> <span class="p">)</span> <span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1"># randomly select ten nodes for our test set</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">#################################################</span>
+<span class="sd">               YOUR CODE HERE</span>
+<span class="sd">#################################################</span>
+
+<span class="sd">Add node features to our network</span>
+
+<span class="sd">1. Embed the features which you think might be best for convergence using mean aggregation</span>
+
+<span class="sd">2. Print each node and its corresponding feature</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="n">unknown_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span> <span class="p">)</span> <span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1"># randomly select ten nodes for our test set</span>
 <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span> <span class="p">:</span> 
     <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">unknown_nodes</span> <span class="p">:</span> 
-        <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># mask node features as 50/50 chance of being Mr. Hi or Mr. Officer</span>
+        <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">()</span> <span class="c1"># mask node features as 50/50 chance of being Mr. Hi or Mr. Officer</span>
         <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;club&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Masked&#39;</span>
     <span class="k">else</span> <span class="p">:</span> 
         <span class="k">if</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;club&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Mr. Hi&#39;</span> <span class="p">:</span>
-            <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span> <span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="c1"># Embed Mr. Hi as [0,1]</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">()</span> <span class="c1"># Embed Mr. Hi as ...</span>
         <span class="k">elif</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;club&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Officer&#39;</span> <span class="p">:</span> 
-            <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span> <span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="c1"># Embed Mr. Officer as [-1,0]</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">()</span> <span class="c1"># Embed Mr. Officer as ...</span>
         <span class="k">else</span> <span class="p">:</span> 
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No club or group found for node&#39;</span><span class="p">)</span>
             
 <span class="c1"># Access updated node features after one iteration</span>
-<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Node:&quot;</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="s2">&quot;Feature:&quot;</span><span class="p">,</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">])</span>
-    
-<span class="c1"># Draw our updated network</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Draw our updated network</span>
 <span class="n">node_colours</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G</span> <span class="p">,</span> <span class="s1">&#39;feature&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;str&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-0.5&#39;</span> <span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span> <span class="p">,</span> <span class="s1">&#39;grey&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;0.5&#39;</span> <span class="p">,</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">)</span> <span class="c1"># Assign node colours based on node features</span>
 
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
@@ -846,45 +779,6 @@ Node: 33 Feature: [1. 0.]
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node: 0 Feature: [0 0]
-Node: 1 Feature: [0 1]
-Node: 2 Feature: [0 1]
-Node: 3 Feature: [0 1]
-Node: 4 Feature: [0 1]
-Node: 5 Feature: [0 1]
-Node: 6 Feature: [0 0]
-Node: 7 Feature: [0 0]
-Node: 8 Feature: [0 0]
-Node: 9 Feature: [-1  0]
-Node: 10 Feature: [0 0]
-Node: 11 Feature: [0 1]
-Node: 12 Feature: [0 1]
-Node: 13 Feature: [0 1]
-Node: 14 Feature: [-1  0]
-Node: 15 Feature: [-1  0]
-Node: 16 Feature: [0 0]
-Node: 17 Feature: [0 1]
-Node: 18 Feature: [-1  0]
-Node: 19 Feature: [0 1]
-Node: 20 Feature: [-1  0]
-Node: 21 Feature: [0 1]
-Node: 22 Feature: [-1  0]
-Node: 23 Feature: [0 0]
-Node: 24 Feature: [0 0]
-Node: 25 Feature: [-1  0]
-Node: 26 Feature: [-1  0]
-Node: 27 Feature: [-1  0]
-Node: 28 Feature: [-1  0]
-Node: 29 Feature: [-1  0]
-Node: 30 Feature: [-1  0]
-Node: 31 Feature: [-1  0]
-Node: 32 Feature: [-1  0]
-Node: 33 Feature: [-1  0]
-</pre></div>
-</div>
-<img alt="../_images/7b499f32d9d21b3eff6c6e6a83d3b22b1245036fa6ae8304600f2b3e701c108b.png" src="../_images/7b499f32d9d21b3eff6c6e6a83d3b22b1245036fa6ae8304600f2b3e701c108b.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -913,9 +807,7 @@ Node: 33 Feature: [-1  0]
 <span class="sd">        </span>
 <span class="sd">        Re-implement the above code but using np.mean() or likewise instead of median</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">neighbor_features</span> <span class="o">=</span> <span class="p">[</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">neighbor</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">]</span>
-        <span class="n">aggregated_message</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">neighbor_features</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        
+
         <span class="k">return</span> <span class="n">aggregated_message</span>
 </pre></div>
 </div>
@@ -923,14 +815,26 @@ Node: 33 Feature: [-1  0]
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example of one iteration of message passing</span>
-<span class="n">message_passing_iteration</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">#################################################</span>
+<span class="sd">               YOUR CODE HERE</span>
+<span class="sd">#################################################</span>
+
+<span class="sd">Perform a single iteration of message passing and</span>
+<span class="sd">print the updated node features</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="c1"># Example of one iteration of message passing</span>
 
 <span class="c1"># Access updated node features after one iteration</span>
-<span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Node:&quot;</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="s2">&quot;Feature:&quot;</span><span class="p">,</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">][</span><span class="s1">&#39;feature&#39;</span><span class="p">])</span>
-    
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id1">
+<h3>Here we are plotting the karate club network after one iteration of message passing and comparing it to the original network<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
 <span class="n">node_colours_message</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G</span> <span class="p">,</span> <span class="s1">&#39;feature&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="kc">True</span> <span class="p">,</span> <span class="s1">&#39;skyblue&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="kc">False</span> <span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="c1"># Assign node colours based on node features</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
@@ -953,46 +857,10 @@ Node: 33 Feature: [-1  0]
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node: 0 Feature: [-0.0625  0.6875]
-Node: 1 Feature: [-0.11111111  0.66666667]
-Node: 2 Feature: [-0.4  0.3]
-Node: 3 Feature: [0.         0.66666667]
-Node: 4 Feature: [0. 0.]
-Node: 5 Feature: [0. 0.]
-Node: 6 Feature: [0.  0.5]
-Node: 7 Feature: [0.   0.75]
-Node: 8 Feature: [-0.6  0.2]
-Node: 9 Feature: [-0.5  0.5]
-Node: 10 Feature: [0.         0.66666667]
-Node: 11 Feature: [0. 0.]
-Node: 12 Feature: [0.  0.5]
-Node: 13 Feature: [-0.2  0.6]
-Node: 14 Feature: [-1.  0.]
-Node: 15 Feature: [-1.  0.]
-Node: 16 Feature: [0.  0.5]
-Node: 17 Feature: [0.  0.5]
-Node: 18 Feature: [-1.  0.]
-Node: 19 Feature: [-0.33333333  0.33333333]
-Node: 20 Feature: [-1.  0.]
-Node: 21 Feature: [0.  0.5]
-Node: 22 Feature: [-1.  0.]
-Node: 23 Feature: [-1.  0.]
-Node: 24 Feature: [-1.  0.]
-Node: 25 Feature: [-0.33333333  0.        ]
-Node: 26 Feature: [-1.  0.]
-Node: 27 Feature: [-0.25  0.25]
-Node: 28 Feature: [-0.66666667  0.33333333]
-Node: 29 Feature: [-0.75  0.  ]
-Node: 30 Feature: [-0.5   0.25]
-Node: 31 Feature: [-0.66666667  0.        ]
-Node: 32 Feature: [-0.75        0.08333333]
-Node: 33 Feature: [-0.76470588  0.11764706]
-</pre></div>
 </div>
-<img alt="../_images/b7cff00deac36cf3aba28e68d81b52992d76291c3eb7b98ae81bd24cbe4c381e.png" src="../_images/b7cff00deac36cf3aba28e68d81b52992d76291c3eb7b98ae81bd24cbe4c381e.png" />
-</div>
-</div>
+</section>
+<section id="id2">
+<h3>We are now going to run 100 more iterations of message passing to see if the node features converge to give back the original club memberships<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example of 100 iterations of message passing</span>
@@ -1026,49 +894,11 @@ Node: 33 Feature: [-0.76470588  0.11764706]
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Node: 0 Feature: [-0.42948698  0.30128216]
-Node: 1 Feature: [-0.42948708  0.30128211]
-Node: 2 Feature: [-0.42948719  0.30128205]
-Node: 3 Feature: [-0.42948705  0.30128212]
-Node: 4 Feature: [-0.42948676  0.30128227]
-Node: 5 Feature: [-0.42948671  0.3012823 ]
-Node: 6 Feature: [-0.42948671  0.3012823 ]
-Node: 7 Feature: [-0.42948706  0.30128212]
-Node: 8 Feature: [-0.42948724  0.30128202]
-Node: 9 Feature: [-0.42948729  0.301282  ]
-Node: 10 Feature: [-0.42948676  0.30128227]
-Node: 11 Feature: [-0.42948695  0.30128217]
-Node: 12 Feature: [-0.42948699  0.30128215]
-Node: 13 Feature: [-0.42948712  0.30128208]
-Node: 14 Feature: [-0.42948739  0.30128194]
-Node: 15 Feature: [-0.42948739  0.30128194]
-Node: 16 Feature: [-0.42948664  0.30128234]
-Node: 17 Feature: [-0.42948701  0.30128214]
-Node: 18 Feature: [-0.42948739  0.30128194]
-Node: 19 Feature: [-0.42948713  0.30128208]
-Node: 20 Feature: [-0.42948739  0.30128194]
-Node: 21 Feature: [-0.42948701  0.30128214]
-Node: 22 Feature: [-0.42948739  0.30128194]
-Node: 23 Feature: [-0.42948742  0.30128193]
-Node: 24 Feature: [-0.42948739  0.30128194]
-Node: 25 Feature: [-0.42948741  0.30128193]
-Node: 26 Feature: [-0.42948742  0.30128192]
-Node: 27 Feature: [-0.42948736  0.30128195]
-Node: 28 Feature: [-0.4294873   0.30128199]
-Node: 29 Feature: [-0.42948743  0.30128192]
-Node: 30 Feature: [-0.42948728  0.301282  ]
-Node: 31 Feature: [-0.42948732  0.30128198]
-Node: 32 Feature: [-0.42948738  0.30128195]
-Node: 33 Feature: [-0.42948736  0.30128196]
-</pre></div>
-</div>
-<img alt="../_images/36b1def0cccc2d58934abde697842f2a7bc45bc29c122f983a9aacea4c786bed.png" src="../_images/36b1def0cccc2d58934abde697842f2a7bc45bc29c122f983a9aacea4c786bed.png" />
-</div>
 </div>
 </section>
-<section id="message-passing-key-takeaways">
-<h2><font color='darkblue'>Message Passing Key Takeaways </font><a class="headerlink" href="#message-passing-key-takeaways" title="Link to this heading">#</a></h2>
+</section>
+<section id="font-color-darkblue-message-passing-key-takeaways-font">
+<h2><font color='darkblue'>Message Passing Key Takeaways </font><a class="headerlink" href="#font-color-darkblue-message-passing-key-takeaways-font" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Message passing is fast.</p></li>
 <li><p>Message passing is not perfect</p></li>
@@ -1134,17 +964,24 @@ Node: 33 Feature: [-0.42948736  0.30128196]
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#message-passing-features"><font color="darkblue">Message Passing Features </font></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#message-passing-function"><font color="darkblue">Message Passing Function </font></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-aggregation"><font color="darkblue">Mean Aggregation </font></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#message-passing-key-takeaways"><font color="darkblue">Message Passing Key Takeaways </font></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-message-passing-features-font"><font color="darkblue">Message Passing Features </font></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-message-passing-function-font"><font color="darkblue">Message Passing Function </font></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#here-we-are-plotting-the-karate-club-network-after-one-iteration-of-message-passing-and-comparing-it-to-the-original-network">Here we are plotting the karate club network after one iteration of message passing and comparing it to the original network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#we-are-now-going-to-run-100-more-iterations-of-message-passing-to-see-if-the-node-features-converge-to-give-back-the-original-club-memberships">We are now going to run 100 more iterations of message passing to see if the node features converge to give back the original club memberships</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-mean-aggregation-font"><font color="darkblue">Mean Aggregation </font></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Here we are plotting the karate club network after one iteration of message passing and comparing it to the original network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">We are now going to run 100 more iterations of message passing to see if the node features converge to give back the original club memberships</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-message-passing-key-takeaways-font"><font color="darkblue">Message Passing Key Takeaways </font></a></li>
 </ul>
   </nav></div>
 
@@ -1169,7 +1006,7 @@ By https://biomedicalinformaticsgroup.github.io/
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>
@@ -1193,8 +1030,8 @@ By https://biomedicalinformaticsgroup.github.io/
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>
