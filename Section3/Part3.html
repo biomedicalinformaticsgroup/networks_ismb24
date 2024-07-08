@@ -406,6 +406,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-working-with-deep-graph-library-font"><font color="darkblue"> Working with Deep Graph Library</font></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-graph-convolutional-network-font"><font color="darkblue">Graph Convolutional Network </font></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-training-evaluation-font"><font color="darkblue"> Training &amp; Evaluation </font></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-model">Train the Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#we-are-going-to-compare-our-model-to-a-logistic-regression-baseline">We are going to compare our model to a Logistic Regression Baseline</a></li>
 </ul>
 </li>
 </ul>
@@ -472,8 +474,20 @@ We will now highlight the difference between our two networks to see if we can l
 <span class="kn">import</span> <span class="nn">dgl</span>
 <span class="kn">import</span> <span class="nn">torch</span>
 
-<span class="n">g</span> <span class="o">=</span> <span class="n">dgl</span><span class="o">.</span><span class="n">from_networkx</span><span class="p">(</span><span class="n">loaded_data</span><span class="p">[</span><span class="s1">&#39;PSN_EWAS&#39;</span><span class="p">]</span> <span class="p">,</span> <span class="n">node_attrs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;idx&#39;</span> <span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">])</span> <span class="c1"># Create a DGL graph from the networkx graph</span>
-<span class="n">g</span><span class="o">.</span><span class="n">ndata</span><span class="p">[</span><span class="s1">&#39;feat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">loaded_data</span><span class="p">[</span><span class="s1">&#39;Feat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">ndata</span><span class="p">[</span><span class="s1">&#39;idx&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="c1"># Add the features to the nodes</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">#################################################</span>
+<span class="sd">                YOUR CODE HERE</span>
+<span class="sd">#################################################</span>
+<span class="sd">Create a DGL graph from the networkx graph </span>
+
+<span class="sd">Add the features to the nodes, ensuring the order of the </span>
+<span class="sd">features matches the order of the nodes. </span>
+
+<span class="sd">Note : DGL only accepts torch.Tensors as feature attributes</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">dgl</span><span class="o">.</span><span class="n">from_networkx</span><span class="p">(,</span> <span class="n">node_attrs</span><span class="o">=</span><span class="p">[])</span> 
+<span class="n">g</span><span class="o">.</span><span class="n">ndata</span><span class="p">[</span><span class="s1">&#39;feat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">()</span> 
 </pre></div>
 </div>
 </div>
@@ -488,15 +502,14 @@ We will now highlight the difference between our two networks to see if we can l
 <span class="n">node_0_edges</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">e1</span> <span class="p">,</span> <span class="n">e2</span> <span class="ow">in</span> <span class="n">loaded_data</span><span class="p">[</span><span class="s1">&#39;PSN_EWAS&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">node_0</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="p">:</span>  <span class="c1"># Get the edges of this node in the networkx graph</span>
     <span class="n">node_0_edges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span>
-        
-<span class="c1"># Note : DGL will reorder the nodes if integers present in the node name</span>
+<span class="w">    </span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">###########################################################################</span>
+<span class="sd">Note : DGL will reorder the nodes if integers are present in the node name</span>
+<span class="sd">###########################################################################</span>
+<span class="sd">&#39;&#39;&#39;</span>
 
 <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">phenotypes</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">ndata</span><span class="p">[</span><span class="s1">&#39;idx&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">out_edges</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()]</span><span class="o">.</span><span class="n">index</span><span class="p">))</span> <span class="o">==</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">node_0_edges</span><span class="p">)</span> <span class="c1"># Check if the edges match between the networkx and dgl graph</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
 </pre></div>
 </div>
 </div>
@@ -535,12 +548,7 @@ We will now highlight the difference between our two networks to see if we can l
 <span class="sd">            3. hidden_feats[1] -&gt; num_classes</span>
 
 <span class="sd">        Where hidden_feats is a list of the number of hidden features in each layer which we will specify later</span>
-<span class="sd">        &#39;&#39;&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">gcnlayers</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span>
-            <span class="n">GraphConv</span><span class="p">(</span><span class="n">input_dim</span> <span class="p">,</span> <span class="n">hidden_feats</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
-            <span class="n">GraphConv</span><span class="p">(</span><span class="n">hidden_feats</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">hidden_feats</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
-            <span class="n">GraphConv</span><span class="p">(</span><span class="n">hidden_feats</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">,</span> <span class="n">num_classes</span><span class="p">)</span>
-        <span class="p">])</span>        
+<span class="sd">        &#39;&#39;&#39;</span>    
 
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
         <span class="c1"># list of hidden representation at each layer (including the input layer)</span>
@@ -561,12 +569,6 @@ We will now highlight the difference between our two networks to see if we can l
 <span class="sd">            6. Return the output of the third layer</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         
-        <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gcnlayers</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="n">g</span> <span class="p">,</span> <span class="n">h</span><span class="p">)</span>
-        <span class="n">h</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">h</span><span class="p">))</span>
-        <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gcnlayers</span><span class="p">[</span><span class="mi">1</span><span class="p">](</span><span class="n">g</span> <span class="p">,</span> <span class="n">h</span><span class="p">)</span>
-        <span class="n">h</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">h</span><span class="p">))</span>
-        <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gcnlayers</span><span class="p">[</span><span class="mi">2</span><span class="p">](</span><span class="n">g</span> <span class="p">,</span> <span class="n">h</span><span class="p">)</span>
-            
         <span class="k">return</span> <span class="n">h</span>
 </pre></div>
 </div>
@@ -585,6 +587,7 @@ We will now highlight the difference between our two networks to see if we can l
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">precision_recall_curve</span> <span class="p">,</span> <span class="n">average_precision_score</span> <span class="p">,</span> <span class="n">recall_score</span> <span class="p">,</span>  <span class="n">PrecisionRecallDisplay</span>
 <span class="kn">from</span> <span class="nn">tqdm.notebook</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 
 <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">train_split</span> <span class="p">,</span> <span class="n">val_split</span> <span class="p">,</span> <span class="n">device</span> <span class="p">,</span>  <span class="n">model</span> <span class="p">,</span> <span class="n">labels</span> <span class="p">,</span> <span class="n">epochs</span> <span class="p">,</span> <span class="n">lr</span><span class="p">):</span>
     <span class="c1"># loss function, optimizer and scheduler</span>
@@ -684,21 +687,41 @@ We will now highlight the difference between our two networks to see if we can l
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">#################################################</span>
+<span class="sd">               YOUR CODE HERE</span>
+<span class="sd">#################################################</span>
+
+<span class="sd">Here we are going to prepare our data for input to the </span>
+<span class="sd">Graph Convoloution Network</span>
+
+<span class="sd">1. Move the graph to the relevant device - GPU/CPU</span>
+<span class="sd">2. Get the node labels from the meta data, order by network nodes and reset the index</span>
+<span class="sd">3. Specify the input shape to the model from the shape of the input data</span>
+<span class="sd">4. One hot encode the node labels using torch.nn.functional.one_hot()</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
 
 <span class="n">device</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;cuda&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s1">&#39;cpu&#39;</span><span class="p">)</span> <span class="c1"># Set the device to GPU if available else CPU</span>
 
 <span class="n">g</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span> <span class="c1"># Move the graph to the device</span>
 
-<span class="c1"># Get the node labels from the meta data, order by network nodes and reset the index</span>
-<span class="n">node_subjects</span> <span class="o">=</span> <span class="n">phenotypes</span><span class="p">[</span><span class="s1">&#39;Smoking&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">ndata</span><span class="p">[</span><span class="s1">&#39;idx&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># Get node target labels from meta data </span>
+<span class="n">node_subjects</span> <span class="o">=</span>  <span class="c1"># Get node target labels from phenoteypes meta data </span>
 <span class="n">node_subjects</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Smoking&#39;</span>
 
-<span class="n">GCN_input_shapes</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">ndata</span><span class="p">[</span><span class="s1">&#39;feat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># Get the input shape of the GCN model</span>
+<span class="n">GCN_input_shapes</span> <span class="o">=</span> <span class="o">.</span><span class="n">shape</span><span class="p">[]</span> <span class="c1"># Get the input shape of the GCN model</span>
 
-<span class="n">labels</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">one_hot</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">ndata</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">))</span> <span class="c1"># Encode the labels as one hot vectors</span>
-
-<span class="n">output_metrics</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">one_hot</span><span class="p">()</span> <span class="c1"># Encode the labels as one hot vectors</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="train-the-model">
+<h3>Train the Model<a class="headerlink" href="#train-the-model" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output_metrics</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">logits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
 <span class="n">labels_all</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
 
@@ -726,27 +749,10 @@ We will now highlight the difference between our two networks to see if we can l
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GCN(
-  (gcnlayers): ModuleList(
-    (0): GraphConv(in=23676, out=128, normalization=both, activation=None)
-    (1): GraphConv(in=128, out=32, normalization=both, activation=None)
-    (2): GraphConv(in=32, out=2, normalization=both, activation=None)
-  )
-  (drop): Dropout(p=0.1, inplace=False)
-)
-Graph(num_nodes=1000, num_edges=39616,
-      ndata_schemes={&#39;idx&#39;: Scheme(shape=(), dtype=torch.int64), &#39;label&#39;: Scheme(shape=(), dtype=torch.int8), &#39;feat&#39;: Scheme(shape=(23676,), dtype=torch.float32)}
-      edata_schemes={})
-</pre></div>
 </div>
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "41a168cf2fae45c1bfffb760b28336b9", "version_major": 2, "version_minor": 0}</script><img alt="../_images/fa17f19e3558d4c98d1e3eb0edbd542608099323ef507929a1f9b26bbf279923.png" src="../_images/fa17f19e3558d4c98d1e3eb0edbd542608099323ef507929a1f9b26bbf279923.png" />
-<img alt="../_images/b7a668cbd52a730a4f6c7d9638a52d8cd9785c5160b45b2f6a60449825e83640.png" src="../_images/b7a668cbd52a730a4f6c7d9638a52d8cd9785c5160b45b2f6a60449825e83640.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GNN Model | Test Accuracy = 0.7125 | F1 = 0.6816 |
-</pre></div>
-</div>
-</div>
-</div>
+</section>
+<section id="we-are-going-to-compare-our-model-to-a-logistic-regression-baseline">
+<h3>We are going to compare our model to a Logistic Regression Baseline<a class="headerlink" href="#we-are-going-to-compare-our-model-to-a-logistic-regression-baseline" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span> <span class="c1"># Import the logistic regression model from sklearn</span>
@@ -758,15 +764,6 @@ Graph(num_nodes=1000, num_edges=39616,
 <span class="n">glmnet</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">input_data</span><span class="p">[</span><span class="n">train_index</span><span class="p">]</span> <span class="p">,</span> <span class="n">y_vals</span><span class="p">[</span><span class="n">train_index</span><span class="p">][:</span> <span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="c1"># Fit the logistic regression model</span>
 <span class="n">glmnet_acc</span> <span class="o">=</span> <span class="n">glmnet</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">input_data</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span> <span class="p">,</span> <span class="n">y_vals</span><span class="p">[</span><span class="n">test_index</span><span class="p">][:</span> <span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="c1"># Get the accuracy of the logistic regression model on the test set</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Baseline Logistic Regression ACC : </span><span class="si">{</span><span class="n">glmnet_acc</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># Print the accuracy of the logistic regression model</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Baseline Logistic Regression ACC : 0.745
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Barry\anaconda3\lib\site-packages\sklearn\linear_model\_sag.py:350: ConvergenceWarning: The max_iter was reached which means the coef_ did not converge
-  warnings.warn(
 </pre></div>
 </div>
 </div>
@@ -846,6 +843,8 @@ Graph(num_nodes=1000, num_edges=39616,
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-working-with-deep-graph-library-font"><font color="darkblue"> Working with Deep Graph Library</font></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-graph-convolutional-network-font"><font color="darkblue">Graph Convolutional Network </font></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-training-evaluation-font"><font color="darkblue"> Training &amp; Evaluation </font></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-model">Train the Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#we-are-going-to-compare-our-model-to-a-logistic-regression-baseline">We are going to compare our model to a Logistic Regression Baseline</a></li>
 </ul>
 </li>
 </ul>
