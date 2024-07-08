@@ -201,7 +201,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="Part1.html"><font color="darkblue"> Part 1 : Message Passing </font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Part2.html"><font color="darkblue"> Part 2 : Problem Formulation / Patient Similarity Network Generation </font></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Part3.html"><font color="darkblue"> Part 3 : Smoking Network Classification using Graph Convolutional Networks</font></a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#"><font color="darkblue"> Part 4 : Similarity Network Fusion with Graph Convolutional Networks</font></a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Part 4 : Similarity Network Fusion with Graph Convolutional Networks</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../ConceptGlossary.html">Concept Glossary</a></li>
@@ -391,7 +391,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><font color='darkblue'> Part 4 : Similarity Network Fusion with Graph Convolutional Networks</font></h1>
+    <h1>Part 4 : Similarity Network Fusion with Graph Convolutional Networks</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -401,10 +401,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-import-functions-and-packages-font"><font color="darkblue">Import Functions and Packages </font></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-import-and-process-generation-scotland-data-font"><font color="darkblue">Import and Process Generation Scotland Data</font></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-create-patient-similarity-network-for-second-modality-font"><font color="darkblue"> Create Patient Similarity Network for Second Modality </font></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note-creating-temporary-second-modality-of-time-since-last-cigarette-waiting-for-more-gen-scot-data-this-will-be-artificially-high">NOTE : Creating temporary second modality of time since last cigarette. Waiting for more Gen Scot data. This will be artificially high</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-functions-and-packages">Import Functions and Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-and-process-generation-scotland-data">Import and Process Generation Scotland Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-patient-similarity-network-for-second-modality">Create Patient Similarity Network for Second Modality</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note-creating-second-modality-of-time-since-last-cigarette-this-will-be-highly-correlated-with-the-outcome-of-smoking-or-not-however-we-want-to-use-this-as-an-exemplar-for-snf-gnn-s">NOTE : Creating second modality of time since last cigarette. This will be highly correlated with the outcome of smoking or not however, we want to use this as an exemplar for SNF + GNN’s</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-time-since-last-smoked-network">Plot the Time Since Last Smoked Network</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-train-gcn-on-second-modality-for-comparison-of-performance-font"><font color="darkblue"> Train GCN on second modality for comparison of performance </font></a></li>
@@ -421,8 +422,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="font-color-darkblue-part-4-similarity-network-fusion-with-graph-convolutional-networks-font">
-<h1><font color='darkblue'> Part 4 : Similarity Network Fusion with Graph Convolutional Networks</font><a class="headerlink" href="#font-color-darkblue-part-4-similarity-network-fusion-with-graph-convolutional-networks-font" title="Permalink to this heading">#</a></h1>
+  <section id="part-4-similarity-network-fusion-with-graph-convolutional-networks">
+<h1>Part 4 : Similarity Network Fusion with Graph Convolutional Networks<a class="headerlink" href="#part-4-similarity-network-fusion-with-graph-convolutional-networks" title="Permalink to this heading">#</a></h1>
 <p>In the previous notebook we trained a Graph Convolutional Network on two similarity matrices. We found that when our network is bad, our performance is bad. When we have a more informative network we can improve this performance.</p>
 <p>Neither of our networks were more expressive than performing a basic linear regression however. We are not fully leveraging the power of neworks, in particular their flexibility.</p>
 <p>In this notebook we will use the Similarity Network Fusion (SNF) algorithm to integrate a second modality.</p>
@@ -433,8 +434,8 @@ document.write(`
 <li><p>Perform SNF to integrate our two modalities</p></li>
 <li><p>Retrain a GCN on the combined network</p></li>
 </ul>
-<section id="font-color-darkblue-import-functions-and-packages-font">
-<h2><font color='darkblue'>Import Functions and Packages </font><a class="headerlink" href="#font-color-darkblue-import-functions-and-packages-font" title="Permalink to this heading">#</a></h2>
+<section id="import-functions-and-packages">
+<h2>Import Functions and Packages<a class="headerlink" href="#import-functions-and-packages" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
@@ -457,8 +458,8 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="font-color-darkblue-import-and-process-generation-scotland-data-font">
-<h2><font color='darkblue'>Import and Process Generation Scotland Data</font><a class="headerlink" href="#font-color-darkblue-import-and-process-generation-scotland-data-font" title="Permalink to this heading">#</a></h2>
+<section id="import-and-process-generation-scotland-data">
+<h2>Import and Process Generation Scotland Data<a class="headerlink" href="#import-and-process-generation-scotland-data" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/data/intermediate/GCN_Data.pkl&#39;</span> <span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span> <span class="p">:</span> 
@@ -470,10 +471,10 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="font-color-darkblue-create-patient-similarity-network-for-second-modality-font">
-<h2><font color='darkblue'> Create Patient Similarity Network for Second Modality </font><a class="headerlink" href="#font-color-darkblue-create-patient-similarity-network-for-second-modality-font" title="Permalink to this heading">#</a></h2>
-<section id="note-creating-temporary-second-modality-of-time-since-last-cigarette-waiting-for-more-gen-scot-data-this-will-be-artificially-high">
-<h3>NOTE : Creating temporary second modality of time since last cigarette. Waiting for more Gen Scot data. This will be artificially high<a class="headerlink" href="#note-creating-temporary-second-modality-of-time-since-last-cigarette-waiting-for-more-gen-scot-data-this-will-be-artificially-high" title="Permalink to this heading">#</a></h3>
+<section id="create-patient-similarity-network-for-second-modality">
+<h2>Create Patient Similarity Network for Second Modality<a class="headerlink" href="#create-patient-similarity-network-for-second-modality" title="Permalink to this heading">#</a></h2>
+<section id="note-creating-second-modality-of-time-since-last-cigarette-this-will-be-highly-correlated-with-the-outcome-of-smoking-or-not-however-we-want-to-use-this-as-an-exemplar-for-snf-gnn-s">
+<h3>NOTE : Creating second modality of time since last cigarette. This will be highly correlated with the outcome of smoking or not however, we want to use this as an exemplar for SNF + GNN’s<a class="headerlink" href="#note-creating-second-modality-of-time-since-last-cigarette-this-will-be-highly-correlated-with-the-outcome-of-smoking-or-not-however-we-want-to-use-this-as-an-exemplar-for-snf-gnn-s" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
@@ -489,23 +490,53 @@ document.write(`
         
 <span class="n">phenotypes</span><span class="p">[</span><span class="s1">&#39;time_since_last_smoked&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">phenotypes</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">time_since_last_smoked</span> <span class="p">,</span> <span class="n">axis</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="n">phenotypes</span><span class="p">[</span><span class="s1">&#39;time_since_last_smoked&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">#################################################</span>
+<span class="sd">                YOUR CODE HERE</span>
+<span class="sd">#################################################</span>
+<span class="sd">Plot the distribution of the Time Since Last Cigarette Phenotype</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribution of Time Since Last Cigarette&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">#################################################</span>
+<span class="sd">                YOUR CODE HERE</span>
+<span class="sd">#################################################</span>
+<span class="sd">Here we will infer a similarity between patients based on their time since last cigarette</span>
+<span class="sd">In order to calculate this we will </span>
 
+<span class="sd">1. Scale the data using the MinMaxScaler</span>
+<span class="sd">2. Create an empty nxn dataframe of zeros with the patients on the index and columns</span>
+<span class="sd">3. Fill the dataframe on the euclidean distance between each patients time_since_last_smoked </span>
+
+<span class="sd">&#39;&#39;&#39;</span>
 <span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
-<span class="n">scaled_time</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">phenotypes</span><span class="p">[[</span><span class="s1">&#39;time_since_last_smoked&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">scaled_time</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">scaled_time</span><span class="p">)</span>
-
+<span class="n">n</span> <span class="o">=</span> 
 <span class="c1"># Create a DataFrame filled with zeros</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">phenotypes</span><span class="o">.</span><span class="n">index</span> <span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">phenotypes</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">()</span> <span class="p">,</span> <span class="n">columns</span><span class="o">=</span> <span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">)</span>
 
 <span class="c1"># Fill the DataFrame with the differences</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">integer</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">scaled_time</span><span class="p">):</span>
-    <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">scaled_time</span><span class="p">)</span> <span class="o">-</span> <span class="n">integer</span><span class="p">)</span>
-
-<span class="n">node_colour</span> <span class="o">=</span> <span class="n">phenotypes</span><span class="p">[</span><span class="s1">&#39;Smoking&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">set_categories</span><span class="p">(</span><span class="n">wesanderson</span><span class="o">.</span><span class="n">FantasticFox2_5</span><span class="o">.</span><span class="n">hex_colors</span> <span class="p">,</span> <span class="n">rename</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-the-time-since-last-smoked-network">
+<h3>Plot the Time Since Last Smoked Network<a class="headerlink" href="#plot-the-time-since-last-smoked-network" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">node_colour</span> <span class="o">=</span> <span class="n">phenotypes</span><span class="p">[</span><span class="s1">&#39;Smoking&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">set_categories</span><span class="p">(</span><span class="n">wesanderson</span><span class="o">.</span><span class="n">FantasticFox2_5</span><span class="o">.</span><span class="n">hex_colors</span> <span class="p">,</span> <span class="n">rename</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">phenotypes</span><span class="p">[</span><span class="s1">&#39;Smoking&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> : 0 </span><span class="se">\n</span><span class="si">{</span><span class="n">phenotypes</span><span class="p">[</span><span class="s1">&#39;Smoking&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> : 1&quot;</span><span class="p">)</span>
 
@@ -516,14 +547,6 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/6efc2a6b285b0bda2abfbf4f857fc98059d67433e267af7477357abc5b4ef009.png" src="../_images/6efc2a6b285b0bda2abfbf4f857fc98059d67433e267af7477357abc5b4ef009.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Non-Smoker : 0 
-Smoker : 1
-</pre></div>
-</div>
-<img alt="../_images/c15fe7cf1fa1e807c74396020e7be0be61cda151b5c04d39cf48980843c37af0.png" src="../_images/c15fe7cf1fa1e807c74396020e7be0be61cda151b5c04d39cf48980843c37af0.png" />
 </div>
 </div>
 </section>
@@ -574,28 +597,6 @@ Smoker : 1
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GCN(
-  (gcnlayers): ModuleList(
-    (0): GraphConv(in=23676, out=128, normalization=both, activation=None)
-    (1): GraphConv(in=128, out=2, normalization=both, activation=None)
-  )
-  (batch_norms): ModuleList(
-    (0): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-  )
-  (drop): Dropout(p=0.05, inplace=False)
-)
-Graph(num_nodes=1000, num_edges=34855,
-      ndata_schemes={&#39;idx&#39;: Scheme(shape=(), dtype=torch.int64), &#39;label&#39;: Scheme(shape=(), dtype=torch.int8), &#39;feat&#39;: Scheme(shape=(23676,), dtype=torch.float32)}
-      edata_schemes={})
-</pre></div>
-</div>
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "ba80ffe92b6e42ab98c613390e27cfe4", "version_major": 2, "version_minor": 0}</script><img alt="../_images/88a8b9486f8eb5e02ad55c38ace730f1a9c8431b6efdd46a4ec9abe169462f80.png" src="../_images/88a8b9486f8eb5e02ad55c38ace730f1a9c8431b6efdd46a4ec9abe169462f80.png" />
-<img alt="../_images/aa0e7f0e5f16f9cc745ce73cf9c9ac56473a662456211a5108de9ded6064d9a5.png" src="../_images/aa0e7f0e5f16f9cc745ce73cf9c9ac56473a662456211a5108de9ded6064d9a5.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GNN Model | Test Accuracy = 0.8825 | F1 = 0.8613 |
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="font-color-darkblue-similarity-network-fusion-snf-font">
@@ -619,9 +620,6 @@ Graph(num_nodes=1000, num_edges=34855,
 <span class="n">full_graphs</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">graph</span> <span class="ow">in</span> <span class="p">[</span><span class="n">G_time_to_smoke</span> <span class="p">,</span> <span class="n">G_DNAm</span><span class="p">]</span> <span class="p">:</span> 
-    <span class="n">graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_pandas_adjacency</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
-    
-    <span class="n">full_graphs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -639,9 +637,7 @@ Graph(num_nodes=1000, num_edges=34855,
 <span class="sd">2. Convert the numpy array output from the SNF function to a pandas DataFrame with the index and columns as the patient IDs.</span>
 
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">k</span> <span class="o">=</span> <span class="mi">25</span>
-<span class="n">t</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">adj</span> <span class="o">=</span> <span class="n">snf</span><span class="o">.</span><span class="n">snf</span><span class="p">(</span><span class="n">full_graphs</span> <span class="p">,</span> <span class="n">K</span> <span class="o">=</span> <span class="n">k</span> <span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="p">)</span>
+<span class="n">adj</span> <span class="o">=</span> <span class="n">snf</span><span class="o">.</span><span class="n">snf</span><span class="p">()</span>
 
 <span class="n">adj_snf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">adj</span> <span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">phenotypes</span><span class="o">.</span><span class="n">index</span> <span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">phenotypes</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> 
 </pre></div>
@@ -661,9 +657,6 @@ Graph(num_nodes=1000, num_edges=34855,
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/6bc2bf00635fae71c2236d5f5b81f5f9b8f422e9d977db15ff97989a21f0b4d6.png" src="../_images/6bc2bf00635fae71c2236d5f5b81f5f9b8f422e9d977db15ff97989a21f0b4d6.png" />
 </div>
 </div>
 </section>
@@ -711,28 +704,6 @@ Graph(num_nodes=1000, num_edges=34855,
     <span class="s2">&quot;GNN Model | Test Accuracy = </span><span class="si">{:.4f}</span><span class="s2"> | F1 = </span><span class="si">{:.4f}</span><span class="s2"> |&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
      <span class="n">test_output_metrics</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">,</span> <span class="n">test_output_metrics</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">)</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GCN(
-  (gcnlayers): ModuleList(
-    (0): GraphConv(in=23676, out=128, normalization=both, activation=None)
-    (1): GraphConv(in=128, out=2, normalization=both, activation=None)
-  )
-  (batch_norms): ModuleList(
-    (0): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-  )
-  (drop): Dropout(p=0.05, inplace=False)
-)
-Graph(num_nodes=1000, num_edges=30320,
-      ndata_schemes={&#39;idx&#39;: Scheme(shape=(), dtype=torch.int32), &#39;label&#39;: Scheme(shape=(), dtype=torch.int8), &#39;feat&#39;: Scheme(shape=(23676,), dtype=torch.float32)}
-      edata_schemes={})
-</pre></div>
-</div>
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "bbc4cca8777f4b04805735118fd28bba", "version_major": 2, "version_minor": 0}</script><img alt="../_images/c6fc975905e772c983395d4ab7a94b8647200169ec055586bfb7b83219fb5482.png" src="../_images/c6fc975905e772c983395d4ab7a94b8647200169ec055586bfb7b83219fb5482.png" />
-<img alt="../_images/17f23b05af328188af19070d39b48a64b372b789ab5573dab4c768c019a15e26.png" src="../_images/17f23b05af328188af19070d39b48a64b372b789ab5573dab4c768c019a15e26.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GNN Model | Test Accuracy = 0.8675 | F1 = 0.8447 |
 </pre></div>
 </div>
 </div>
@@ -803,10 +774,11 @@ Graph(num_nodes=1000, num_edges=30320,
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-import-functions-and-packages-font"><font color="darkblue">Import Functions and Packages </font></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-import-and-process-generation-scotland-data-font"><font color="darkblue">Import and Process Generation Scotland Data</font></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-create-patient-similarity-network-for-second-modality-font"><font color="darkblue"> Create Patient Similarity Network for Second Modality </font></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note-creating-temporary-second-modality-of-time-since-last-cigarette-waiting-for-more-gen-scot-data-this-will-be-artificially-high">NOTE : Creating temporary second modality of time since last cigarette. Waiting for more Gen Scot data. This will be artificially high</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-functions-and-packages">Import Functions and Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-and-process-generation-scotland-data">Import and Process Generation Scotland Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-patient-similarity-network-for-second-modality">Create Patient Similarity Network for Second Modality</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note-creating-second-modality-of-time-since-last-cigarette-this-will-be-highly-correlated-with-the-outcome-of-smoking-or-not-however-we-want-to-use-this-as-an-exemplar-for-snf-gnn-s">NOTE : Creating second modality of time since last cigarette. This will be highly correlated with the outcome of smoking or not however, we want to use this as an exemplar for SNF + GNN’s</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-time-since-last-smoked-network">Plot the Time Since Last Smoked Network</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-train-gcn-on-second-modality-for-comparison-of-performance-font"><font color="darkblue"> Train GCN on second modality for comparison of performance </font></a></li>
