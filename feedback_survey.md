@@ -5,7 +5,7 @@ On behalf of the ISMB organising committee and ourselves we would greatly apprec
 We hope to be able to deliver this tutorial or similar in the future, and your feedback can help us to improve. 
 
 You can fill out the feedback form by clicking the link below.
-## [FEEDBACK SURVEY](https://docs.google.com/forms/d/e/1FAIpQLSfrjbxbGdE45OFPQgM58JDt59B--gonwjuKw1HkHrR4FLvhhw/viewform?usp=sf_link)
+#### [LINK TO FEEDBACK SURVEY](https://docs.google.com/forms/d/e/1FAIpQLSfrjbxbGdE45OFPQgM58JDt59B--gonwjuKw1HkHrR4FLvhhw/viewform?usp=sf_link)
 
 We will release all materials and solutions in the days following the tutorial. 
 
