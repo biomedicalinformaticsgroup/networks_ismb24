@@ -24,7 +24,7 @@ Message passing is the method of information exchange among nodes. It is perform
 
 The message passing algorithm consists of three core steps : Propagation, Aggregation and Update. For a single node "u", the hidden embedding $h(k)_u$ can be formulated as per the general equation, where $N(u)$ is the neighbourhood of u. 
 
-```{image} ./MessagePassingalgo.png
+```{image} ./MessagePassingAlgo.png
 :alt: fishy
 :width: 1000px
 :align: center
