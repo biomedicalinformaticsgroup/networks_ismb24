@@ -402,29 +402,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-networks-from-section-1">0. Load networks from Section 1</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-function-draw-network-with-node-attrs-draws-a-network-with-nodes-colored-and-or-shaped-based-on-their-attributes-if-communities-are-provided-nodes-are-colored-by-their-community-memberships-a-legend-is-added-to-indicate-the-mapping-of-attributes-to-colors-and-shapes">Custom function <code class="docutils literal notranslate"><span class="pre">draw_network_with_node_attrs()</span></code> draws a network with nodes colored and/or shaped based on their attributes. If communities are provided, nodes are colored by their community memberships. A legend is added to indicate the mapping of attributes to colors and shapes.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#we-will-use-cancer-gene-calatogue-cgc-from-the-catalogue-of-somatic-mutations-in-cancer-cosmic-to-annotate-genes-in-our-network">We will use cancer gene calatogue (CGC) from the Catalogue Of Somatic Mutations In Cancer (COSMIC) to annotate genes in our network.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#over-representation-analysis-ora">Over Representation Analysis (ORA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ora-on-gene-correlation-network">ORA on gene correlation network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ora-on-gene-clusters">ORA on gene clusters</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gene-network-analysis-with-g-exp">1. Gene Network Analysis with <code class="docutils literal notranslate"><span class="pre">G_exp</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#over-representation-analysis-ora">1.1 Over Representation Analysis (ORA)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ora-on-gene-correlation-network">1.1.1 ORA on gene correlation network</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ora-on-gene-clusters">1.1.1 ORA on gene clusters</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualising-the-communities">Visualising the Communities</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-ora-on-each-community">Perform ORA on Each Community</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gene-set-enrichment-analysis-gsea">1.2 Gene Set Enrichment Analysis (GSEA)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assign-classes-based-on-phenotypic-attributes-in-metadata-e-g-smoking-status">Assign classes based on phenotypic attributes in metadata (e.g., smoking status)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gene-set-enrichment-analysis-gsea">Gene Set Enrichment Analysis (GSEA)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualising-gsea-results">Visualising GSEA Results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gsea-on-clusters">GSEA on Clusters</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#barcode-enrichment-plot">Barcode Enrichment Plot</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-visualisation">Heatmap Visualisation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustermap-visualisation">Clustermap Visualisation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dot-plot-visualisation">Dot Plot Visualisation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gsea-on-clusters">GSEA on Clusters</a></li>
 </ul>
             </nav>
         </div>
@@ -479,8 +466,7 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="load-networks-from-section-1">
-<h2>0. Load networks from Section 1<a class="headerlink" href="#load-networks-from-section-1" title="Permalink to this heading">#</a></h2>
+<p><strong>Load networks from Section 1</strong></p>
 <ul class="simple">
 <li><p>Gene correlation network</p></li>
 <li><p>Patient network from TCGA gene expression data</p></li>
@@ -528,8 +514,7 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="custom-function-draw-network-with-node-attrs-draws-a-network-with-nodes-colored-and-or-shaped-based-on-their-attributes-if-communities-are-provided-nodes-are-colored-by-their-community-memberships-a-legend-is-added-to-indicate-the-mapping-of-attributes-to-colors-and-shapes">
-<h3>Custom function <code class="docutils literal notranslate"><span class="pre">draw_network_with_node_attrs()</span></code> draws a network with nodes colored and/or shaped based on their attributes. If communities are provided, nodes are colored by their community memberships. A legend is added to indicate the mapping of attributes to colors and shapes.<a class="headerlink" href="#custom-function-draw-network-with-node-attrs-draws-a-network-with-nodes-colored-and-or-shaped-based-on-their-attributes-if-communities-are-provided-nodes-are-colored-by-their-community-memberships-a-legend-is-added-to-indicate-the-mapping-of-attributes-to-colors-and-shapes" title="Permalink to this heading">#</a></h3>
+<p>Custom function <code class="docutils literal notranslate"><span class="pre">draw_network_with_node_attrs()</span></code> draws a network with nodes colored and/or shaped based on their attributes. If communities are provided, nodes are colored by their community memberships. A legend is added to indicate the mapping of attributes to colors and shapes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functions</span> <span class="kn">import</span> <span class="n">draw_network_with_node_attrs</span>
@@ -564,9 +549,8 @@ document.write(`
 </div>
 </div>
 </div>
-</section>
-<section id="we-will-use-cancer-gene-calatogue-cgc-from-the-catalogue-of-somatic-mutations-in-cancer-cosmic-to-annotate-genes-in-our-network">
-<h3>We will use <a class="reference external" href="https://cancer.sanger.ac.uk/census">cancer gene calatogue (CGC)</a> from the Catalogue Of Somatic Mutations In Cancer (COSMIC) to annotate genes in our network.<a class="headerlink" href="#we-will-use-cancer-gene-calatogue-cgc-from-the-catalogue-of-somatic-mutations-in-cancer-cosmic-to-annotate-genes-in-our-network" title="Permalink to this heading">#</a></h3>
+<p><strong>Network Annotation</strong></p>
+<p>We will use <a class="reference external" href="https://cancer.sanger.ac.uk/census">cancer gene calatogue (CGC)</a> from the Catalogue Of Somatic Mutations In Cancer (COSMIC) to annotate genes in our network.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">'Tier'</span></code></p>
 <ul>
@@ -614,10 +598,6 @@ document.write(`
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="gene-network-analysis-with-g-exp">
-<h2>1. Gene Network Analysis with <code class="docutils literal notranslate"><span class="pre">G_exp</span></code><a class="headerlink" href="#gene-network-analysis-with-g-exp" title="Permalink to this heading">#</a></h2>
 <p>We are going to use <code class="docutils literal notranslate"><span class="pre">'KEGG_2021_Human'</span></code> as the gene set. KEGG (Kyoto Encyclopedia of Genes and Genomes) is a knowledge base for systematic analysis of gene functions, linking genomic information with higher order functional information <a class="reference external" href="https://doi.org/10.1093/nar/28.1.27">(Kanehisa et al., 2000)</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -637,10 +617,10 @@ document.write(`
 </div>
 </div>
 <section id="over-representation-analysis-ora">
-<h3>1.1 Over Representation Analysis (ORA)<a class="headerlink" href="#over-representation-analysis-ora" title="Permalink to this heading">#</a></h3>
+<h2>Over Representation Analysis (ORA)<a class="headerlink" href="#over-representation-analysis-ora" title="Permalink to this heading">#</a></h2>
 <p>Over-representation analysis (ORA) is a method used to identify which predefined gene sets are disproportionately represented in a given set of genes compared to what would be expected by random chance <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2615629/">(Huang et al., 2009)</a>. We recommend using Over-representation analysis (ORA) only when Gene Set Enrichment Analysis (GSEA) is not suitable. Although we are using the <a class="reference external" href="https://doi.org/10.1093/bioinformatics/btac757"><code class="docutils literal notranslate"><span class="pre">gseapy</span></code></a> library for ORA in this the tutorial, it’s important to note that ORA and GSEA are distinct methods.</p>
 <section id="ora-on-gene-correlation-network">
-<h4>1.1.1 ORA on gene correlation network<a class="headerlink" href="#ora-on-gene-correlation-network" title="Permalink to this heading">#</a></h4>
+<h3>ORA on gene correlation network<a class="headerlink" href="#ora-on-gene-correlation-network" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform ORA on all nodes in the gene correlation network</span>
@@ -662,7 +642,7 @@ document.write(`
 </div>
 </section>
 <section id="ora-on-gene-clusters">
-<h4>1.1.1 ORA on gene clusters<a class="headerlink" href="#ora-on-gene-clusters" title="Permalink to this heading">#</a></h4>
+<h3>ORA on gene clusters<a class="headerlink" href="#ora-on-gene-clusters" title="Permalink to this heading">#</a></h3>
 <p>Clustering on Gene Correlation Network</p>
 <ul class="simple">
 <li><p>We use community detection algorithm to identify communities in the network:</p>
@@ -706,10 +686,7 @@ document.write(`
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="visualising-the-communities">
-<h3>Visualising the Communities<a class="headerlink" href="#visualising-the-communities" title="Permalink to this heading">#</a></h3>
+<p><strong>Visualising the Communities</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualise the gene correlation network with community memberships</span>
@@ -720,9 +697,6 @@ document.write(`
 </div>
 </div>
 </div>
-</section>
-<section id="perform-ora-on-each-community">
-<h3>Perform ORA on Each Community<a class="headerlink" href="#perform-ora-on-each-community" title="Permalink to this heading">#</a></h3>
 <p>Performing ORA on individual clusters can help in understanding distinct biological significance of each cluster, revealing how certain pathways or functions are associated with specific subsets of genes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -753,8 +727,9 @@ document.write(`
 </div>
 </div>
 </section>
+</section>
 <section id="gene-set-enrichment-analysis-gsea">
-<h3>1.2 Gene Set Enrichment Analysis (GSEA)<a class="headerlink" href="#gene-set-enrichment-analysis-gsea" title="Permalink to this heading">#</a></h3>
+<h2>Gene Set Enrichment Analysis (GSEA)<a class="headerlink" href="#gene-set-enrichment-analysis-gsea" title="Permalink to this heading">#</a></h2>
 <p>Gene Set Enrichment Analysis (GSEA) is a genome-wide expression analysis method designed to interpret expression profiles focusing on pre-defined gene sets <a class="reference external" href="https://doi.org/10.1073/pnas.0506580102">(Subramanian et al., 2005)</a>. These gene sets are curated based on prior biological knowledge, such as published information about biochemical pathways or patterns of coexpression observed in previous experimental studies. The genes can be ordered in a ranked list, according to their differential expression between the classes. The primary objective of GSEA is to assess whether the genes within a given gene set tend to occur toward the top (or bottom) of the ranked list. This ranking is based on the correlation between gene expression and a particular phenotypic class distinction. By evaluating the distribution of gene set members within the ranked list, GSEA identifies whether the set is correlated with the phenotypic class, thus providing insights into underlying biological mechanisms. This method contrasts with traditional single-gene analysis by focusing on the collective behavior of gene sets, thereby uncovering biologically significant patterns that might be overlooked when examining individual genes in isolation. We use <code class="docutils literal notranslate"><span class="pre">gseapy</span></code> to perform GSEA with the gene set <code class="docutils literal notranslate"><span class="pre">KEGG_2021_Human</span></code>.</p>
 <!-- (https://pnnl-comp-mass-spec.github.io/proteomics-data-analysis-tutorial/gsea.html) for referencing.  -->
 <div class="cell docutils container">
@@ -772,9 +747,7 @@ document.write(`
 </div>
 </div>
 </div>
-</section>
-<section id="assign-classes-based-on-phenotypic-attributes-in-metadata-e-g-smoking-status">
-<h3>Assign classes based on phenotypic attributes in metadata (e.g., smoking status)<a class="headerlink" href="#assign-classes-based-on-phenotypic-attributes-in-metadata-e-g-smoking-status" title="Permalink to this heading">#</a></h3>
+<p>Assign classes based on phenotypic attributes in metadata (e.g., smoking status)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a dictionary to store the class assignments for each sample</span>
@@ -821,14 +794,10 @@ document.write(`
 </div>
 </div>
 </div>
-</section>
 <section id="visualising-gsea-results">
 <h3>Visualising GSEA Results<a class="headerlink" href="#visualising-gsea-results" title="Permalink to this heading">#</a></h3>
 <p>Once you have performed GSEA, the next step is to visualise the results. Visualisation helps in interpreting the biological roles of the enriched gene sets. Here, we visualise GSEA results with Barcode Enrichment Plot, Heatmap, Clustermap, and Dot Plot.</p>
-</section>
-</section>
-<section id="barcode-enrichment-plot">
-<h2>Barcode Enrichment Plot<a class="headerlink" href="#barcode-enrichment-plot" title="Permalink to this heading">#</a></h2>
+<p><strong>Barcode Enrichment Plot</strong></p>
 <p>Barcode Enrichment Plot shows the positions of members of a given gene set in a ranked list of enrichment scores for the top enriched terms. The scores are ranked left to right from smallest to largest. The ranked scores are represented by a shaded bar, forming a pattern like a barcode.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -853,9 +822,7 @@ document.write(`
 </div>
 </div>
 </div>
-</section>
-<section id="heatmap-visualisation">
-<h2>Heatmap Visualisation<a class="headerlink" href="#heatmap-visualisation" title="Permalink to this heading">#</a></h2>
+<p><strong>Heatmap Visualisation</strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">gseapy</span></code> provides a heatmap function to visualise the expression levels of the leading-edge genes. The heatmap provides a visual representation of how these genes are expressed across different samples in relation to their assigned phenotypic classes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -887,9 +854,7 @@ document.write(`
 </div>
 </div>
 </div>
-</section>
-<section id="clustermap-visualisation">
-<h2>Clustermap Visualisation<a class="headerlink" href="#clustermap-visualisation" title="Permalink to this heading">#</a></h2>
+<p><strong>Clustermap Visualisation</strong></p>
 <p>The function <code class="docutils literal notranslate"><span class="pre">clustermap</span></code> from <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> is used to create a clustered heatmap. It not only shows the expression levels of the leading-edge genes but also clusters them based on similarity, providing additional insights into gene expression patterns. The cluster map includes dendrograms, which show the hierarchical clustering of both genes and samples, helping to identify groups of co-expressed genes and similar samples.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -925,9 +890,7 @@ document.write(`
 </div>
 </div>
 </div>
-</section>
-<section id="dot-plot-visualisation">
-<h2>Dot Plot Visualisation<a class="headerlink" href="#dot-plot-visualisation" title="Permalink to this heading">#</a></h2>
+<p><strong>Dot Plot Visualisation</strong></p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">dotplot</span></code> function in <code class="docutils literal notranslate"><span class="pre">gseapy</span></code> to create a visual representation of the GSEA results. Here we use “FDR q-val” to determine the dot sizes, which represents the false discovery rate adjusted p-values. We display normalised enrichment score (NES) value as the x-axis.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -949,7 +912,7 @@ document.write(`
 </div>
 </section>
 <section id="gsea-on-clusters">
-<h2>GSEA on Clusters<a class="headerlink" href="#gsea-on-clusters" title="Permalink to this heading">#</a></h2>
+<h3>GSEA on Clusters<a class="headerlink" href="#gsea-on-clusters" title="Permalink to this heading">#</a></h3>
 <p>Similarly to ORA, GSEA can also be performed on individual communities after clustering. This allows for a more granular analysis, revealing pathways and functions that are enriched within particular subgroups of the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -988,6 +951,7 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
 </section>
 </section>
 
@@ -1054,29 +1018,16 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-networks-from-section-1">0. Load networks from Section 1</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-function-draw-network-with-node-attrs-draws-a-network-with-nodes-colored-and-or-shaped-based-on-their-attributes-if-communities-are-provided-nodes-are-colored-by-their-community-memberships-a-legend-is-added-to-indicate-the-mapping-of-attributes-to-colors-and-shapes">Custom function <code class="docutils literal notranslate"><span class="pre">draw_network_with_node_attrs()</span></code> draws a network with nodes colored and/or shaped based on their attributes. If communities are provided, nodes are colored by their community memberships. A legend is added to indicate the mapping of attributes to colors and shapes.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#we-will-use-cancer-gene-calatogue-cgc-from-the-catalogue-of-somatic-mutations-in-cancer-cosmic-to-annotate-genes-in-our-network">We will use cancer gene calatogue (CGC) from the Catalogue Of Somatic Mutations In Cancer (COSMIC) to annotate genes in our network.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#over-representation-analysis-ora">Over Representation Analysis (ORA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ora-on-gene-correlation-network">ORA on gene correlation network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ora-on-gene-clusters">ORA on gene clusters</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gene-network-analysis-with-g-exp">1. Gene Network Analysis with <code class="docutils literal notranslate"><span class="pre">G_exp</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#over-representation-analysis-ora">1.1 Over Representation Analysis (ORA)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ora-on-gene-correlation-network">1.1.1 ORA on gene correlation network</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ora-on-gene-clusters">1.1.1 ORA on gene clusters</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualising-the-communities">Visualising the Communities</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-ora-on-each-community">Perform ORA on Each Community</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gene-set-enrichment-analysis-gsea">1.2 Gene Set Enrichment Analysis (GSEA)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assign-classes-based-on-phenotypic-attributes-in-metadata-e-g-smoking-status">Assign classes based on phenotypic attributes in metadata (e.g., smoking status)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gene-set-enrichment-analysis-gsea">Gene Set Enrichment Analysis (GSEA)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualising-gsea-results">Visualising GSEA Results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gsea-on-clusters">GSEA on Clusters</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#barcode-enrichment-plot">Barcode Enrichment Plot</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-visualisation">Heatmap Visualisation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustermap-visualisation">Clustermap Visualisation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dot-plot-visualisation">Dot Plot Visualisation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gsea-on-clusters">GSEA on Clusters</a></li>
 </ul>
   </nav></div>
 
