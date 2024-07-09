@@ -404,29 +404,21 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-over-representation-and-enrichment-analysis">Part 1: Over-representation and Enrichment Analysis</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#over-representation-analysis-ora">Over Representation Analysis (ORA)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ora-on-gene-expression-network-clusters">ORA on gene expression network clusters</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-on-gene-correlation-network">Clustering on Gene Correlation Network</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-ora-on-each-community">Perform ORA on Each Community</a></li>
-</ul>
-</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ora-on-gene-expression-network-clusters">ORA on gene expression network clusters</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gene-set-enrichment-analysis-gsea">Gene Set Enrichment Analysis (GSEA)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualising-gsea-results">Visualising GSEA Results</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#barcode-enrichment-plot">Barcode Enrichment Plot</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-visualisation">Heatmap Visualisation</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#clustermap-visualisation">Clustermap Visualisation</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#dot-plot-visualisation">Dot Plot Visualisation</a></li>
-</ul>
-</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualising-gsea-results">Visualising GSEA Results</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gsea-on-clusters">GSEA on Clusters</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-similarity-network-fusion">Part 2: Similarity Network Fusion</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-on-individual-patient-networks">Clustering on Individual Patient Networks</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-network-fusion-snf">Similarity Network Fusion (SNF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-network-fusion-snf">Similarity Network Fusion (SNF)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#snf-consists-of-two-main-steps">SNF consists of two main steps:</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -449,40 +441,38 @@ document.write(`
 <p>Over-representation analysis (ORA) is a method used to identify which predefined gene sets are disproportionately represented in a given set of genes compared to what would be expected by random chance <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2615629/">(Huang et al., 2009)</a>. We recommend using Over-representation analysis (ORA) only when Gene Set Enrichment Analysis (GSEA) is not suitable. Although we are using the <code class="docutils literal notranslate"><span class="pre">gseapy</span></code> library for ORA in this the tutorial, it’s important to note that ORA and GSEA are distinct methods.</p>
 <section id="ora-on-gene-expression-network-clusters">
 <h4>ORA on gene expression network clusters<a class="headerlink" href="#ora-on-gene-expression-network-clusters" title="Permalink to this heading">#</a></h4>
-<section id="clustering-on-gene-correlation-network">
-<h5>Clustering on Gene Correlation Network<a class="headerlink" href="#clustering-on-gene-correlation-network" title="Permalink to this heading">#</a></h5>
-<p>We use community detection algorithm to identify communities in the network:
-<br />
-The <code class="docutils literal notranslate"><span class="pre">greedy_modularity_communities</span></code> function in NetworkX implements a community detection algorithm that optimises modularity using a greedy approach. It iteratively merges pairs of nodes or communities that result in the largest increase in modularity until no further improvement is possible. Modularity measures the density of links inside communities compared to links between communities, aiming to maximise this value to identify densely connected groups within the network.</p>
-</section>
-<section id="perform-ora-on-each-community">
-<h5>Perform ORA on Each Community<a class="headerlink" href="#perform-ora-on-each-community" title="Permalink to this heading">#</a></h5>
+<p>We use community detection algorithm to identify communities in the network. The <code class="docutils literal notranslate"><span class="pre">greedy_modularity_communities</span></code> function in NetworkX implements a community detection algorithm that optimises modularity using a greedy approach. It iteratively merges pairs of nodes or communities that result in the largest increase in modularity until no further improvement is possible. Modularity measures the density of links inside communities compared to links between communities, aiming to maximise this value to identify densely connected groups within the network.</p>
 <p>Performing ORA on individual clusters can help in understanding distinct biological significance of each cluster, revealing how certain pathways or functions are associated with specific subsets of genes and potentially uncovering biological themes that may be missed.</p>
-</section>
 </section>
 </section>
 <section id="gene-set-enrichment-analysis-gsea">
 <h3>Gene Set Enrichment Analysis (GSEA)<a class="headerlink" href="#gene-set-enrichment-analysis-gsea" title="Permalink to this heading">#</a></h3>
-<p>Gene Set Enrichment Analysis (GSEA) is a genome-wide expression analysis method designed to interpret expression profiles focusing on pre-defined gene sets. These gene sets are curated based on prior biological knowledge, such as published information about biochemical pathways or patterns of coexpression observed in previous experiment studies. The genes can be ordered in a ranked list, according to their differential expression between the classes. The primary objective of GSEA is to assess whether the genes within a given gene set tend to occur toward the top (or bottom) of the ranked list. This ranking is based on the correlation between gene expression and a particular phenotypic class distinction. By evaluating the distribution of gene set members within the ranked list, GSEA identifies whether the set is correlated with the phenotypic class, thus providing insights into underlying biological mechanisms. This method contrasts with traditional single-gene analysis by focusing on the collective behavior of gene sets, thereby uncovering biologically significant patterns that might be overlooked when examining individual genes in isolation. We use <code class="docutils literal notranslate"><span class="pre">gseapy</span></code> to perform GSEA on <code class="docutils literal notranslate"><span class="pre">KEGG_2021_Human</span></code> assigned classes based on a phenotypic attribute (e.g., smoking status). (ref)</p>
+<p>Gene Set Enrichment Analysis (GSEA) is a genome-wide expression analysis method designed to interpret expression profiles focusing on pre-defined gene sets <a class="reference external" href="https://doi.org/10.1073/pnas.0506580102">(Subramanian et al., 2005)</a>. These gene sets are curated based on prior biological knowledge, such as published information about biochemical pathways or patterns of coexpression observed in previous experimental studies. The genes can be ordered in a ranked list, according to their differential expression between the classes. The primary objective of GSEA is to assess whether the genes within a given gene set tend to occur toward the top (or bottom) of the ranked list. This ranking is based on the correlation between gene expression and a particular phenotypic class distinction. By evaluating the distribution of gene set members within the ranked list, GSEA identifies whether the set is correlated with the phenotypic class, thus providing insights into underlying biological mechanisms. This method contrasts with traditional single-gene analysis by focusing on the collective behavior of gene sets, thereby uncovering biologically significant patterns that might be overlooked when examining individual genes in isolation. We use <code class="docutils literal notranslate"><span class="pre">gseapy</span></code> to perform GSEA with the gene set <code class="docutils literal notranslate"><span class="pre">KEGG_2021_Human</span></code>.</p>
 <section id="visualising-gsea-results">
 <h4>Visualising GSEA Results<a class="headerlink" href="#visualising-gsea-results" title="Permalink to this heading">#</a></h4>
-<p>Once you have performed GSEA, the next step is to visualise the results. Visualisation helps in interpreting the biological significance of the enriched gene sets. Here, we visualise GSEA results with Barcode Enrichment Plot, Heatmap, Clustermap, and Dot Plot.</p>
-<section id="barcode-enrichment-plot">
-<h5>Barcode Enrichment Plot<a class="headerlink" href="#barcode-enrichment-plot" title="Permalink to this heading">#</a></h5>
-<p>Barcode Enrichment Plot shows the positions of members of a given gene set in a ranked list of enrichment scores for the top enriched terms. The scores are ranked left to right from smallest to largest. The ranked scores are represented by a shaded bar, forming a pattern like a barcode.</p>
-</section>
-<section id="heatmap-visualisation">
-<h5>Heatmap Visualisation<a class="headerlink" href="#heatmap-visualisation" title="Permalink to this heading">#</a></h5>
-<p><code class="docutils literal notranslate"><span class="pre">gseapy</span></code> provides a heatmap function to visualise the expression levels of the leading-edge genes. The heatmap provides a visual representation of how these genes are expressed across different samples in relation to their assigned phenotypic classes.</p>
-</section>
-<section id="clustermap-visualisation">
-<h5>Clustermap Visualisation<a class="headerlink" href="#clustermap-visualisation" title="Permalink to this heading">#</a></h5>
-<p>The function <code class="docutils literal notranslate"><span class="pre">clustermap</span></code> from <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> is used to create a clustered heatmap. It not only shows the expression levels of the leading-edge genes but also clusters them based on similarity, providing additional insights into gene expression patterns. The cluster map includes dendrograms, which show the hierarchical clustering of both genes and samples, helping to identify groups of co-expressed genes and similar samples.</p>
-</section>
-<section id="dot-plot-visualisation">
-<h5>Dot Plot Visualisation<a class="headerlink" href="#dot-plot-visualisation" title="Permalink to this heading">#</a></h5>
-<p>Use the <code class="docutils literal notranslate"><span class="pre">dotplot</span></code> function in <code class="docutils literal notranslate"><span class="pre">gseapy</span></code> to create a visual representation of the GSEA results. Here we use “FDR q-val” to determine the dot sizes, which represents the false discovery rate adjusted p-values. We display normalised enrichment score (NES) value as the x-axis.</p>
-</section>
+<p>Once you have performed GSEA, the next step is to visualise the results. Visualisation helps in interpreting the biological roles of the enriched gene sets. Here, we visualise GSEA results with Barcode Enrichment Plot, Heatmap, Clustermap, and Dot Plot.</p>
+<ul class="simple">
+<li><p>Barcode Enrichment Plot</p>
+<ul>
+<li><p>Barcode Enrichment Plot shows the positions of members of a given gene set in a ranked list of enrichment scores for the top enriched terms. The scores are ranked left to right from smallest to largest. The ranked scores are represented by a shaded bar, forming a pattern like a barcode.</p></li>
+</ul>
+</li>
+<li><p>Heatmap Visualisation</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">gseapy</span></code> provides a heatmap function to visualise the expression levels of the leading-edge genes. The heatmap provides a visual representation of how these genes are expressed across different samples in relation to their assigned phenotypic classes.</p></li>
+</ul>
+</li>
+<li><p>Clustermap Visualisation</p>
+<ul>
+<li><p>The function <code class="docutils literal notranslate"><span class="pre">clustermap</span></code> from <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> is used to create a clustered heatmap. It not only shows the expression levels of the leading-edge genes but also clusters them based on similarity, providing additional insights into gene expression patterns. The cluster map includes dendrograms, which show the hierarchical clustering of both genes and samples, helping to identify groups of co-expressed genes and similar samples.</p></li>
+</ul>
+</li>
+<li><p>Dot Plot Visualisation</p>
+<ul>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">dotplot</span></code> function in <code class="docutils literal notranslate"><span class="pre">gseapy</span></code> to create a visual representation of the GSEA results. Here we use “FDR q-val” to determine the dot sizes, which represents the false discovery rate adjusted p-values. We display normalised enrichment score (NES) value as the x-axis.</p></li>
+</ul>
+</li>
+</ul>
 </section>
 <section id="gsea-on-clusters">
 <h4>GSEA on Clusters<a class="headerlink" href="#gsea-on-clusters" title="Permalink to this heading">#</a></h4>
@@ -493,19 +483,25 @@ The <code class="docutils literal notranslate"><span class="pre">greedy_modulari
 <section id="part-2-similarity-network-fusion">
 <h2>Part 2: Similarity Network Fusion<a class="headerlink" href="#part-2-similarity-network-fusion" title="Permalink to this heading">#</a></h2>
 <p>In Part 1, we worked with a gene expression network, where each node represents a gene. In Part 2, our focus shifts to Patient Networks. In patient networks, each node represents an individual patient. Unlike gene networks that represent molecular interactions, patient networks encode similarities and differences between patients, based on various modalities of data such as gene expression profiles and DNA methylation patterns.</p>
-<a class="reference internal image-reference" href="_images/SNF.png"><img alt="fishy" class="align-center" src="_images/SNF.png" style="width: 1200px;" /></a>
-<section id="clustering-on-individual-patient-networks">
-<h3>Clustering on Individual Patient Networks<a class="headerlink" href="#clustering-on-individual-patient-networks" title="Permalink to this heading">#</a></h3>
-<p>We can apply clustering methods to patient networks to identify patterns in relation to a phenotypic attribute (e.g., smoking status)</p>
-</section>
 <section id="similarity-network-fusion-snf">
 <h3>Similarity Network Fusion (SNF)<a class="headerlink" href="#similarity-network-fusion-snf" title="Permalink to this heading">#</a></h3>
-<p>In Patient Network analysis, we often want to combine patient data based on multiple modalities. Similarity network fusion (SNF) uses networks of patients as a basis for integration between multiple modalities. SNF consists of two main steps:</p>
+<p>When working with patient data, we often want to combine information from multiple modalities. Here, we use Similarity Network Fusion (SNF) to integrate patient data in the space of samples (e.g., patients) rather than measurements (e.g., gene expression) <a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/24464287/">(Wang et al.)</a>.</p>
+<p><img alt="snf_image" src="_images/SNF.png" /></p>
+<section id="snf-consists-of-two-main-steps">
+<h4>SNF consists of two main steps:<a class="headerlink" href="#snf-consists-of-two-main-steps" title="Permalink to this heading">#</a></h4>
 <ol class="arabic simple">
-<li><p>Construction of a sample-similarity network for each data type</p></li>
-<li><p>Integration of these networks into a single similarity network using a nonlinear combination method.</p></li>
+<li><p>Construction of Patient-Similarity Networks (<code class="docutils literal notranslate"><span class="pre">Section</span> <span class="pre">1</span></code>):</p>
+<ul class="simple">
+<li><p>For each type of data (e.g., gene expression, DNA methylation), SNF constructs a patient-by-patient similarity matrix. This matrix represents a similarity network where nodes are samples (patients) and weighted edges represent the pairwise similarities between them.</p></li>
+</ul>
+</li>
+<li><p>Integration of Networks:</p>
+<ul class="simple">
+<li><p>Using a nonlinear combination method based on message-passing theory, SNF iteratively updates each network with information from the others. This process aligns each network more closely to the other with every iteration. The iterative update continues until convergence, resulting in a single integrated similarity network.</p></li>
+</ul>
+</li>
 </ol>
-<p>We use the Python library <code class="docutils literal notranslate"><span class="pre">snfpy</span></code> for similarity network fusion (SNF). We perform K-nearest neighbors procedure on each adjacency matrices to create and fuse similarity networks.</p>
+</section>
 </section>
 </section>
 <div class="toctree-wrapper compound">
@@ -577,29 +573,21 @@ The <code class="docutils literal notranslate"><span class="pre">greedy_modulari
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-over-representation-and-enrichment-analysis">Part 1: Over-representation and Enrichment Analysis</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#over-representation-analysis-ora">Over Representation Analysis (ORA)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ora-on-gene-expression-network-clusters">ORA on gene expression network clusters</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-on-gene-correlation-network">Clustering on Gene Correlation Network</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-ora-on-each-community">Perform ORA on Each Community</a></li>
-</ul>
-</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ora-on-gene-expression-network-clusters">ORA on gene expression network clusters</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gene-set-enrichment-analysis-gsea">Gene Set Enrichment Analysis (GSEA)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualising-gsea-results">Visualising GSEA Results</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#barcode-enrichment-plot">Barcode Enrichment Plot</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmap-visualisation">Heatmap Visualisation</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#clustermap-visualisation">Clustermap Visualisation</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#dot-plot-visualisation">Dot Plot Visualisation</a></li>
-</ul>
-</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#visualising-gsea-results">Visualising GSEA Results</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gsea-on-clusters">GSEA on Clusters</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-similarity-network-fusion">Part 2: Similarity Network Fusion</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-on-individual-patient-networks">Clustering on Individual Patient Networks</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-network-fusion-snf">Similarity Network Fusion (SNF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-network-fusion-snf">Similarity Network Fusion (SNF)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#snf-consists-of-two-main-steps">SNF consists of two main steps:</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
