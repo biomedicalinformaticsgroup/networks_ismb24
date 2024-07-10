@@ -507,3 +507,435 @@ class GCN(nn.Module):
         score = self.drop(h)
             
         return score
+    
+
+def filter_low_expression_genes(data, threshold=1.0):
+    """
+    Filter out low-expressed genes from the dataset.
+
+    Calculates the mean expression level for each gene and filters out
+    genes whose mean expression level is below the specified threshold.
+
+    Parameters:
+    data (DataFrame): Expression data with genes as columns.
+    threshold (float): Minimum mean expression level to retain a gene.
+                       Default is 1.0.
+
+    Returns:
+    DataFrame: Filtered data with genes above the threshold.
+    """
+    # Calculate the mean expression for each gene
+    gene_means = data.mean(axis=0)
+    # Filter out genes with mean expression below the threshold
+    mask = gene_means >= threshold
+    filtered_data = data.loc[:, mask]
+    return filtered_data
+
+
+def filter_high_variance_genes(data, threshold):
+    """
+    Filter out genes with variance below the specified threshold.
+
+    Calculates the variance for each gene and filters out genes whose 
+    variance is below the specified threshold.
+
+    Parameters:
+    data (DataFrame): Gene expression data with genes as columns and samples as rows.
+    threshold (float): Minimum variance level to retain a gene.
+
+    Returns:
+    DataFrame: Filtered data with genes having variance above the threshold.
+    """
+
+    # Calculate the variance for each gene (column)
+    gene_variances = data.var(axis=0)
+    # Create a boolean mask to filter out genes with variance below the threshold
+    mask = gene_variances >= threshold
+    # Apply the mask to filter the DataFrame
+    filtered_data = data.loc[:, mask]
+    return filtered_data
+
+def calc_abs_bicorr(data):
+    """
+    Calculate the absolute biweight midcorrelation matrix for numeric data.
+
+    Parameters:
+    data (pd.DataFrame): Input DataFrame with numeric data.
+
+    Returns:
+    pd.DataFrame: DataFrame containing the absolute biweight midcorrelation matrix.
+    """
+
+    # Select only numeric data
+    data = data._get_numeric_data()
+    cols = data.columns
+    idx = cols.copy()
+    mat = data.to_numpy(dtype=float, na_value=np.nan, copy=False)
+    mat = mat.T
+
+    K = len(cols)
+    correl = np.empty((K, K), dtype=np.float32)
+
+    # Calculate biweight midcovariance
+    bicorr = astropy.stats.biweight_midcovariance(mat, modify_sample_size=True)
+
+    for i in range(K):
+        for j in range(K):
+            if i == j:
+                correl[i, j] = 1.0
+            else:
+                denominator = np.sqrt(bicorr[i, i] * bicorr[j, j])
+                if denominator != 0:
+                    correl[i, j] = bicorr[i, j] / denominator
+                else:
+                    correl[i, j] = 0  # Or handle it in another appropriate way
+
+    return pd.DataFrame(data=np.abs(correl), index=idx, columns=cols, dtype=np.float32)
+
+
+def create_graph_from_correlation(correlation_matrix, threshold=0.8):
+    """
+    Creates a graph from a correlation matrix using a specified threshold.
+
+    Parameters:
+    correlation_matrix (pd.DataFrame): DataFrame containing the correlation matrix.
+    threshold (float): Threshold for including edges based on correlation value.
+
+    Returns:
+    G (nx.Graph): Graph created from the correlation matrix.
+    """
+    G = nx.Graph()
+
+    # Add nodes
+    for node in correlation_matrix.columns:
+        G.add_node(node)
+
+    # Add edges with weights above the threshold
+    for i in range(correlation_matrix.shape[0]):
+        for j in range(i + 1, correlation_matrix.shape[1]):
+            if i != j:  # Ignore the diagonal elements
+                weight = correlation_matrix.iloc[i, j]
+                if abs(weight) >= threshold:
+                    G.add_edge(correlation_matrix.index[i], correlation_matrix.columns[j], weight=weight)
+
+    return G
+
+
+def print_graph_info(G):
+    """
+    Print basic information about a NetworkX graph.
+
+    
+    Parameters:
+    G (nx.Graph): The NetworkX graph.
+    """
+    print(f"Number of nodes: {G.number_of_nodes()}")
+    print(f"Number of edges: {G.number_of_edges()}")
+    print("Sample nodes:", list(G.nodes)[:10])  # Print first 10 nodes as a sample
+    print("Sample edges:", list(G.edges(data=True))[:10])  # Print first 10 edges as a sample
+    
+    info_str = "Graph type: "
+    is_directed = G.is_directed()
+    if is_directed:
+        info_str += "directed"
+    else:
+        info_str += "undirected"
+    print(info_str)
+
+    # Check for self-loops
+    self_loops = list(nx.selfloop_edges(G))
+    if self_loops:
+        print(f"Number of self-loops: {len(self_loops)}")
+        print("Self-loops:", self_loops)
+    else:
+        print("No self-loops in the graph.")
+
+    # density of the graph
+    density = nx.density(G)
+    print(f"Graph density: {density}")
+
+    # Find and print the number of connected components
+    num_connected_components = nx.number_connected_components(G)
+    print(f"Number of connected components: {num_connected_components}")
+
+    # Calculate and print the clustering coefficient of the graph
+    clustering_coeff = nx.average_clustering(G)
+    print(f"Average clustering coefficient: {clustering_coeff}")
+
+
+# Function to visualize the graph
+def visualise_graph(G, title='Gene Co-expression Network'):
+    """
+    Visualizes the graph using Matplotlib and NetworkX.
+
+    Parameters:
+    G (nx.Graph): Graph to visualize.
+    title (str): Title of the plot.
+    """
+    plt.figure(figsize=(10, 10))
+    pos = nx.spring_layout(G, k=0.1)  # k controls the distance between nodes
+    nx.draw_networkx_nodes(G, pos, node_size=50, node_color='blue', alpha=0.7)
+    nx.draw_networkx_edges(G, pos, width=0.2, alpha=0.5)
+    plt.title(title)
+    plt.show()
+
+
+def clean_graph(G, degree_threshold=1, keep_largest_component=True):
+    """
+    Cleans the graph by performing several cleaning steps:
+    - Removes unconnected nodes (isolates)
+    - Removes self-loops
+    - Removes nodes with a degree below a specified threshold
+    - Keeps only the largest connected component (optional)
+
+    Parameters:
+    G (nx.Graph): The NetworkX graph to clean.
+    degree_threshold (int): Minimum degree for nodes to keep.
+    keep_largest_component (bool): Whether to keep only the largest connected component.
+
+    Returns:
+    G (nx.Graph): Cleaned graph.
+    """
+    G = G.copy()  # Work on a copy of the graph to avoid modifying the original graph
+
+    # Remove self-loops
+    G.remove_edges_from(nx.selfloop_edges(G))
+
+    # Remove nodes with no edges (isolates)
+    G.remove_nodes_from(list(nx.isolates(G)))
+
+    # Remove nodes with degree below the threshold
+    low_degree_nodes = [node for node, degree in dict(G.degree()).items() if degree < degree_threshold]
+    G.remove_nodes_from(low_degree_nodes)
+
+    # Keep only the largest connected component
+    if keep_largest_component:
+        largest_cc = max(nx.connected_components(G), key=len)
+        G = G.subgraph(largest_cc).copy()
+
+    return G
+
+
+def plot_degree_distribution(G):
+    """
+    Plots the degree distribution of the graph.
+    
+    Parameters:
+    G (nx.Graph): The NetworkX graph.
+    """
+    degrees = [d for n, d in G.degree()]
+    plt.figure(figsize=(10, 6))
+    sns.histplot(degrees, bins=30, kde=False, edgecolor='black')
+    plt.title('Degree Distribution')
+    plt.xlabel('Degree')
+    plt.ylabel('Frequency')
+    plt.show()
+
+def visualise_edge_weight_distribution(G):
+    """
+    Visualizes the distribution of edge weights.
+
+    Parameters:
+    edge_weights (list): List of edge weights.
+    """
+    plt.figure(figsize=(10, 6))
+    edge_weights = [G[u][v]['weight'] for u, v in G.edges()]
+    # Histogram
+    sns.histplot(edge_weights, bins=30, kde=False)
+    
+    plt.title('Distribution of Edge Weights')
+    plt.xlabel('Edge Weight')
+    plt.ylabel('Frequency')
+    plt.show()
+
+def threshold_sparsification(graph, threshold):
+    """
+    Sparsifies the graph by removing edges below the specified weight threshold.
+
+    Parameters:
+    graph (nx.Graph): The original NetworkX graph.
+    threshold (float): The weight threshold.
+
+    Returns:
+    nx.Graph: The sparsified graph.
+    """
+    graph_copy = graph.copy()
+    sparsified_graph = nx.Graph()
+    sparsified_graph.add_nodes_from(graph_copy.nodes(data=True))
+    sparsified_graph.add_edges_from((u, v, d) for u, v, d in graph_copy.edges(data=True) if d.get('weight', 0) >= threshold)
+    return sparsified_graph
+
+def top_percentage_sparsification(graph, top_percentage):
+    """
+    Sparsifies the graph by keeping the top percentage of edges by weight.
+
+    Parameters:
+    graph (nx.Graph): The original NetworkX graph.
+    top_percentage (float): The percentage of top-weight edges to keep.
+
+    Returns:
+    nx.Graph: The sparsified graph.
+    """
+    graph_copy = graph.copy()
+    sorted_edges = sorted(graph_copy.edges(data=True), key=lambda x: x[2].get('weight', 0), reverse=True)
+    top_edges_count = max(1, int(len(sorted_edges) * (top_percentage / 100)))
+    sparsified_graph = nx.Graph()
+    sparsified_graph.add_nodes_from(graph_copy.nodes(data=True))
+    sparsified_graph.add_edges_from(sorted_edges[:top_edges_count])
+    return sparsified_graph
+
+
+def remove_by_degree(graph, min_degree):
+    """
+    Sparsifies the graph by removing nodes with degree below the specified threshold.
+
+    Parameters:
+    graph (nx.Graph): The original NetworkX graph.
+    min_degree (int): The minimum degree threshold.
+
+    Returns:
+    nx.Graph: The sparsified graph.
+    """
+    graph_copy = graph.copy()
+    nodes_to_remove = [node for node, degree in dict(graph_copy.degree()).items() if degree < min_degree]
+    
+    graph_copy.remove_nodes_from(nodes_to_remove)
+    return graph_copy
+
+def knn_sparsification(graph, k):
+    """
+    Sparsifies the graph by keeping only the top-k edges with the highest weights for each node.
+
+    Parameters:
+    graph (nx.Graph): The original NetworkX graph.
+    k (int): The number of nearest neighbors to keep for each node.
+
+    Returns:
+    nx.Graph: The sparsified graph.
+    """
+    graph_copy = graph.copy()
+    sparsified_graph = nx.Graph()
+    sparsified_graph.add_nodes_from(graph_copy.nodes(data=True))
+    
+    for node in graph_copy.nodes():
+        edges = sorted(graph_copy.edges(node, data=True), key=lambda x: x[2].get('weight', 0), reverse=True)
+        sparsified_graph.add_edges_from(edges[:k])
+    
+    return sparsified_graph
+
+
+def spanning_tree_sparsification(graph):
+    """
+    Sparsifies the graph by creating a minimum spanning tree.
+
+    Parameters:
+    graph (nx.Graph): The original NetworkX graph.
+
+    Returns:
+    nx.Graph: The sparsified graph.
+    """
+    graph_copy = graph.copy()
+    return nx.minimum_spanning_tree(graph_copy, weight='weight')
+
+def analyse_and_plot_density(graph):
+    """
+    Calculates and plots the density of the graph for a predefined series of thresholds.
+
+    Parameters:
+    graph (nx.Graph): The original NetworkX graph.
+
+    Returns:
+    densities (list of float): Densities of the graph at each threshold.
+    """
+    thresholds = [0.7 + i * 0.01 for i in range(31)]
+    densities = []
+
+    for threshold in thresholds:
+        filtered_edges = [(u, v) for u, v, d in graph.edges(data=True) if d['weight'] > threshold]
+        temp_graph = nx.Graph()
+        temp_graph.add_edges_from(filtered_edges)
+        densities.append(nx.density(temp_graph))
+
+    # Plot the densities
+    plt.figure(figsize=(10, 6))
+    plt.plot(thresholds, densities, marker='o')
+    plt.xlabel('Threshold')
+    plt.ylabel('Density')
+    plt.title('Density vs. Threshold')
+    plt.grid(True)
+    plt.show()
+
+    return densities
+
+def get_highest_degree_nodes(graph, top_n=10):
+    """
+    Returns the nodes with the highest degree in the graph.
+
+    Parameters:
+    graph (nx.Graph): The NetworkX graph.
+    top_n (int): The number of top nodes to return.
+
+    Returns:
+    List of tuples: Each tuple contains a node and its degree.
+    """
+    degrees = dict(graph.degree())
+    sorted_degrees = sorted(degrees.items(), key=lambda x: x[1], reverse=True)
+    return sorted_degrees[:top_n]
+
+def fetch_gene_info(gene_list):
+    """
+    Fetches gene information from MyGene.info.
+
+    Parameters:
+    gene_list (list): List of gene symbols or Ensembl IDs.
+
+    Returns:
+    list: List of dictionaries containing gene information.
+    """
+    mg = mygene.MyGeneInfo()
+    gene_info = mg.querymany(gene_list, scopes='symbol,ensembl.gene', 
+                             fields='name,symbol,entrezgene,summary,disease,pathway', 
+                             species='human')
+    return gene_info
+
+def print_gene_info_with_degree(top_genes_with_degrees, gene_info):
+    """
+    Prints gene information including the degree.
+
+    Parameters:
+    top_genes_with_degrees (list): List of tuples containing gene symbols and their degrees.
+    gene_info (list): List of dictionaries containing gene information.
+    """
+    for gene, degree in top_genes_with_degrees:
+        info = next((item for item in gene_info if item['query'] == gene), None)
+        if info:
+            print(f"Gene Symbol: {info.get('symbol', 'N/A')}")
+            print(f"Degree: {degree}")
+            print(f"Gene Name: {info.get('name', 'N/A')}")
+            print(f"Entrez ID: {info.get('entrezgene', 'N/A')}")
+            print(f"Summary: {info.get('summary', 'N/A')}")
+            if 'disease' in info:
+                diseases = ', '.join([d['term'] for d in info['disease']])
+                print(f"Diseases: {diseases}")
+            else:
+                print("Diseases: N/A")
+            if 'pathway' in info:
+                pathways = []
+                if isinstance(info['pathway'], dict):
+                    for key in info['pathway']:
+                        pathway_data = info['pathway'][key]
+                        if isinstance(pathway_data, list):
+                            pathways.extend([p['name'] for p in pathway_data if 'name' in p])
+                        elif isinstance(pathway_data, dict) and 'name' in pathway_data:
+                            pathways.append(pathway_data['name'])
+                        elif isinstance(pathway_data, str):
+                            pathways.append(pathway_data)
+                print(f"Pathways: {', '.join(pathways) if pathways else 'N/A'}")
+            else:
+                print("Pathways: N/A")
+            print("-" * 40)
+        else:
+            print(f"Gene not found: {gene}")
+            print(f"Degree: {degree}")
+            print("-" * 40)
+

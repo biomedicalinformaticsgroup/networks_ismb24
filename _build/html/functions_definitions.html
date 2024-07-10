@@ -182,13 +182,8 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+<li class="toctree-l2"><a class="reference internal" href="Section1/Part2.html">Part 2 - Patient Similarity Networks (PSNs)</a></li>
 
-
-
-
-
-
-<li class="toctree-l2"><a class="reference internal" href="Section1/Part2.html">Part 2 - Patient similarity networks</a></li>
 
 </ul>
 </li>
@@ -462,6 +457,53 @@ It inherits from the <cite>nn.Module</cite> class of PyTorch.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="functions.analyse_and_plot_density">
+<span class="sig-prename descclassname"><span class="pre">functions.</span></span><span class="sig-name descname"><span class="pre">analyse_and_plot_density</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/functions.html#analyse_and_plot_density"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.analyse_and_plot_density" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculates and plots the density of the graph for a predefined series of thresholds.</p>
+<p>Parameters:
+graph (nx.Graph): The original NetworkX graph.</p>
+<p>Returns:
+densities (list of float): Densities of the graph at each threshold.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="functions.calc_abs_bicorr">
+<span class="sig-prename descclassname"><span class="pre">functions.</span></span><span class="sig-name descname"><span class="pre">calc_abs_bicorr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/functions.html#calc_abs_bicorr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.calc_abs_bicorr" title="Permalink to this definition">#</a></dt>
+<dd><p>Calculate the absolute biweight midcorrelation matrix for numeric data.</p>
+<p>Parameters:
+data (pd.DataFrame): Input DataFrame with numeric data.</p>
+<p>Returns:
+pd.DataFrame: DataFrame containing the absolute biweight midcorrelation matrix.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="functions.clean_graph">
+<span class="sig-prename descclassname"><span class="pre">functions.</span></span><span class="sig-name descname"><span class="pre">clean_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_largest_component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/functions.html#clean_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.clean_graph" title="Permalink to this definition">#</a></dt>
+<dd><p>Cleans the graph by performing several cleaning steps:
+- Removes unconnected nodes (isolates)
+- Removes self-loops
+- Removes nodes with a degree below a specified threshold
+- Keeps only the largest connected component (optional)</p>
+<p>Parameters:
+G (nx.Graph): The NetworkX graph to clean.
+degree_threshold (int): Minimum degree for nodes to keep.
+keep_largest_component (bool): Whether to keep only the largest connected component.</p>
+<p>Returns:
+G (nx.Graph): Cleaned graph.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="functions.create_graph_from_correlation">
+<span class="sig-prename descclassname"><span class="pre">functions.</span></span><span class="sig-name descname"><span class="pre">create_graph_from_correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">correlation_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/functions.html#create_graph_from_correlation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.create_graph_from_correlation" title="Permalink to this definition">#</a></dt>
+<dd><p>Creates a graph from a correlation matrix using a specified threshold.</p>
+<p>Parameters:
+correlation_matrix (pd.DataFrame): DataFrame containing the correlation matrix.
+threshold (float): Threshold for including edges based on correlation value.</p>
+<p>Returns:
+G (nx.Graph): Graph created from the correlation matrix.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="functions.draw_network_with_node_attrs">
 <span class="sig-prename descclassname"><span class="pre">functions.</span></span><span class="sig-name descname"><span class="pre">draw_network_with_node_attrs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">communities</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Network</span> <span class="pre">Visualization'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape_attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(20,</span> <span class="pre">10)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spring'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tab20'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_path_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/functions.html#draw_network_with_node_attrs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.draw_network_with_node_attrs" title="Permalink to this definition">#</a></dt>
 <dd><p>Draws a network graph with nodes colored and shaped based on their attributes, and optionally colored by community membership.</p>
@@ -525,6 +567,45 @@ It inherits from the <cite>nn.Module</cite> class of PyTorch.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="functions.fetch_gene_info">
+<span class="sig-prename descclassname"><span class="pre">functions.</span></span><span class="sig-name descname"><span class="pre">fetch_gene_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gene_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/functions.html#fetch_gene_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.fetch_gene_info" title="Permalink to this definition">#</a></dt>
+<dd><p>Fetches gene information from MyGene.info.</p>
+<p>Parameters:
+gene_list (list): List of gene symbols or Ensembl IDs.</p>
+<p>Returns:
+list: List of dictionaries containing gene information.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="functions.filter_high_variance_genes">
+<span class="sig-prename descclassname"><span class="pre">functions.</span></span><span class="sig-name descname"><span class="pre">filter_high_variance_genes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/functions.html#filter_high_variance_genes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.filter_high_variance_genes" title="Permalink to this definition">#</a></dt>
+<dd><p>Filter out genes with variance below the specified threshold.</p>
+<p>Calculates the variance for each gene and filters out genes whose
+variance is below the specified threshold.</p>
+<p>Parameters:
+data (DataFrame): Gene expression data with genes as columns and samples as rows.
+threshold (float): Minimum variance level to retain a gene.</p>
+<p>Returns:
+DataFrame: Filtered data with genes having variance above the threshold.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="functions.filter_low_expression_genes">
+<span class="sig-prename descclassname"><span class="pre">functions.</span></span><span class="sig-name descname"><span class="pre">filter_low_expression_genes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/functions.html#filter_low_expression_genes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.filter_low_expression_genes" title="Permalink to this definition">#</a></dt>
+<dd><p>Filter out low-expressed genes from the dataset.</p>
+<p>Calculates the mean expression level for each gene and filters out
+genes whose mean expression level is below the specified threshold.</p>
+<p>Parameters:
+data (DataFrame): Expression data with genes as columns.
+threshold (float): Minimum mean expression level to retain a gene.</p>
+<blockquote>
+<div><p>Default is 1.0.</p>
+</div></blockquote>
+<p>Returns:
+DataFrame: Filtered data with genes above the threshold.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="functions.gen_graph_legend">
 <span class="sig-prename descclassname"><span class="pre">functions.</span></span><span class="sig-name descname"><span class="pre">gen_graph_legend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_colours</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/functions.html#gen_graph_legend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.gen_graph_legend" title="Permalink to this definition">#</a></dt>
 <dd><p>Generate a legend for a graph based on node colors and attributes.</p>
@@ -566,6 +647,17 @@ It inherits from the <cite>nn.Module</cite> class of PyTorch.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="functions.get_highest_degree_nodes">
+<span class="sig-prename descclassname"><span class="pre">functions.</span></span><span class="sig-name descname"><span class="pre">get_highest_degree_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/functions.html#get_highest_degree_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.get_highest_degree_nodes" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns the nodes with the highest degree in the graph.</p>
+<p>Parameters:
+graph (nx.Graph): The NetworkX graph.
+top_n (int): The number of top nodes to return.</p>
+<p>Returns:
+List of tuples: Each tuple contains a node and its degree.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="functions.get_k_neighbours">
 <span class="sig-prename descclassname"><span class="pre">functions.</span></span><span class="sig-name descname"><span class="pre">get_k_neighbours</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/functions.html#get_k_neighbours"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.get_k_neighbours" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns a dictionary of k-nearest neighbors for each node in the dataframe.</p>
@@ -583,6 +675,17 @@ It inherits from the <cite>nn.Module</cite> class of PyTorch.</p>
 <dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="functions.knn_sparsification">
+<span class="sig-prename descclassname"><span class="pre">functions.</span></span><span class="sig-name descname"><span class="pre">knn_sparsification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/functions.html#knn_sparsification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.knn_sparsification" title="Permalink to this definition">#</a></dt>
+<dd><p>Sparsifies the graph by keeping only the top-k edges with the highest weights for each node.</p>
+<p>Parameters:
+graph (nx.Graph): The original NetworkX graph.
+k (int): The number of nearest neighbors to keep for each node.</p>
+<p>Returns:
+nx.Graph: The sparsified graph.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -650,6 +753,14 @@ Aggregation: Aggregate the gathered messages using median aggregation.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="functions.plot_degree_distribution">
+<span class="sig-prename descclassname"><span class="pre">functions.</span></span><span class="sig-name descname"><span class="pre">plot_degree_distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/functions.html#plot_degree_distribution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.plot_degree_distribution" title="Permalink to this definition">#</a></dt>
+<dd><p>Plots the degree distribution of the graph.</p>
+<p>Parameters:
+G (nx.Graph): The NetworkX graph.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="functions.plot_knn_network">
 <span class="sig-prename descclassname"><span class="pre">functions.</span></span><span class="sig-name descname"><span class="pre">plot_knn_network</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_colours</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['skyblue']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/functions.html#plot_knn_network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.plot_knn_network" title="Permalink to this definition">#</a></dt>
 <dd><p>Plots a k-nearest neighbors network based on the given dataframe and parameters.</p>
@@ -670,6 +781,66 @@ Aggregation: Aggregate the gathered messages using median aggregation.</p>
 <dd class="field-odd"><p>nx.Graph</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="functions.print_gene_info_with_degree">
+<span class="sig-prename descclassname"><span class="pre">functions.</span></span><span class="sig-name descname"><span class="pre">print_gene_info_with_degree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">top_genes_with_degrees</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gene_info</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/functions.html#print_gene_info_with_degree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.print_gene_info_with_degree" title="Permalink to this definition">#</a></dt>
+<dd><p>Prints gene information including the degree.</p>
+<p>Parameters:
+top_genes_with_degrees (list): List of tuples containing gene symbols and their degrees.
+gene_info (list): List of dictionaries containing gene information.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="functions.print_graph_info">
+<span class="sig-prename descclassname"><span class="pre">functions.</span></span><span class="sig-name descname"><span class="pre">print_graph_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/functions.html#print_graph_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.print_graph_info" title="Permalink to this definition">#</a></dt>
+<dd><p>Print basic information about a NetworkX graph.</p>
+<p>Parameters:
+G (nx.Graph): The NetworkX graph.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="functions.remove_by_degree">
+<span class="sig-prename descclassname"><span class="pre">functions.</span></span><span class="sig-name descname"><span class="pre">remove_by_degree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_degree</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/functions.html#remove_by_degree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.remove_by_degree" title="Permalink to this definition">#</a></dt>
+<dd><p>Sparsifies the graph by removing nodes with degree below the specified threshold.</p>
+<p>Parameters:
+graph (nx.Graph): The original NetworkX graph.
+min_degree (int): The minimum degree threshold.</p>
+<p>Returns:
+nx.Graph: The sparsified graph.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="functions.spanning_tree_sparsification">
+<span class="sig-prename descclassname"><span class="pre">functions.</span></span><span class="sig-name descname"><span class="pre">spanning_tree_sparsification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/functions.html#spanning_tree_sparsification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.spanning_tree_sparsification" title="Permalink to this definition">#</a></dt>
+<dd><p>Sparsifies the graph by creating a minimum spanning tree.</p>
+<p>Parameters:
+graph (nx.Graph): The original NetworkX graph.</p>
+<p>Returns:
+nx.Graph: The sparsified graph.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="functions.threshold_sparsification">
+<span class="sig-prename descclassname"><span class="pre">functions.</span></span><span class="sig-name descname"><span class="pre">threshold_sparsification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/functions.html#threshold_sparsification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.threshold_sparsification" title="Permalink to this definition">#</a></dt>
+<dd><p>Sparsifies the graph by removing edges below the specified weight threshold.</p>
+<p>Parameters:
+graph (nx.Graph): The original NetworkX graph.
+threshold (float): The weight threshold.</p>
+<p>Returns:
+nx.Graph: The sparsified graph.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="functions.top_percentage_sparsification">
+<span class="sig-prename descclassname"><span class="pre">functions.</span></span><span class="sig-name descname"><span class="pre">top_percentage_sparsification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_percentage</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/functions.html#top_percentage_sparsification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.top_percentage_sparsification" title="Permalink to this definition">#</a></dt>
+<dd><p>Sparsifies the graph by keeping the top percentage of edges by weight.</p>
+<p>Parameters:
+graph (nx.Graph): The original NetworkX graph.
+top_percentage (float): The percentage of top-weight edges to keep.</p>
+<p>Returns:
+nx.Graph: The sparsified graph.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -698,6 +869,23 @@ train/validation splits, device, model, labels, epochs, and learning rate.</p>
 <dd class="field-odd"><p>tuple</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="functions.visualise_edge_weight_distribution">
+<span class="sig-prename descclassname"><span class="pre">functions.</span></span><span class="sig-name descname"><span class="pre">visualise_edge_weight_distribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/functions.html#visualise_edge_weight_distribution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.visualise_edge_weight_distribution" title="Permalink to this definition">#</a></dt>
+<dd><p>Visualizes the distribution of edge weights.</p>
+<p>Parameters:
+edge_weights (list): List of edge weights.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="functions.visualise_graph">
+<span class="sig-prename descclassname"><span class="pre">functions.</span></span><span class="sig-name descname"><span class="pre">visualise_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Gene</span> <span class="pre">Co-expression</span> <span class="pre">Network'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/functions.html#visualise_graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#functions.visualise_graph" title="Permalink to this definition">#</a></dt>
+<dd><p>Visualizes the graph using Matplotlib and NetworkX.</p>
+<p>Parameters:
+G (nx.Graph): Graph to visualize.
+title (str): Title of the plot.</p>
 </dd></dl>
 
 </section>
