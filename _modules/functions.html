@@ -179,13 +179,8 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+<li class="toctree-l2"><a class="reference internal" href="../Section1/Part2.html">Part 2 - Patient Similarity Networks (PSNs)</a></li>
 
-
-
-
-
-
-<li class="toctree-l2"><a class="reference internal" href="../Section1/Part2.html">Part 2 - Patient similarity networks</a></li>
 
 </ul>
 </li>
@@ -863,6 +858,438 @@ document.write(`
         <span class="n">score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
             
         <span class="k">return</span> <span class="n">score</span></div></div>
+    
+
+<div class="viewcode-block" id="filter_low_expression_genes"><a class="viewcode-back" href="../functions_definitions.html#functions.filter_low_expression_genes">[docs]</a><span class="k">def</span> <span class="nf">filter_low_expression_genes</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filter out low-expressed genes from the dataset.</span>
+
+<span class="sd">    Calculates the mean expression level for each gene and filters out</span>
+<span class="sd">    genes whose mean expression level is below the specified threshold.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    data (DataFrame): Expression data with genes as columns.</span>
+<span class="sd">    threshold (float): Minimum mean expression level to retain a gene.</span>
+<span class="sd">                       Default is 1.0.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    DataFrame: Filtered data with genes above the threshold.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Calculate the mean expression for each gene</span>
+    <span class="n">gene_means</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># Filter out genes with mean expression below the threshold</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">gene_means</span> <span class="o">&gt;=</span> <span class="n">threshold</span>
+    <span class="n">filtered_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">mask</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">filtered_data</span></div>
+
+
+<div class="viewcode-block" id="filter_high_variance_genes"><a class="viewcode-back" href="../functions_definitions.html#functions.filter_high_variance_genes">[docs]</a><span class="k">def</span> <span class="nf">filter_high_variance_genes</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filter out genes with variance below the specified threshold.</span>
+
+<span class="sd">    Calculates the variance for each gene and filters out genes whose </span>
+<span class="sd">    variance is below the specified threshold.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    data (DataFrame): Gene expression data with genes as columns and samples as rows.</span>
+<span class="sd">    threshold (float): Minimum variance level to retain a gene.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    DataFrame: Filtered data with genes having variance above the threshold.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Calculate the variance for each gene (column)</span>
+    <span class="n">gene_variances</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># Create a boolean mask to filter out genes with variance below the threshold</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">gene_variances</span> <span class="o">&gt;=</span> <span class="n">threshold</span>
+    <span class="c1"># Apply the mask to filter the DataFrame</span>
+    <span class="n">filtered_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">mask</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">filtered_data</span></div>
+
+<div class="viewcode-block" id="calc_abs_bicorr"><a class="viewcode-back" href="../functions_definitions.html#functions.calc_abs_bicorr">[docs]</a><span class="k">def</span> <span class="nf">calc_abs_bicorr</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the absolute biweight midcorrelation matrix for numeric data.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    data (pd.DataFrame): Input DataFrame with numeric data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    pd.DataFrame: DataFrame containing the absolute biweight midcorrelation matrix.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Select only numeric data</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">_get_numeric_data</span><span class="p">()</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">cols</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">mat</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">na_value</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">mat</span> <span class="o">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="n">K</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>
+    <span class="n">correl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">K</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+    <span class="c1"># Calculate biweight midcovariance</span>
+    <span class="n">bicorr</span> <span class="o">=</span> <span class="n">astropy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">biweight_midcovariance</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">modify_sample_size</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+                <span class="n">correl</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">denominator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">bicorr</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">bicorr</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">denominator</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">correl</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">bicorr</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">/</span> <span class="n">denominator</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">correl</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Or handle it in another appropriate way</span>
+
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">correl</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">idx</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="create_graph_from_correlation"><a class="viewcode-back" href="../functions_definitions.html#functions.create_graph_from_correlation">[docs]</a><span class="k">def</span> <span class="nf">create_graph_from_correlation</span><span class="p">(</span><span class="n">correlation_matrix</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.8</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a graph from a correlation matrix using a specified threshold.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    correlation_matrix (pd.DataFrame): DataFrame containing the correlation matrix.</span>
+<span class="sd">    threshold (float): Threshold for including edges based on correlation value.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    G (nx.Graph): Graph created from the correlation matrix.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+
+    <span class="c1"># Add nodes</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">correlation_matrix</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+    <span class="c1"># Add edges with weights above the threshold</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">correlation_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">correlation_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>  <span class="c1"># Ignore the diagonal elements</span>
+                <span class="n">weight</span> <span class="o">=</span> <span class="n">correlation_matrix</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">:</span>
+                    <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">correlation_matrix</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">correlation_matrix</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">weight</span><span class="o">=</span><span class="n">weight</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">G</span></div>
+
+
+<div class="viewcode-block" id="print_graph_info"><a class="viewcode-back" href="../functions_definitions.html#functions.print_graph_info">[docs]</a><span class="k">def</span> <span class="nf">print_graph_info</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Print basic information about a NetworkX graph.</span>
+
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    G (nx.Graph): The NetworkX graph.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of nodes: </span><span class="si">{</span><span class="n">G</span><span class="o">.</span><span class="n">number_of_nodes</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of edges: </span><span class="si">{</span><span class="n">G</span><span class="o">.</span><span class="n">number_of_edges</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample nodes:&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">)[:</span><span class="mi">10</span><span class="p">])</span>  <span class="c1"># Print first 10 nodes as a sample</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample edges:&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">))[:</span><span class="mi">10</span><span class="p">])</span>  <span class="c1"># Print first 10 edges as a sample</span>
+    
+    <span class="n">info_str</span> <span class="o">=</span> <span class="s2">&quot;Graph type: &quot;</span>
+    <span class="n">is_directed</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">is_directed</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">is_directed</span><span class="p">:</span>
+        <span class="n">info_str</span> <span class="o">+=</span> <span class="s2">&quot;directed&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">info_str</span> <span class="o">+=</span> <span class="s2">&quot;undirected&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">info_str</span><span class="p">)</span>
+
+    <span class="c1"># Check for self-loops</span>
+    <span class="n">self_loops</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">selfloop_edges</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">self_loops</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of self-loops: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">self_loops</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Self-loops:&quot;</span><span class="p">,</span> <span class="n">self_loops</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No self-loops in the graph.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># density of the graph</span>
+    <span class="n">density</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">density</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Graph density: </span><span class="si">{</span><span class="n">density</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Find and print the number of connected components</span>
+    <span class="n">num_connected_components</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">number_connected_components</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of connected components: </span><span class="si">{</span><span class="n">num_connected_components</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Calculate and print the clustering coefficient of the graph</span>
+    <span class="n">clustering_coeff</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">average_clustering</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average clustering coefficient: </span><span class="si">{</span><span class="n">clustering_coeff</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<span class="c1"># Function to visualize the graph</span>
+<div class="viewcode-block" id="visualise_graph"><a class="viewcode-back" href="../functions_definitions.html#functions.visualise_graph">[docs]</a><span class="k">def</span> <span class="nf">visualise_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Gene Co-expression Network&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Visualizes the graph using Matplotlib and NetworkX.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    G (nx.Graph): Graph to visualize.</span>
+<span class="sd">    title (str): Title of the plot.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># k controls the distance between nodes</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="clean_graph"><a class="viewcode-back" href="../functions_definitions.html#functions.clean_graph">[docs]</a><span class="k">def</span> <span class="nf">clean_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degree_threshold</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keep_largest_component</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Cleans the graph by performing several cleaning steps:</span>
+<span class="sd">    - Removes unconnected nodes (isolates)</span>
+<span class="sd">    - Removes self-loops</span>
+<span class="sd">    - Removes nodes with a degree below a specified threshold</span>
+<span class="sd">    - Keeps only the largest connected component (optional)</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    G (nx.Graph): The NetworkX graph to clean.</span>
+<span class="sd">    degree_threshold (int): Minimum degree for nodes to keep.</span>
+<span class="sd">    keep_largest_component (bool): Whether to keep only the largest connected component.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    G (nx.Graph): Cleaned graph.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># Work on a copy of the graph to avoid modifying the original graph</span>
+
+    <span class="c1"># Remove self-loops</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">remove_edges_from</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">selfloop_edges</span><span class="p">(</span><span class="n">G</span><span class="p">))</span>
+
+    <span class="c1"># Remove nodes with no edges (isolates)</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">remove_nodes_from</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">isolates</span><span class="p">(</span><span class="n">G</span><span class="p">)))</span>
+
+    <span class="c1"># Remove nodes with degree below the threshold</span>
+    <span class="n">low_degree_nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span> <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">degree</span> <span class="ow">in</span> <span class="nb">dict</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">())</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">degree</span> <span class="o">&lt;</span> <span class="n">degree_threshold</span><span class="p">]</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">remove_nodes_from</span><span class="p">(</span><span class="n">low_degree_nodes</span><span class="p">)</span>
+
+    <span class="c1"># Keep only the largest connected component</span>
+    <span class="k">if</span> <span class="n">keep_largest_component</span><span class="p">:</span>
+        <span class="n">largest_cc</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">connected_components</span><span class="p">(</span><span class="n">G</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">)</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">subgraph</span><span class="p">(</span><span class="n">largest_cc</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">G</span></div>
+
+
+<div class="viewcode-block" id="plot_degree_distribution"><a class="viewcode-back" href="../functions_definitions.html#functions.plot_degree_distribution">[docs]</a><span class="k">def</span> <span class="nf">plot_degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots the degree distribution of the graph.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    G (nx.Graph): The NetworkX graph.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">degrees</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">()]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">degrees</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Degree Distribution&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Degree&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="visualise_edge_weight_distribution"><a class="viewcode-back" href="../functions_definitions.html#functions.visualise_edge_weight_distribution">[docs]</a><span class="k">def</span> <span class="nf">visualise_edge_weight_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Visualizes the distribution of edge weights.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    edge_weights (list): List of edge weights.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">edge_weights</span> <span class="o">=</span> <span class="p">[</span><span class="n">G</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">()]</span>
+    <span class="c1"># Histogram</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">edge_weights</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribution of Edge Weights&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Edge Weight&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="threshold_sparsification"><a class="viewcode-back" href="../functions_definitions.html#functions.threshold_sparsification">[docs]</a><span class="k">def</span> <span class="nf">threshold_sparsification</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sparsifies the graph by removing edges below the specified weight threshold.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    graph (nx.Graph): The original NetworkX graph.</span>
+<span class="sd">    threshold (float): The weight threshold.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    nx.Graph: The sparsified graph.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">graph_copy</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">sparsified_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+    <span class="n">sparsified_graph</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">graph_copy</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="n">sparsified_graph</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">((</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">graph_copy</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sparsified_graph</span></div>
+
+<div class="viewcode-block" id="top_percentage_sparsification"><a class="viewcode-back" href="../functions_definitions.html#functions.top_percentage_sparsification">[docs]</a><span class="k">def</span> <span class="nf">top_percentage_sparsification</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">top_percentage</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sparsifies the graph by keeping the top percentage of edges by weight.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    graph (nx.Graph): The original NetworkX graph.</span>
+<span class="sd">    top_percentage (float): The percentage of top-weight edges to keep.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    nx.Graph: The sparsified graph.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">graph_copy</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">sorted_edges</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">graph_copy</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">top_edges_count</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sorted_edges</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">top_percentage</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)))</span>
+    <span class="n">sparsified_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+    <span class="n">sparsified_graph</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">graph_copy</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="n">sparsified_graph</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">sorted_edges</span><span class="p">[:</span><span class="n">top_edges_count</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">sparsified_graph</span></div>
+
+
+<div class="viewcode-block" id="remove_by_degree"><a class="viewcode-back" href="../functions_definitions.html#functions.remove_by_degree">[docs]</a><span class="k">def</span> <span class="nf">remove_by_degree</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">min_degree</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sparsifies the graph by removing nodes with degree below the specified threshold.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    graph (nx.Graph): The original NetworkX graph.</span>
+<span class="sd">    min_degree (int): The minimum degree threshold.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    nx.Graph: The sparsified graph.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">graph_copy</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">nodes_to_remove</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span> <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">degree</span> <span class="ow">in</span> <span class="nb">dict</span><span class="p">(</span><span class="n">graph_copy</span><span class="o">.</span><span class="n">degree</span><span class="p">())</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">degree</span> <span class="o">&lt;</span> <span class="n">min_degree</span><span class="p">]</span>
+    
+    <span class="n">graph_copy</span><span class="o">.</span><span class="n">remove_nodes_from</span><span class="p">(</span><span class="n">nodes_to_remove</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">graph_copy</span></div>
+
+<div class="viewcode-block" id="knn_sparsification"><a class="viewcode-back" href="../functions_definitions.html#functions.knn_sparsification">[docs]</a><span class="k">def</span> <span class="nf">knn_sparsification</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sparsifies the graph by keeping only the top-k edges with the highest weights for each node.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    graph (nx.Graph): The original NetworkX graph.</span>
+<span class="sd">    k (int): The number of nearest neighbors to keep for each node.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    nx.Graph: The sparsified graph.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">graph_copy</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">sparsified_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+    <span class="n">sparsified_graph</span><span class="o">.</span><span class="n">add_nodes_from</span><span class="p">(</span><span class="n">graph_copy</span><span class="o">.</span><span class="n">nodes</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">graph_copy</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">graph_copy</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">sparsified_graph</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">edges</span><span class="p">[:</span><span class="n">k</span><span class="p">])</span>
+    
+    <span class="k">return</span> <span class="n">sparsified_graph</span></div>
+
+
+<div class="viewcode-block" id="spanning_tree_sparsification"><a class="viewcode-back" href="../functions_definitions.html#functions.spanning_tree_sparsification">[docs]</a><span class="k">def</span> <span class="nf">spanning_tree_sparsification</span><span class="p">(</span><span class="n">graph</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sparsifies the graph by creating a minimum spanning tree.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    graph (nx.Graph): The original NetworkX graph.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    nx.Graph: The sparsified graph.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">graph_copy</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">nx</span><span class="o">.</span><span class="n">minimum_spanning_tree</span><span class="p">(</span><span class="n">graph_copy</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;weight&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="analyse_and_plot_density"><a class="viewcode-back" href="../functions_definitions.html#functions.analyse_and_plot_density">[docs]</a><span class="k">def</span> <span class="nf">analyse_and_plot_density</span><span class="p">(</span><span class="n">graph</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates and plots the density of the graph for a predefined series of thresholds.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    graph (nx.Graph): The original NetworkX graph.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    densities (list of float): Densities of the graph at each threshold.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">thresholds</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.7</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="mf">0.01</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">31</span><span class="p">)]</span>
+    <span class="n">densities</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">threshold</span> <span class="ow">in</span> <span class="n">thresholds</span><span class="p">:</span>
+        <span class="n">filtered_edges</span> <span class="o">=</span> <span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">]</span>
+        <span class="n">temp_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+        <span class="n">temp_graph</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">filtered_edges</span><span class="p">)</span>
+        <span class="n">densities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">density</span><span class="p">(</span><span class="n">temp_graph</span><span class="p">))</span>
+
+    <span class="c1"># Plot the densities</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">thresholds</span><span class="p">,</span> <span class="n">densities</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Threshold&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Density&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Density vs. Threshold&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">densities</span></div>
+
+<div class="viewcode-block" id="get_highest_degree_nodes"><a class="viewcode-back" href="../functions_definitions.html#functions.get_highest_degree_nodes">[docs]</a><span class="k">def</span> <span class="nf">get_highest_degree_nodes</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">top_n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the nodes with the highest degree in the graph.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    graph (nx.Graph): The NetworkX graph.</span>
+<span class="sd">    top_n (int): The number of top nodes to return.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    List of tuples: Each tuple contains a node and its degree.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">degrees</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">degree</span><span class="p">())</span>
+    <span class="n">sorted_degrees</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">degrees</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sorted_degrees</span><span class="p">[:</span><span class="n">top_n</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="fetch_gene_info"><a class="viewcode-back" href="../functions_definitions.html#functions.fetch_gene_info">[docs]</a><span class="k">def</span> <span class="nf">fetch_gene_info</span><span class="p">(</span><span class="n">gene_list</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fetches gene information from MyGene.info.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    gene_list (list): List of gene symbols or Ensembl IDs.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    list: List of dictionaries containing gene information.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mg</span> <span class="o">=</span> <span class="n">mygene</span><span class="o">.</span><span class="n">MyGeneInfo</span><span class="p">()</span>
+    <span class="n">gene_info</span> <span class="o">=</span> <span class="n">mg</span><span class="o">.</span><span class="n">querymany</span><span class="p">(</span><span class="n">gene_list</span><span class="p">,</span> <span class="n">scopes</span><span class="o">=</span><span class="s1">&#39;symbol,ensembl.gene&#39;</span><span class="p">,</span> 
+                             <span class="n">fields</span><span class="o">=</span><span class="s1">&#39;name,symbol,entrezgene,summary,disease,pathway&#39;</span><span class="p">,</span> 
+                             <span class="n">species</span><span class="o">=</span><span class="s1">&#39;human&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">gene_info</span></div>
+
+<div class="viewcode-block" id="print_gene_info_with_degree"><a class="viewcode-back" href="../functions_definitions.html#functions.print_gene_info_with_degree">[docs]</a><span class="k">def</span> <span class="nf">print_gene_info_with_degree</span><span class="p">(</span><span class="n">top_genes_with_degrees</span><span class="p">,</span> <span class="n">gene_info</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Prints gene information including the degree.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    top_genes_with_degrees (list): List of tuples containing gene symbols and their degrees.</span>
+<span class="sd">    gene_info (list): List of dictionaries containing gene information.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">gene</span><span class="p">,</span> <span class="n">degree</span> <span class="ow">in</span> <span class="n">top_genes_with_degrees</span><span class="p">:</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">gene_info</span> <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;query&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">gene</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">info</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gene Symbol: </span><span class="si">{</span><span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;symbol&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;N/A&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Degree: </span><span class="si">{</span><span class="n">degree</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gene Name: </span><span class="si">{</span><span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;N/A&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Entrez ID: </span><span class="si">{</span><span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;entrezgene&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;N/A&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Summary: </span><span class="si">{</span><span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;summary&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;N/A&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s1">&#39;disease&#39;</span> <span class="ow">in</span> <span class="n">info</span><span class="p">:</span>
+                <span class="n">diseases</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;term&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;disease&#39;</span><span class="p">]])</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Diseases: </span><span class="si">{</span><span class="n">diseases</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Diseases: N/A&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s1">&#39;pathway&#39;</span> <span class="ow">in</span> <span class="n">info</span><span class="p">:</span>
+                <span class="n">pathways</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;pathway&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;pathway&#39;</span><span class="p">]:</span>
+                        <span class="n">pathway_data</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;pathway&#39;</span><span class="p">][</span><span class="n">key</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pathway_data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                            <span class="n">pathways</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">p</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pathway_data</span> <span class="k">if</span> <span class="s1">&#39;name&#39;</span> <span class="ow">in</span> <span class="n">p</span><span class="p">])</span>
+                        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pathway_data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;name&#39;</span> <span class="ow">in</span> <span class="n">pathway_data</span><span class="p">:</span>
+                            <span class="n">pathways</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pathway_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+                        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pathway_data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                            <span class="n">pathways</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pathway_data</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pathways: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pathways</span><span class="p">)</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">pathways</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;N/A&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pathways: N/A&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gene not found: </span><span class="si">{</span><span class="n">gene</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Degree: </span><span class="si">{</span><span class="n">degree</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span></div>
+
 </pre></div>
 
                 </article>
