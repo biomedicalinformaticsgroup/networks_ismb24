@@ -571,6 +571,11 @@ In order to construct a biological network, we are going to first:</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;datExpr&#39;, &#39;datMeta&#39;])
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -579,6 +584,172 @@ In order to construct a biological network, we are going to first:</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>patient</th>
+      <th>race</th>
+      <th>gender</th>
+      <th>sample_type</th>
+      <th>cigarettes_per_day</th>
+      <th>Smoked</th>
+      <th>sizeFactor</th>
+      <th>replaceable</th>
+    </tr>
+    <tr>
+      <th>_row</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>TCGA-38-7271</th>
+      <td>TCGA-38-7271</td>
+      <td>white</td>
+      <td>female</td>
+      <td>Primary Tumor</td>
+      <td>1.3699</td>
+      <td>Smoker</td>
+      <td>0.5841</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>TCGA-55-7914</th>
+      <td>TCGA-55-7914</td>
+      <td>white</td>
+      <td>female</td>
+      <td>Primary Tumor</td>
+      <td>0.274</td>
+      <td>Smoker</td>
+      <td>0.9873</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>TCGA-95-7043</th>
+      <td>TCGA-95-7043</td>
+      <td>white</td>
+      <td>female</td>
+      <td>Primary Tumor</td>
+      <td>2.1918</td>
+      <td>Smoker</td>
+      <td>0.5439</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>TCGA-73-4658</th>
+      <td>TCGA-73-4658</td>
+      <td>white</td>
+      <td>female</td>
+      <td>Primary Tumor</td>
+      <td>1.3699</td>
+      <td>Smoker</td>
+      <td>0.7715</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>TCGA-86-8076</th>
+      <td>TCGA-86-8076</td>
+      <td>white</td>
+      <td>male</td>
+      <td>Primary Tumor</td>
+      <td>0</td>
+      <td>Never</td>
+      <td>1.313</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>TCGA-86-8073</th>
+      <td>TCGA-86-8073</td>
+      <td>white</td>
+      <td>male</td>
+      <td>Primary Tumor</td>
+      <td>2.1918</td>
+      <td>Smoker</td>
+      <td>1.9733</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>TCGA-MN-A4N4</th>
+      <td>TCGA-MN-A4N4</td>
+      <td>white</td>
+      <td>male</td>
+      <td>Primary Tumor</td>
+      <td>0</td>
+      <td>Never</td>
+      <td>1.0464</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>TCGA-53-7626</th>
+      <td>TCGA-53-7626</td>
+      <td>white</td>
+      <td>female</td>
+      <td>Primary Tumor</td>
+      <td>1.9178</td>
+      <td>Smoker</td>
+      <td>1.7208</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>TCGA-44-A47G</th>
+      <td>TCGA-44-A47G</td>
+      <td>white</td>
+      <td>female</td>
+      <td>Primary Tumor</td>
+      <td>1.5342</td>
+      <td>Smoker</td>
+      <td>0.8926</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>TCGA-55-6969</th>
+      <td>TCGA-55-6969</td>
+      <td>white</td>
+      <td>male</td>
+      <td>Primary Tumor</td>
+      <td>0</td>
+      <td>Never</td>
+      <td>1.4732</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+<p>498 rows × 8 columns</p>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -587,11 +758,24 @@ In order to construct a biological network, we are going to first:</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>498
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Count the occurrences of each unique value in the &#39;sample_type&#39; column of the &#39;datMeta&#39; DataFrame</span>
 <span class="n">data</span><span class="p">[</span><span class="s2">&quot;datMeta&quot;</span><span class="p">][</span><span class="s1">&#39;sample_type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sample_type
+Primary Tumor          469
+Solid Tissue Normal     29
+Name: count, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -642,6 +826,9 @@ In order to construct a biological network, we are going to first:</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/5ce11f62a0e9f129a0d0026ba63ebf236b902ab58471d9f4bc1ec6921907dbd7.png" src="../_images/5ce11f62a0e9f129a0d0026ba63ebf236b902ab58471d9f4bc1ec6921907dbd7.png" />
+</div>
 </div>
 </section>
 <section id="expression-data">
@@ -657,6 +844,317 @@ The values in the table are the expression levels of the genes for each sample.<
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>_row</th>
+      <th>ENSG00000000003.15</th>
+      <th>ENSG00000000419.13</th>
+      <th>ENSG00000000457.14</th>
+      <th>ENSG00000000460.17</th>
+      <th>ENSG00000000938.13</th>
+      <th>ENSG00000000971.16</th>
+      <th>ENSG00000001036.14</th>
+      <th>ENSG00000001084.13</th>
+      <th>ENSG00000001167.14</th>
+      <th>ENSG00000001460.18</th>
+      <th>...</th>
+      <th>ENSG00000288586.1</th>
+      <th>ENSG00000288596.2</th>
+      <th>ENSG00000288598.1</th>
+      <th>ENSG00000288611.1</th>
+      <th>ENSG00000288612.1</th>
+      <th>ENSG00000288638.1</th>
+      <th>ENSG00000288658.1</th>
+      <th>ENSG00000288663.1</th>
+      <th>ENSG00000288670.1</th>
+      <th>ENSG00000288675.1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>TCGA-38-7271</th>
+      <td>11.3668</td>
+      <td>10.3673</td>
+      <td>9.7884</td>
+      <td>8.2552</td>
+      <td>10.6173</td>
+      <td>12.8447</td>
+      <td>10.8836</td>
+      <td>10.4437</td>
+      <td>10.8112</td>
+      <td>9.1178</td>
+      <td>...</td>
+      <td>4.4411</td>
+      <td>5.6909</td>
+      <td>3.8172</td>
+      <td>5.5378</td>
+      <td>4.5573</td>
+      <td>5.4255</td>
+      <td>5.1694</td>
+      <td>4.0073</td>
+      <td>7.97</td>
+      <td>4.664</td>
+    </tr>
+    <tr>
+      <th>TCGA-55-7914</th>
+      <td>11.5434</td>
+      <td>10.5282</td>
+      <td>9.7292</td>
+      <td>7.9951</td>
+      <td>8.4858</td>
+      <td>10.4696</td>
+      <td>10.4737</td>
+      <td>7.9065</td>
+      <td>11.8983</td>
+      <td>8.5842</td>
+      <td>...</td>
+      <td>4.768</td>
+      <td>8.0948</td>
+      <td>4.2182</td>
+      <td>3.5233</td>
+      <td>4.975</td>
+      <td>2.4821</td>
+      <td>6.0753</td>
+      <td>4.975</td>
+      <td>8.8543</td>
+      <td>4.3015</td>
+    </tr>
+    <tr>
+      <th>TCGA-95-7043</th>
+      <td>11.411</td>
+      <td>11.2018</td>
+      <td>9.4449</td>
+      <td>8.3546</td>
+      <td>7.3211</td>
+      <td>10.7856</td>
+      <td>11.6185</td>
+      <td>14.1836</td>
+      <td>10.8329</td>
+      <td>8.8155</td>
+      <td>...</td>
+      <td>4.2248</td>
+      <td>7.3539</td>
+      <td>5.0121</td>
+      <td>4.2248</td>
+      <td>4.8311</td>
+      <td>4.7304</td>
+      <td>5.5053</td>
+      <td>4.9246</td>
+      <td>7.6064</td>
+      <td>3.8623</td>
+    </tr>
+    <tr>
+      <th>TCGA-73-4658</th>
+      <td>12.2149</td>
+      <td>10.3249</td>
+      <td>9.234</td>
+      <td>7.7537</td>
+      <td>11.0656</td>
+      <td>12.3631</td>
+      <td>10.9023</td>
+      <td>10.06</td>
+      <td>11.2092</td>
+      <td>9.0663</td>
+      <td>...</td>
+      <td>4.2146</td>
+      <td>6.0253</td>
+      <td>3.8231</td>
+      <td>4.0984</td>
+      <td>4.6727</td>
+      <td>7.1082</td>
+      <td>7.1615</td>
+      <td>3.6533</td>
+      <td>7.3223</td>
+      <td>5.2312</td>
+    </tr>
+    <tr>
+      <th>TCGA-86-8076</th>
+      <td>11.2882</td>
+      <td>10.2095</td>
+      <td>9.8186</td>
+      <td>7.9844</td>
+      <td>10.5213</td>
+      <td>13.7848</td>
+      <td>11.2318</td>
+      <td>10.8315</td>
+      <td>10.5784</td>
+      <td>9.6428</td>
+      <td>...</td>
+      <td>4.7844</td>
+      <td>6.8675</td>
+      <td>4.5078</td>
+      <td>2.4821</td>
+      <td>5.1468</td>
+      <td>3.3897</td>
+      <td>4.2833</td>
+      <td>4.4553</td>
+      <td>8.1011</td>
+      <td>4.8254</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>TCGA-86-8073</th>
+      <td>10.7676</td>
+      <td>10.5503</td>
+      <td>9.0277</td>
+      <td>8.2811</td>
+      <td>9.9471</td>
+      <td>11.8641</td>
+      <td>11.237</td>
+      <td>14.2843</td>
+      <td>10.9497</td>
+      <td>8.8266</td>
+      <td>...</td>
+      <td>4.2611</td>
+      <td>7.157</td>
+      <td>4.2187</td>
+      <td>5.2566</td>
+      <td>5.276</td>
+      <td>2.4821</td>
+      <td>6.695</td>
+      <td>5.1967</td>
+      <td>7.8098</td>
+      <td>4.3418</td>
+    </tr>
+    <tr>
+      <th>TCGA-MN-A4N4</th>
+      <td>11.656</td>
+      <td>11.0739</td>
+      <td>9.5578</td>
+      <td>8.7883</td>
+      <td>8.9532</td>
+      <td>11.0791</td>
+      <td>10.5202</td>
+      <td>11.331</td>
+      <td>11.3659</td>
+      <td>8.8701</td>
+      <td>...</td>
+      <td>4.3317</td>
+      <td>7.6037</td>
+      <td>5.0518</td>
+      <td>7.4063</td>
+      <td>6.5835</td>
+      <td>3.0746</td>
+      <td>5.9828</td>
+      <td>4.9634</td>
+      <td>7.9208</td>
+      <td>5.1745</td>
+    </tr>
+    <tr>
+      <th>TCGA-53-7626</th>
+      <td>10.8912</td>
+      <td>10.1742</td>
+      <td>9.6307</td>
+      <td>8.0179</td>
+      <td>10.6328</td>
+      <td>11.247</td>
+      <td>10.4815</td>
+      <td>9.8428</td>
+      <td>10.5795</td>
+      <td>9.86</td>
+      <td>...</td>
+      <td>5.6458</td>
+      <td>6.6984</td>
+      <td>4.646</td>
+      <td>3.1345</td>
+      <td>4.8113</td>
+      <td>3.8962</td>
+      <td>5.9768</td>
+      <td>4.2816</td>
+      <td>8.4192</td>
+      <td>4.4566</td>
+    </tr>
+    <tr>
+      <th>TCGA-44-A47G</th>
+      <td>11.32</td>
+      <td>9.9137</td>
+      <td>9.3312</td>
+      <td>7.8703</td>
+      <td>11.3029</td>
+      <td>12.8687</td>
+      <td>11.2659</td>
+      <td>12.4677</td>
+      <td>10.9404</td>
+      <td>9.4188</td>
+      <td>...</td>
+      <td>4.6125</td>
+      <td>8.0939</td>
+      <td>5.1263</td>
+      <td>2.4821</td>
+      <td>5.2619</td>
+      <td>5.0279</td>
+      <td>8.793</td>
+      <td>5.173</td>
+      <td>7.951</td>
+      <td>4.465</td>
+    </tr>
+    <tr>
+      <th>TCGA-55-6969</th>
+      <td>10.5764</td>
+      <td>10.9022</td>
+      <td>9.3425</td>
+      <td>8.8147</td>
+      <td>9.6115</td>
+      <td>12.3155</td>
+      <td>11.216</td>
+      <td>11.1273</td>
+      <td>10.311</td>
+      <td>9.123</td>
+      <td>...</td>
+      <td>5.9603</td>
+      <td>7.2623</td>
+      <td>4.5931</td>
+      <td>4.1326</td>
+      <td>4.5495</td>
+      <td>3.1863</td>
+      <td>3.9293</td>
+      <td>4.828</td>
+      <td>7.5868</td>
+      <td>4.1326</td>
+    </tr>
+  </tbody>
+</table>
+<p>498 rows × 22637 columns</p>
+</div></div></div>
 </div>
 <p>498 rows × 22637 columns is a quite large matrix, thus we have to consider reducing the dimensionality.</p>
 </section>
@@ -693,12 +1191,23 @@ The values in the table are the expression levels of the genes for each sample.<
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(498, 22637)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Checking for duplicate rows and columns</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of duplicate indices: </span><span class="si">{</span><span class="n">expression_data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of duplicate columns: </span><span class="si">{</span><span class="n">expression_data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of duplicate indices: 0
+Number of duplicate columns: 0
 </pre></div>
 </div>
 </div>
@@ -727,6 +1236,9 @@ The values in the table are the expression levels of the genes for each sample.<
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c1159eb425082c8c00119a8a0dccff11cda1037b86d5414e2fe821e1ccce3e73.png" src="../_images/c1159eb425082c8c00119a8a0dccff11cda1037b86d5414e2fe821e1ccce3e73.png" />
 </div>
 </div>
 <p>The histogram shows the frequency of genes at different mean expression levels.<br />
@@ -789,6 +1301,9 @@ Some genes are consistently expressed at lower levels (housekeeping genes?), whi
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/f0dba6767841754602fe39e1c2102093b5452542f746036fcd80e22dd5064acb.png" src="../_images/f0dba6767841754602fe39e1c2102093b5452542f746036fcd80e22dd5064acb.png" />
+</div>
 </div>
 </section>
 <section id="thresholding-based-on-gene-expression-variance">
@@ -816,6 +1331,29 @@ Some genes are consistently expressed at lower levels (housekeeping genes?), whi
 
 <span class="sd">3. Apply the mask, and retain only those genes with variance above the threshold</span>
 <span class="sd">&#39;&#39;&#39;</span>
+
+<span class="k">def</span> <span class="nf">filter_high_variance_genes</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Filter out genes with variance below the specified threshold.</span>
+
+<span class="sd">    Calculates the variance for each gene and filters out genes whose </span>
+<span class="sd">    variance is below the specified threshold.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    data (DataFrame): Gene expression data with genes as columns and samples as rows.</span>
+<span class="sd">    threshold (float): Minimum variance level to retain a gene.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    DataFrame: Filtered data with genes having variance above the threshold.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Calculate the variance for each gene (column)</span>
+    <span class="n">gene_variances</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># Create a boolean mask to filter out genes with variance below the threshold</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">gene_variances</span> <span class="o">&gt;=</span> <span class="n">threshold</span>
+    <span class="c1"># Apply the mask to filter the DataFrame</span>
+    <span class="n">filtered_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">mask</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">filtered_data</span>
 </pre></div>
 </div>
 </div>
@@ -859,6 +1397,12 @@ It is a good balance between retaining enough data for meaningful analysis and r
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chosen Variance Threshold: 1.2018901296749187
+</pre></div>
+</div>
+<img alt="../_images/f47d742f7f0342b89a98144cef054c8917eb21e5f28f22e59394a4766e675de6.png" src="../_images/f47d742f7f0342b89a98144cef054c8917eb21e5f28f22e59394a4766e675de6.png" />
+</div>
 </div>
 <p>Let’s assign this value as threshold to focus on genes with higher variance.</p>
 <div class="cell docutils container">
@@ -867,6 +1411,11 @@ It is a good balance between retaining enough data for meaningful analysis and r
 <span class="c1"># Focusing on the top quartile (75th percentile) of genes with the highest variance</span>
 <span class="n">df_filtered_variance</span> <span class="o">=</span> <span class="n">filter_high_variance_genes</span><span class="p">(</span><span class="n">expression_data</span><span class="p">,</span> <span class="n">threshold</span> <span class="o">=</span> <span class="mf">1.2</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Filtered data shape: </span><span class="si">{</span><span class="n">df_filtered_variance</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Check the new shape to confirm filtering</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Filtered data shape: (498, 5671)
 </pre></div>
 </div>
 </div>
@@ -950,12 +1499,29 @@ It is a good balance between retaining enough data for meaningful analysis and r
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 input query terms found no hit:	[&#39;ENSG00000168078&#39;]
+1 input query terms found no hit:	[&#39;ENSG00000180525&#39;]
+2 input query terms found no hit:	[&#39;ENSG00000236740&#39;, &#39;ENSG00000239467&#39;]
+9 input query terms found no hit:	[&#39;ENSG00000256618&#39;, &#39;ENSG00000259820&#39;, &#39;ENSG00000259834&#39;, &#39;ENSG00000261068&#39;, &#39;ENSG00000261534&#39;, &#39;ENS
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Unmapped genes: [&#39;ENSG00000166104&#39;, &#39;ENSG00000168078&#39;, &#39;ENSG00000180525&#39;, &#39;ENSG00000189229&#39;, &#39;ENSG00000197476&#39;, &#39;ENSG00000203635&#39;, &#39;ENSG00000204584&#39;, &#39;ENSG00000213058&#39;, &#39;ENSG00000214776&#39;, &#39;ENSG00000214797&#39;, &#39;ENSG00000215146&#39;, &#39;ENSG00000217801&#39;, &#39;ENSG00000218048&#39;, &#39;ENSG00000218175&#39;, &#39;ENSG00000218274&#39;, &#39;ENSG00000218617&#39;, &#39;ENSG00000220154&#39;, &#39;ENSG00000222000&#39;, &#39;ENSG00000223829&#39;, &#39;ENSG00000223931&#39;, &#39;ENSG00000224251&#39;, &#39;ENSG00000224585&#39;, &#39;ENSG00000224945&#39;, &#39;ENSG00000226025&#39;, &#39;ENSG00000226286&#39;, &#39;ENSG00000226468&#39;, &#39;ENSG00000226668&#39;, &#39;ENSG00000226816&#39;, &#39;ENSG00000227619&#39;, &#39;ENSG00000227755&#39;, &#39;ENSG00000228113&#39;, &#39;ENSG00000228477&#39;, &#39;ENSG00000228509&#39;, &#39;ENSG00000228613&#39;, &#39;ENSG00000229312&#39;, &#39;ENSG00000229896&#39;, &#39;ENSG00000229970&#39;, &#39;ENSG00000230623&#39;, &#39;ENSG00000230628&#39;, &#39;ENSG00000230699&#39;, &#39;ENSG00000230882&#39;, &#39;ENSG00000231331&#39;, &#39;ENSG00000231533&#39;, &#39;ENSG00000231703&#39;, &#39;ENSG00000231881&#39;, &#39;ENSG00000231892&#39;, &#39;ENSG00000231990&#39;, &#39;ENSG00000232006&#39;, &#39;ENSG00000232949&#39;, &#39;ENSG00000234156&#39;, &#39;ENSG00000234648&#39;, &#39;ENSG00000235563&#39;, &#39;ENSG00000235584&#39;, &#39;ENSG00000235721&#39;, &#39;ENSG00000235939&#39;, &#39;ENSG00000235994&#39;, &#39;ENSG00000236212&#39;, &#39;ENSG00000236283&#39;, &#39;ENSG00000236449&#39;, &#39;ENSG00000236740&#39;, &#39;ENSG00000237550&#39;, &#39;ENSG00000237813&#39;, &#39;ENSG00000238279&#39;, &#39;ENSG00000239467&#39;, &#39;ENSG00000244306&#39;, &#39;ENSG00000247134&#39;, &#39;ENSG00000248347&#39;, &#39;ENSG00000248545&#39;, &#39;ENSG00000249001&#39;, &#39;ENSG00000249007&#39;, &#39;ENSG00000249199&#39;, &#39;ENSG00000249743&#39;, &#39;ENSG00000249746&#39;, &#39;ENSG00000250049&#39;, &#39;ENSG00000250509&#39;, &#39;ENSG00000250770&#39;, &#39;ENSG00000250978&#39;, &#39;ENSG00000251095&#39;, &#39;ENSG00000251532&#39;, &#39;ENSG00000253217&#39;, &#39;ENSG00000253227&#39;, &#39;ENSG00000253288&#39;, &#39;ENSG00000253339&#39;, &#39;ENSG00000253361&#39;, &#39;ENSG00000254054&#39;, &#39;ENSG00000254143&#39;, &#39;ENSG00000254290&#39;, &#39;ENSG00000254367&#39;, &#39;ENSG00000254632&#39;, &#39;ENSG00000254851&#39;, &#39;ENSG00000254988&#39;, &#39;ENSG00000255026&#39;, &#39;ENSG00000255085&#39;, &#39;ENSG00000255182&#39;, &#39;ENSG00000255310&#39;, &#39;ENSG00000255345&#39;, &#39;ENSG00000255366&#39;, &#39;ENSG00000255462&#39;, &#39;ENSG00000255847&#39;, &#39;ENSG00000255910&#39;, &#39;ENSG00000255983&#39;, &#39;ENSG00000256417&#39;, &#39;ENSG00000256443&#39;, &#39;ENSG00000256615&#39;, &#39;ENSG00000256618&#39;, &#39;ENSG00000256673&#39;, &#39;ENSG00000256969&#39;, &#39;ENSG00000257474&#39;, &#39;ENSG00000257512&#39;, &#39;ENSG00000257604&#39;, &#39;ENSG00000257826&#39;, &#39;ENSG00000257829&#39;, &#39;ENSG00000257894&#39;, &#39;ENSG00000258053&#39;, &#39;ENSG00000258077&#39;, &#39;ENSG00000258168&#39;, &#39;ENSG00000258342&#39;, &#39;ENSG00000258346&#39;, &#39;ENSG00000258661&#39;, &#39;ENSG00000258676&#39;, &#39;ENSG00000258752&#39;, &#39;ENSG00000258837&#39;, &#39;ENSG00000258844&#39;, &#39;ENSG00000259087&#39;, &#39;ENSG00000259094&#39;, &#39;ENSG00000259342&#39;, &#39;ENSG00000259345&#39;, &#39;ENSG00000259353&#39;, &#39;ENSG00000259425&#39;, &#39;ENSG00000259723&#39;, &#39;ENSG00000259820&#39;, &#39;ENSG00000259834&#39;, &#39;ENSG00000259925&#39;, &#39;ENSG00000260197&#39;, &#39;ENSG00000260289&#39;, &#39;ENSG00000260328&#39;, &#39;ENSG00000260337&#39;, &#39;ENSG00000260430&#39;, &#39;ENSG00000260597&#39;, &#39;ENSG00000260604&#39;, &#39;ENSG00000260710&#39;, &#39;ENSG00000260711&#39;, &#39;ENSG00000260877&#39;, &#39;ENSG00000260997&#39;, &#39;ENSG00000261068&#39;, &#39;ENSG00000261104&#39;, &#39;ENSG00000261123&#39;, &#39;ENSG00000261172&#39;, &#39;ENSG00000261296&#39;, &#39;ENSG00000261305&#39;, &#39;ENSG00000261502&#39;, &#39;ENSG00000261534&#39;, &#39;ENSG00000261578&#39;, &#39;ENSG00000261600&#39;, &#39;ENSG00000261762&#39;, &#39;ENSG00000261786&#39;, &#39;ENSG00000261804&#39;, &#39;ENSG00000262539&#39;, &#39;ENSG00000262580&#39;, &#39;ENSG00000262714&#39;, &#39;ENSG00000262873&#39;, &#39;ENSG00000262877&#39;, &#39;ENSG00000262920&#39;, &#39;ENSG00000262979&#39;, &#39;ENSG00000263301&#39;, &#39;ENSG00000263893&#39;, &#39;ENSG00000264112&#39;, &#39;ENSG00000264659&#39;, &#39;ENSG00000265298&#39;, &#39;ENSG00000265750&#39;, &#39;ENSG00000266302&#39;, &#39;ENSG00000266830&#39;, &#39;ENSG00000266869&#39;, &#39;ENSG00000266968&#39;, &#39;ENSG00000267072&#39;, &#39;ENSG00000267383&#39;, &#39;ENSG00000267466&#39;, &#39;ENSG00000267506&#39;, &#39;ENSG00000267640&#39;, &#39;ENSG00000267886&#39;, &#39;ENSG00000267892&#39;, &#39;ENSG00000268362&#39;, &#39;ENSG00000268416&#39;, &#39;ENSG00000268555&#39;, &#39;ENSG00000268833&#39;, &#39;ENSG00000268903&#39;, &#39;ENSG00000269028&#39;, &#39;ENSG00000269353&#39;, &#39;ENSG00000269918&#39;, &#39;ENSG00000269954&#39;, &#39;ENSG00000269981&#39;, &#39;ENSG00000270460&#39;, &#39;ENSG00000270605&#39;, &#39;ENSG00000270933&#39;, &#39;ENSG00000270977&#39;, &#39;ENSG00000271392&#39;, &#39;ENSG00000271959&#39;, &#39;ENSG00000272079&#39;, &#39;ENSG00000272141&#39;, &#39;ENSG00000272279&#39;, &#39;ENSG00000272379&#39;, &#39;ENSG00000272405&#39;, &#39;ENSG00000272502&#39;, &#39;ENSG00000272512&#39;, &#39;ENSG00000272622&#39;, &#39;ENSG00000272626&#39;, &#39;ENSG00000272720&#39;, &#39;ENSG00000272825&#39;, &#39;ENSG00000272865&#39;, &#39;ENSG00000273108&#39;, &#39;ENSG00000273151&#39;, &#39;ENSG00000273179&#39;, &#39;ENSG00000273203&#39;, &#39;ENSG00000273230&#39;, &#39;ENSG00000273295&#39;, &#39;ENSG00000273301&#39;, &#39;ENSG00000273328&#39;, &#39;ENSG00000273760&#39;, &#39;ENSG00000273906&#39;, &#39;ENSG00000274002&#39;, &#39;ENSG00000274414&#39;, &#39;ENSG00000274979&#39;, &#39;ENSG00000275678&#39;, &#39;ENSG00000276093&#39;, &#39;ENSG00000276851&#39;, &#39;ENSG00000276980&#39;, &#39;ENSG00000277287&#39;, &#39;ENSG00000277840&#39;, &#39;ENSG00000278263&#39;, &#39;ENSG00000278266&#39;, &#39;ENSG00000278484&#39;, &#39;ENSG00000278864&#39;, &#39;ENSG00000278912&#39;, &#39;ENSG00000278962&#39;, &#39;ENSG00000279017&#39;, &#39;ENSG00000279286&#39;, &#39;ENSG00000279511&#39;, &#39;ENSG00000279518&#39;, &#39;ENSG00000279662&#39;, &#39;ENSG00000279806&#39;, &#39;ENSG00000279878&#39;, &#39;ENSG00000279930&#39;, &#39;ENSG00000280002&#39;, &#39;ENSG00000280027&#39;, &#39;ENSG00000280032&#39;, &#39;ENSG00000280079&#39;, &#39;ENSG00000280138&#39;, &#39;ENSG00000280202&#39;, &#39;ENSG00000280217&#39;, &#39;ENSG00000280285&#39;, &#39;ENSG00000280334&#39;, &#39;ENSG00000280399&#39;, &#39;ENSG00000280435&#39;, &#39;ENSG00000283098&#39;, &#39;ENSG00000283142&#39;, &#39;ENSG00000283413&#39;, &#39;ENSG00000283486&#39;, &#39;ENSG00000283631&#39;, &#39;ENSG00000283633&#39;, &#39;ENSG00000283907&#39;, &#39;ENSG00000284636&#39;, &#39;ENSG00000284928&#39;, &#39;ENSG00000285108&#39;, &#39;ENSG00000285128&#39;, &#39;ENSG00000285417&#39;, &#39;ENSG00000285476&#39;, &#39;ENSG00000285517&#39;, &#39;ENSG00000285601&#39;, &#39;ENSG00000285820&#39;, &#39;ENSG00000285847&#39;, &#39;ENSG00000285933&#39;, &#39;ENSG00000286009&#39;, &#39;ENSG00000286015&#39;, &#39;ENSG00000286073&#39;, &#39;ENSG00000286133&#39;, &#39;ENSG00000286191&#39;, &#39;ENSG00000286256&#39;, &#39;ENSG00000286299&#39;, &#39;ENSG00000286342&#39;, &#39;ENSG00000286355&#39;, &#39;ENSG00000286358&#39;, &#39;ENSG00000286403&#39;, &#39;ENSG00000286449&#39;, &#39;ENSG00000286456&#39;, &#39;ENSG00000286519&#39;, &#39;ENSG00000286587&#39;, &#39;ENSG00000286722&#39;, &#39;ENSG00000286750&#39;, &#39;ENSG00000286797&#39;, &#39;ENSG00000286802&#39;, &#39;ENSG00000286818&#39;, &#39;ENSG00000286830&#39;, &#39;ENSG00000286892&#39;, &#39;ENSG00000286944&#39;, &#39;ENSG00000286989&#39;, &#39;ENSG00000287003&#39;, &#39;ENSG00000287051&#39;, &#39;ENSG00000287052&#39;, &#39;ENSG00000287055&#39;, &#39;ENSG00000287059&#39;, &#39;ENSG00000287097&#39;, &#39;ENSG00000287185&#39;, &#39;ENSG00000287238&#39;, &#39;ENSG00000287245&#39;, &#39;ENSG00000287252&#39;, &#39;ENSG00000287271&#39;, &#39;ENSG00000287338&#39;, &#39;ENSG00000287352&#39;, &#39;ENSG00000287390&#39;, &#39;ENSG00000287426&#39;, &#39;ENSG00000287430&#39;, &#39;ENSG00000287460&#39;, &#39;ENSG00000287550&#39;, &#39;ENSG00000287626&#39;, &#39;ENSG00000287627&#39;, &#39;ENSG00000287656&#39;, &#39;ENSG00000287673&#39;, &#39;ENSG00000287725&#39;, &#39;ENSG00000287770&#39;, &#39;ENSG00000287778&#39;, &#39;ENSG00000287804&#39;, &#39;ENSG00000287839&#39;, &#39;ENSG00000287860&#39;, &#39;ENSG00000287879&#39;, &#39;ENSG00000287887&#39;, &#39;ENSG00000287906&#39;, &#39;ENSG00000287920&#39;, &#39;ENSG00000287929&#39;, &#39;ENSG00000288075&#39;, &#39;ENSG00000288218&#39;]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s check the new shape of the data after renaming</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shape of df_filtered_variance:&quot;</span><span class="p">,</span> <span class="n">df_filtered_variance</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shape of df_renamed:&quot;</span><span class="p">,</span> <span class="n">df_renamed</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape of df_filtered_variance: (498, 5671)
+Shape of df_renamed: (498, 5338)
 </pre></div>
 </div>
 </div>
@@ -970,6 +1536,317 @@ In the first case we disregard those genes, in the second we calculate the mean 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A2M</th>
+      <th>A2ML1</th>
+      <th>A4GALT</th>
+      <th>AACSP1</th>
+      <th>AADAC</th>
+      <th>AADACP1</th>
+      <th>AARD</th>
+      <th>AASS</th>
+      <th>AATBC</th>
+      <th>AATK</th>
+      <th>...</th>
+      <th>ZNF90</th>
+      <th>ZP3</th>
+      <th>ZPLD1</th>
+      <th>ZPLD2P</th>
+      <th>ZSCAN1</th>
+      <th>ZSCAN23</th>
+      <th>ZSCAN31</th>
+      <th>ZSCAN4</th>
+      <th>ZWINT</th>
+      <th>ZYG11A</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>TCGA-38-7271</th>
+      <td>17.7492</td>
+      <td>4.4411</td>
+      <td>10.1862</td>
+      <td>3.5845</td>
+      <td>9.6415</td>
+      <td>3.5845</td>
+      <td>8.0089</td>
+      <td>11.2890</td>
+      <td>6.8710</td>
+      <td>8.6552</td>
+      <td>...</td>
+      <td>6.1774</td>
+      <td>6.9127</td>
+      <td>4.9403</td>
+      <td>3.5845</td>
+      <td>3.8172</td>
+      <td>5.7385</td>
+      <td>9.0817</td>
+      <td>3.2709</td>
+      <td>9.2615</td>
+      <td>4.0073</td>
+    </tr>
+    <tr>
+      <th>TCGA-55-7914</th>
+      <td>14.8513</td>
+      <td>4.4530</td>
+      <td>8.9312</td>
+      <td>3.6762</td>
+      <td>6.5685</td>
+      <td>3.6762</td>
+      <td>6.8983</td>
+      <td>10.5920</td>
+      <td>7.9894</td>
+      <td>8.2660</td>
+      <td>...</td>
+      <td>9.9162</td>
+      <td>7.9426</td>
+      <td>2.4821</td>
+      <td>2.4821</td>
+      <td>5.0222</td>
+      <td>4.3796</td>
+      <td>10.9565</td>
+      <td>3.0918</td>
+      <td>10.1334</td>
+      <td>8.3219</td>
+    </tr>
+    <tr>
+      <th>TCGA-95-7043</th>
+      <td>14.1691</td>
+      <td>4.5026</td>
+      <td>9.0834</td>
+      <td>3.8623</td>
+      <td>5.5634</td>
+      <td>8.0183</td>
+      <td>3.6226</td>
+      <td>10.5600</td>
+      <td>7.5223</td>
+      <td>8.8214</td>
+      <td>...</td>
+      <td>5.3150</td>
+      <td>5.8224</td>
+      <td>3.6226</td>
+      <td>3.2988</td>
+      <td>3.8623</td>
+      <td>5.6728</td>
+      <td>10.8095</td>
+      <td>2.4821</td>
+      <td>10.9149</td>
+      <td>6.7593</td>
+    </tr>
+    <tr>
+      <th>TCGA-73-4658</th>
+      <td>16.7238</td>
+      <td>3.1704</td>
+      <td>9.1443</td>
+      <td>2.4821</td>
+      <td>4.3206</td>
+      <td>3.6533</td>
+      <td>4.8856</td>
+      <td>10.5574</td>
+      <td>6.0253</td>
+      <td>7.8940</td>
+      <td>...</td>
+      <td>4.6727</td>
+      <td>6.9805</td>
+      <td>5.4212</td>
+      <td>3.6533</td>
+      <td>3.4468</td>
+      <td>3.6533</td>
+      <td>8.9874</td>
+      <td>3.4468</td>
+      <td>9.7828</td>
+      <td>3.4468</td>
+    </tr>
+    <tr>
+      <th>TCGA-86-8076</th>
+      <td>15.6783</td>
+      <td>4.7422</td>
+      <td>9.5150</td>
+      <td>3.2271</td>
+      <td>7.2321</td>
+      <td>5.1146</td>
+      <td>7.2174</td>
+      <td>10.3567</td>
+      <td>7.2467</td>
+      <td>10.4765</td>
+      <td>...</td>
+      <td>4.8254</td>
+      <td>7.9800</td>
+      <td>3.6417</td>
+      <td>3.9275</td>
+      <td>3.6417</td>
+      <td>5.0478</td>
+      <td>9.5810</td>
+      <td>3.0118</td>
+      <td>8.6640</td>
+      <td>4.7844</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>TCGA-86-8073</th>
+      <td>16.3773</td>
+      <td>4.0817</td>
+      <td>9.4234</td>
+      <td>6.6519</td>
+      <td>6.7641</td>
+      <td>4.2611</td>
+      <td>7.1467</td>
+      <td>11.3497</td>
+      <td>7.0724</td>
+      <td>8.7741</td>
+      <td>...</td>
+      <td>8.6449</td>
+      <td>9.2445</td>
+      <td>5.9388</td>
+      <td>6.8492</td>
+      <td>5.8132</td>
+      <td>7.2074</td>
+      <td>10.2410</td>
+      <td>5.1126</td>
+      <td>10.1390</td>
+      <td>8.2478</td>
+    </tr>
+    <tr>
+      <th>TCGA-MN-A4N4</th>
+      <td>14.9411</td>
+      <td>6.7210</td>
+      <td>11.9107</td>
+      <td>8.8283</td>
+      <td>3.4947</td>
+      <td>3.0746</td>
+      <td>4.1736</td>
+      <td>9.6396</td>
+      <td>6.6811</td>
+      <td>9.3538</td>
+      <td>...</td>
+      <td>10.1845</td>
+      <td>7.5083</td>
+      <td>5.0939</td>
+      <td>5.7178</td>
+      <td>6.2061</td>
+      <td>6.9167</td>
+      <td>9.4672</td>
+      <td>3.3143</td>
+      <td>10.0583</td>
+      <td>8.4566</td>
+    </tr>
+    <tr>
+      <th>TCGA-53-7626</th>
+      <td>16.7343</td>
+      <td>5.2575</td>
+      <td>9.5379</td>
+      <td>2.4821</td>
+      <td>5.7120</td>
+      <td>5.0910</td>
+      <td>5.6287</td>
+      <td>10.7802</td>
+      <td>9.3334</td>
+      <td>9.3085</td>
+      <td>...</td>
+      <td>5.4842</td>
+      <td>7.9278</td>
+      <td>3.8286</td>
+      <td>3.7563</td>
+      <td>3.8286</td>
+      <td>6.0927</td>
+      <td>10.0507</td>
+      <td>4.2816</td>
+      <td>9.4627</td>
+      <td>7.4014</td>
+    </tr>
+    <tr>
+      <th>TCGA-44-A47G</th>
+      <td>15.6622</td>
+      <td>3.7345</td>
+      <td>9.8660</td>
+      <td>4.1045</td>
+      <td>6.2214</td>
+      <td>4.9759</td>
+      <td>4.2980</td>
+      <td>10.3975</td>
+      <td>7.8841</td>
+      <td>10.1369</td>
+      <td>...</td>
+      <td>4.9218</td>
+      <td>7.7402</td>
+      <td>5.9326</td>
+      <td>4.7450</td>
+      <td>3.9944</td>
+      <td>5.3854</td>
+      <td>7.4843</td>
+      <td>4.4650</td>
+      <td>9.5817</td>
+      <td>4.6804</td>
+    </tr>
+    <tr>
+      <th>TCGA-55-6969</th>
+      <td>14.8136</td>
+      <td>4.3058</td>
+      <td>9.7702</td>
+      <td>6.8425</td>
+      <td>5.2016</td>
+      <td>3.9293</td>
+      <td>7.1699</td>
+      <td>8.8889</td>
+      <td>6.1528</td>
+      <td>7.6565</td>
+      <td>...</td>
+      <td>6.4289</td>
+      <td>7.9499</td>
+      <td>4.0012</td>
+      <td>6.4059</td>
+      <td>3.7694</td>
+      <td>3.6792</td>
+      <td>8.5268</td>
+      <td>2.4821</td>
+      <td>10.8228</td>
+      <td>8.6068</td>
+    </tr>
+  </tbody>
+</table>
+<p>498 rows × 5338 columns</p>
+</div></div></div>
 </div>
 <p>Let’s look at the distribution again, this time for the filtered data.</p>
 <div class="cell docutils container">
@@ -995,6 +1872,9 @@ In the first case we disregard those genes, in the second we calculate the mean 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/5ce692f91c47186d588dedebec04b8287cff87aaf0cc73eb44c57e377c6d4a6f.png" src="../_images/5ce692f91c47186d588dedebec04b8287cff87aaf0cc73eb44c57e377c6d4a6f.png" />
+</div>
 </div>
 <p>Let’s see the most extreme cases to get a better idea what is in the data.</p>
 <div class="cell docutils container">
@@ -1018,6 +1898,9 @@ In the first case we disregard those genes, in the second we calculate the mean 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a1bd13c4db0d9fa2c9b2e4b9a609af3d7408f3e7921effd95821624aa0e8811e.png" src="../_images/a1bd13c4db0d9fa2c9b2e4b9a609af3d7408f3e7921effd95821624aa0e8811e.png" />
 </div>
 </div>
 <p>Now let’s inspect the distribution of these extreme cases.</p>
@@ -1070,6 +1953,9 @@ In the first case we disregard those genes, in the second we calculate the mean 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4d66d50372835c46e591dabe80a2572d2dde0fc023385d916c06bfce351fa159.png" src="../_images/4d66d50372835c46e591dabe80a2572d2dde0fc023385d916c06bfce351fa159.png" />
 </div>
 </div>
 </section>
@@ -1183,6 +2069,11 @@ The assumption is that if genes are correlated, then this means they influence e
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;pearson&#39;, &#39;spearman&#39;, &#39;biweight_midcorrelation&#39;])
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1234,6 +2125,9 @@ The assumption is that if genes are correlated, then this means they influence e
                                     <span class="s2">&quot;correlation_matrices_figure.png&quot;</span><span class="p">)))</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/444b8c85e1a849de2e5a34ec23affdef79f1a6aff2d83b1d5649452a546379bc.png" src="../_images/444b8c85e1a849de2e5a34ec23affdef79f1a6aff2d83b1d5649452a546379bc.png" />
 </div>
 </div>
 </section>
@@ -1348,6 +2242,19 @@ If the condition is met, an edge is added between the nodes i and j with the cor
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of nodes: 5338
+Number of edges: 13449
+Sample nodes: [&#39;A2M&#39;, &#39;A2ML1&#39;, &#39;A4GALT&#39;, &#39;AACSP1&#39;, &#39;AADAC&#39;, &#39;AADACP1&#39;, &#39;AARD&#39;, &#39;AASS&#39;, &#39;AATBC&#39;, &#39;AATK&#39;]
+Sample edges: [(&#39;A2M&#39;, &#39;ABCA8&#39;, {&#39;weight&#39;: 0.8308274641648915}), (&#39;A2M&#39;, &#39;ADAMTS8&#39;, {&#39;weight&#39;: 0.8036704002698273}), (&#39;A2M&#39;, &#39;AOC3&#39;, {&#39;weight&#39;: 0.8767411078325781}), (&#39;A2M&#39;, &#39;C7&#39;, {&#39;weight&#39;: 0.8013688242083488}), (&#39;A2M&#39;, &#39;INMT&#39;, {&#39;weight&#39;: 0.8117391230502314}), (&#39;A2M&#39;, &#39;ITGA8&#39;, {&#39;weight&#39;: 0.8724141478160804}), (&#39;A2M&#39;, &#39;MFAP4&#39;, {&#39;weight&#39;: 0.8444697225886688}), (&#39;A2M&#39;, &#39;PKNOX2&#39;, {&#39;weight&#39;: 0.8062841461653377}), (&#39;A2M&#39;, &#39;SCN7A&#39;, {&#39;weight&#39;: 0.8382334505662205}), (&#39;A2M&#39;, &#39;SLIT2&#39;, {&#39;weight&#39;: 0.8041515706739126})]
+Graph type: undirected
+No self-loops in the graph.
+Graph density: 0.0009441569992192751
+Number of connected components: 4392
+Average clustering coefficient: 0.1045798392696385
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1386,6 +2293,9 @@ If the condition is met, an edge is added between the nodes i and j with the cor
                                     <span class="s2">&quot;full_gene_coexpression_network.png&quot;</span><span class="p">)))</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1830c088aea3fff7e21f3ed3708f3b2823e87c1bb3ef97a3815016cfe056cd5c.png" src="../_images/1830c088aea3fff7e21f3ed3708f3b2823e87c1bb3ef97a3815016cfe056cd5c.png" />
 </div>
 </div>
 </section>
@@ -1449,10 +2359,26 @@ If the condition is met, an edge is added between the nodes i and j with the cor
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/9df05fac45de8bbdfe8ecb57771fe0ea986274e35e4f59b884b41f74fe8e0faa.png" src="../_images/9df05fac45de8bbdfe8ecb57771fe0ea986274e35e4f59b884b41f74fe8e0faa.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">print_graph_info</span><span class="p">(</span><span class="n">pearson_graph_cleaned</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of nodes: 1114
+Number of edges: 13449
+Sample nodes: [&#39;A2M&#39;, &#39;ABCA8&#39;, &#39;ABCC9&#39;, &#39;ACKR1&#39;, &#39;ACKR2&#39;, &#39;ACOXL&#39;, &#39;ACOXL-AS1&#39;, &#39;ACTG2&#39;, &#39;ADAM12&#39;, &#39;ADAMTS12&#39;]
+Sample edges: [(&#39;A2M&#39;, &#39;ABCA8&#39;, {&#39;weight&#39;: 0.8308274641648915}), (&#39;A2M&#39;, &#39;ADAMTS8&#39;, {&#39;weight&#39;: 0.8036704002698273}), (&#39;A2M&#39;, &#39;AOC3&#39;, {&#39;weight&#39;: 0.8767411078325781}), (&#39;A2M&#39;, &#39;C7&#39;, {&#39;weight&#39;: 0.8013688242083488}), (&#39;A2M&#39;, &#39;INMT&#39;, {&#39;weight&#39;: 0.8117391230502314}), (&#39;A2M&#39;, &#39;ITGA8&#39;, {&#39;weight&#39;: 0.8724141478160804}), (&#39;A2M&#39;, &#39;MFAP4&#39;, {&#39;weight&#39;: 0.8444697225886688}), (&#39;A2M&#39;, &#39;PKNOX2&#39;, {&#39;weight&#39;: 0.8062841461653377}), (&#39;A2M&#39;, &#39;SCN7A&#39;, {&#39;weight&#39;: 0.8382334505662205}), (&#39;A2M&#39;, &#39;SLIT2&#39;, {&#39;weight&#39;: 0.8041515706739126})]
+Graph type: undirected
+No self-loops in the graph.
+Graph density: 0.021693999912894935
+Number of connected components: 168
+Average clustering coefficient: 0.5011195529814455
 </pre></div>
 </div>
 </div>
@@ -1472,6 +2398,9 @@ If the condition is met, an edge is added between the nodes i and j with the cor
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">visualise_graph</span><span class="p">(</span><span class="n">pearson_graph_pruned</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Pearson Correlation Network - Pruned&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/97a896b9be6377dde8426ba44f38957e147459759d37d5647a7ba4fd7da0faec.png" src="../_images/97a896b9be6377dde8426ba44f38957e147459759d37d5647a7ba4fd7da0faec.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1500,6 +2429,20 @@ If the condition is met, an edge is added between the nodes i and j with the cor
 <span class="n">plot_degree_distribution</span><span class="p">(</span><span class="n">pearson_graph_pruned</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of nodes: 305
+Number of edges: 4033
+Sample nodes: [&#39;CD3D&#39;, &#39;IGKV1OR2-6&#39;, &#39;IGHV4-59&#39;, &#39;TMEM150B&#39;, &#39;IGKV1-33&#39;, &#39;MZB1&#39;, &#39;IGHV4-61&#39;, &#39;HLA-DPA1&#39;, &#39;IGHV1OR21-1&#39;, &#39;IGLV2-8&#39;]
+Sample edges: [(&#39;CD3D&#39;, &#39;CCL5&#39;, {&#39;weight&#39;: 0.8164268876028787}), (&#39;CD3D&#39;, &#39;CD2&#39;, {&#39;weight&#39;: 0.9059448466134844}), (&#39;CD3D&#39;, &#39;CD3E&#39;, {&#39;weight&#39;: 0.8880463274216657}), (&#39;CD3D&#39;, &#39;CD3G&#39;, {&#39;weight&#39;: 0.8587697866651219}), (&#39;CD3D&#39;, &#39;CD8A&#39;, {&#39;weight&#39;: 0.8155211433742793}), (&#39;CD3D&#39;, &#39;CXCR6&#39;, {&#39;weight&#39;: 0.8381232316052957}), (&#39;CD3D&#39;, &#39;GPR174&#39;, {&#39;weight&#39;: 0.8029412113930687}), (&#39;CD3D&#39;, &#39;GZMA&#39;, {&#39;weight&#39;: 0.8241044963939103}), (&#39;CD3D&#39;, &#39;LCK&#39;, {&#39;weight&#39;: 0.8447881577121912}), (&#39;CD3D&#39;, &#39;SH2D1A&#39;, {&#39;weight&#39;: 0.8647407129144329})]
+Graph type: undirected
+No self-loops in the graph.
+Graph density: 0.08699309749784297
+Number of connected components: 1
+Average clustering coefficient: 0.6766781614263463
+</pre></div>
+</div>
+<img alt="../_images/98ed257f4b265bc811ece72b015764ef4b93ad9fb1e444ba65c6efce978ee9cd.png" src="../_images/98ed257f4b265bc811ece72b015764ef4b93ad9fb1e444ba65c6efce978ee9cd.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1530,6 +2473,9 @@ If the condition is met, an edge is added between the nodes i and j with the cor
 <span class="n">visualise_edge_weight_distribution</span><span class="p">(</span><span class="n">pearson_graph_pruned</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/37d213fe14fb8fcf9e29f9aebcd375cfb81490304954b2089277729fa589d497.png" src="../_images/37d213fe14fb8fcf9e29f9aebcd375cfb81490304954b2089277729fa589d497.png" />
 </div>
 </div>
 </section>
@@ -1676,6 +2622,9 @@ If the condition is met, an edge is added between the nodes i and j with the cor
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/b637e9e19ecaf06f129d576eaa8e69e8ed2f5bfad6413b2c8e6d77e7e787d97b.png" src="../_images/b637e9e19ecaf06f129d576eaa8e69e8ed2f5bfad6413b2c8e6d77e7e787d97b.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1702,11 +2651,32 @@ If the condition is met, an edge is added between the nodes i and j with the cor
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/d6650ee282d775030fd4682898399e48af5627f7471ab82d570336233114a8ed.png" src="../_images/d6650ee282d775030fd4682898399e48af5627f7471ab82d570336233114a8ed.png" />
+<img alt="../_images/fde73f81a953cf295b5ec34f168e318b030d7f23b630167efd268e439df3605e.png" src="../_images/fde73f81a953cf295b5ec34f168e318b030d7f23b630167efd268e439df3605e.png" />
+<img alt="../_images/e8b3b41a8d8007fae2c4093456068ae73a51de5b1c1c2efbd22d0f0b3efbdfd2.png" src="../_images/e8b3b41a8d8007fae2c4093456068ae73a51de5b1c1c2efbd22d0f0b3efbdfd2.png" />
+<img alt="../_images/fd907489e96e71be54d1216901f64b506114d6fc11b1c33acc748b81a4b687b4.png" src="../_images/fd907489e96e71be54d1216901f64b506114d6fc11b1c33acc748b81a4b687b4.png" />
+<img alt="../_images/e84c0922bf3d9dec8828c698c7208a2ef9377a1e8575c78c005dda9bc7aaeecd.png" src="../_images/e84c0922bf3d9dec8828c698c7208a2ef9377a1e8575c78c005dda9bc7aaeecd.png" />
+<img alt="../_images/6c2b752ff3b8eeb7b4f82e8fb27fd5960d596b064e6d38b9448529defa89c29f.png" src="../_images/6c2b752ff3b8eeb7b4f82e8fb27fd5960d596b064e6d38b9448529defa89c29f.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s inspect the information of the KNN sparsified graph</span>
 <span class="n">print_graph_info</span><span class="p">(</span><span class="n">graphs</span><span class="p">[</span><span class="s1">&#39;knn_5&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of nodes: 305
+Number of edges: 1078
+Sample nodes: [&#39;CD3D&#39;, &#39;IGKV1OR2-6&#39;, &#39;IGHV4-59&#39;, &#39;TMEM150B&#39;, &#39;IGKV1-33&#39;, &#39;MZB1&#39;, &#39;IGHV4-61&#39;, &#39;HLA-DPA1&#39;, &#39;IGHV1OR21-1&#39;, &#39;IGLV2-8&#39;]
+Sample edges: [(&#39;CD3D&#39;, &#39;TRBC2&#39;, {&#39;weight&#39;: 0.9117371975869358}), (&#39;CD3D&#39;, &#39;CD2&#39;, {&#39;weight&#39;: 0.9059448466134844}), (&#39;CD3D&#39;, &#39;TRAC&#39;, {&#39;weight&#39;: 0.9003608198550485}), (&#39;CD3D&#39;, &#39;CD3E&#39;, {&#39;weight&#39;: 0.8880463274216657}), (&#39;CD3D&#39;, &#39;TRBC1&#39;, {&#39;weight&#39;: 0.8869370962448264}), (&#39;CD3D&#39;, &#39;SIT1&#39;, {&#39;weight&#39;: 0.8801909350217322}), (&#39;IGKV1OR2-6&#39;, &#39;IGKV1OR2-108&#39;, {&#39;weight&#39;: 0.8675030870981676}), (&#39;IGKV1OR2-6&#39;, &#39;IGKJ1&#39;, {&#39;weight&#39;: 0.864609169204325}), (&#39;IGKV1OR2-6&#39;, &#39;IGKV1D-39&#39;, {&#39;weight&#39;: 0.8627088861614383}), (&#39;IGKV1OR2-6&#39;, &#39;IGKV1ORY-1&#39;, {&#39;weight&#39;: 0.8562204667144959})]
+Graph type: undirected
+No self-loops in the graph.
+Graph density: 0.023252804141501295
+Number of connected components: 2
+Average clustering coefficient: 0.5245715856842815
 </pre></div>
 </div>
 </div>
@@ -1791,6 +2761,9 @@ If the condition is met, an edge is added between the nodes i and j with the cor
 <span class="n">plot_knn_analysis</span><span class="p">(</span><span class="n">analysis_results</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/569ec47d3f9a603a2cf5f89c8d33996a219f0e923460328f93f4292a06ee204a.png" src="../_images/569ec47d3f9a603a2cf5f89c8d33996a219f0e923460328f93f4292a06ee204a.png" />
 </div>
 </div>
 </section>
@@ -1884,6 +2857,93 @@ If the condition is met, an edge is added between the nodes i and j with the cor
 
 <span class="c1"># print gene information including degree</span>
 <span class="n">print_gene_info_with_degree</span><span class="p">(</span><span class="n">top_genes_with_degrees</span><span class="p">,</span> <span class="n">gene_info</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4 input query terms found dup hits:	[(&#39;IGHJ4&#39;, 2), (&#39;IGKV3-20&#39;, 2), (&#39;IGKV3-11&#39;, 2), (&#39;IGKV1-39&#39;, 2)]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gene Symbol: IGKJ1
+Degree: 118
+Gene Name: immunoglobulin kappa joining 1
+Entrez ID: 28950
+Summary: Predicted to be involved in adaptive immune response. Predicted to be located in extracellular region and plasma membrane. Predicted to be part of immunoglobulin complex. [provided by Alliance of Genome Resources, Apr 2022]
+Diseases: N/A
+Pathways: N/A
+----------------------------------------
+Gene Symbol: MZB1
+Degree: 109
+Gene Name: marginal zone B and B1 cell specific protein
+Entrez ID: 51237
+Summary: Involved in positive regulation of cell population proliferation. Located in cytoplasm and extracellular region. [provided by Alliance of Genome Resources, Apr 2022]
+Diseases: N/A
+Pathways: N/A
+----------------------------------------
+Gene Symbol: FCRL5
+Degree: 108
+Gene Name: Fc receptor like 5
+Entrez ID: 83416
+Summary: This gene encodes a member of the immunoglobulin receptor superfamily and the Fc-receptor like family. This gene and several other Fc receptor-like gene members are clustered on the long arm of chromosome 1. The encoded protein is a single-pass type I membrane protein and contains 8 immunoglobulin-like C2-type domains. This gene is implicated in B cell development and lymphomagenesis. Alternatively spliced transcript variants encoding different isoforms have been identified. [provided by RefSeq, Sep 2010].
+Diseases: N/A
+Pathways: N/A
+----------------------------------------
+Gene Symbol: IGKC
+Degree: 106
+Gene Name: immunoglobulin kappa constant
+Entrez ID: 3514
+Summary: Predicted to enable antigen binding activity and immunoglobulin receptor binding activity. Involved in retina homeostasis. Located in blood microparticle and extracellular exosome. [provided by Alliance of Genome Resources, Apr 2022]
+Diseases: N/A
+Pathways: N/A
+----------------------------------------
+Gene Symbol: IGHJ4
+Degree: 105
+Gene Name: immunoglobulin heavy joining 4
+Entrez ID: 28477
+Summary: N/A
+Diseases: N/A
+Pathways: N/A
+----------------------------------------
+Gene Symbol: IGLL5
+Degree: 99
+Gene Name: immunoglobulin lambda like polypeptide 5
+Entrez ID: 100423062
+Summary: This gene encodes one of the immunoglobulin lambda-like polypeptides. It is located within the immunoglobulin lambda locus but it does not require somatic rearrangement for expression. The first exon of this gene is unrelated to immunoglobulin variable genes; the second and third exons are the immunoglobulin lambda joining 1 and the immunoglobulin lambda constant 1 gene segments. Alternative splicing results in multiple transcript variants. [provided by RefSeq, May 2010].
+Diseases: N/A
+Pathways: N/A
+----------------------------------------
+Gene Symbol: IGKV3-20
+Degree: 97
+Gene Name: immunoglobulin kappa variable 3-20
+Entrez ID: 28912
+Summary: Involved in antibacterial humoral response and glomerular filtration. Located in extracellular space. Part of monomeric IgA immunoglobulin complex; pentameric IgM immunoglobulin complex; and secretory IgA immunoglobulin complex. [provided by Alliance of Genome Resources, Apr 2022]
+Diseases: N/A
+Pathways: N/A
+----------------------------------------
+Gene Symbol: IGKV3-11
+Degree: 96
+Gene Name: immunoglobulin kappa variable 3-11
+Entrez ID: 28914
+Summary: Predicted to be involved in immune response. Located in blood microparticle and extracellular exosome. [provided by Alliance of Genome Resources, Apr 2022]
+Diseases: N/A
+Pathways: N/A
+----------------------------------------
+Gene Symbol: IGKV3D-11
+Degree: 95
+Gene Name: immunoglobulin kappa variable 3D-11
+Entrez ID: 28876
+Summary: Predicted to be involved in immune response. Located in blood microparticle and extracellular exosome. [provided by Alliance of Genome Resources, Apr 2022]
+Diseases: N/A
+Pathways: N/A
+----------------------------------------
+Gene Symbol: IGKV1-39
+Degree: 95
+Gene Name: immunoglobulin kappa variable 1-39
+Entrez ID: 28930
+Summary: Predicted to be involved in immune response. Located in blood microparticle and extracellular exosome. [provided by Alliance of Genome Resources, Apr 2022]
+Diseases: N/A
+Pathways: N/A
+----------------------------------------
 </pre></div>
 </div>
 </div>
@@ -1998,16 +3058,16 @@ If the condition is met, an edge is added between the nodes i and j with the cor
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "ismb24"
+            mode: "python"
         },
         kernelOptions: {
-            name: "ismb24",
+            name: "python3",
             path: "./Section1"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'ismb24'</script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               

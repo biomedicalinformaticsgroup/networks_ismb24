@@ -400,13 +400,13 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-functions-and-packages">Import Functions and Packages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-and-process-generation-scotland-data">Import and Process Generation Scotland Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-patient-similarity-network-for-second-modality">Create Patient Similarity Network for Second Modality</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note-creating-second-modality-of-time-since-last-cigarette-this-will-be-highly-correlated-with-the-outcome-of-smoking-or-not-however-we-want-to-use-this-as-an-exemplar-for-snf-gnn-s">NOTE : Creating second modality of time since last cigarette. This will be highly correlated with the outcome of smoking or not however, we want to use this as an exemplar for SNF + GNN’s</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note-creating-second-modality-of-time-since-last-cigarette-this-will-be-highly-correlated-with-the-outcome-of-smoking-or-not-however-we-want-to-use-this-as-an-exemplar-for-snf-gnns">NOTE : Creating second modality of time since last cigarette. This will be highly correlated with the outcome of smoking or not however, we want to use this as an exemplar for SNF + GNN’s</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-time-since-last-smoked-network">Plot the Time Since Last Smoked Network</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-train-gcn-on-second-modality-for-comparison-of-performance-font"><font color="darkblue"> Train GCN on second modality for comparison of performance </font></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-similarity-network-fusion-snf-font"><font color="darkblue"> Similarity Network Fusion (SNF) </font></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-gcn-on-snf-network-font"><font color="darkblue"> GCN on SNF network </font></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-gcn-on-second-modality-for-comparison-of-performance">Train GCN on second modality for comparison of performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-network-fusion-snf">Similarity Network Fusion (SNF)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gcn-on-snf-network">GCN on SNF network</a></li>
 </ul>
             </nav>
         </div>
@@ -469,8 +469,8 @@ document.write(`
 </section>
 <section id="create-patient-similarity-network-for-second-modality">
 <h2>Create Patient Similarity Network for Second Modality<a class="headerlink" href="#create-patient-similarity-network-for-second-modality" title="Permalink to this heading">#</a></h2>
-<section id="note-creating-second-modality-of-time-since-last-cigarette-this-will-be-highly-correlated-with-the-outcome-of-smoking-or-not-however-we-want-to-use-this-as-an-exemplar-for-snf-gnn-s">
-<h3>NOTE : Creating second modality of time since last cigarette. This will be highly correlated with the outcome of smoking or not however, we want to use this as an exemplar for SNF + GNN’s<a class="headerlink" href="#note-creating-second-modality-of-time-since-last-cigarette-this-will-be-highly-correlated-with-the-outcome-of-smoking-or-not-however-we-want-to-use-this-as-an-exemplar-for-snf-gnn-s" title="Permalink to this heading">#</a></h3>
+<section id="note-creating-second-modality-of-time-since-last-cigarette-this-will-be-highly-correlated-with-the-outcome-of-smoking-or-not-however-we-want-to-use-this-as-an-exemplar-for-snf-gnns">
+<h3>NOTE : Creating second modality of time since last cigarette. This will be highly correlated with the outcome of smoking or not however, we want to use this as an exemplar for SNF + GNN’s<a class="headerlink" href="#note-creating-second-modality-of-time-since-last-cigarette-this-will-be-highly-correlated-with-the-outcome-of-smoking-or-not-however-we-want-to-use-this-as-an-exemplar-for-snf-gnns" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
@@ -493,10 +493,14 @@ document.write(`
 <span class="sd">Plot the distribution of the Time Since Last Cigarette Phenotype</span>
 <span class="sd">&#39;&#39;&#39;</span>
 
+<span class="n">phenotypes</span><span class="p">[</span><span class="s1">&#39;time_since_last_smoked&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribution of Time Since Last Cigarette&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/14411ad639a936b6952a864c3d2b9eeefbaa784e7890ac75e484d785a0c835b3.png" src="../_images/14411ad639a936b6952a864c3d2b9eeefbaa784e7890ac75e484d785a0c835b3.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -513,16 +517,18 @@ document.write(`
 <span class="sd">3. Fill the dataframe on the euclidean distance between each patients time_since_last_smoked </span>
 
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
-<span class="n">scaled_time</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="n">n</span> <span class="o">=</span> 
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">scaled_time</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">phenotypes</span><span class="p">[[</span><span class="s1">&#39;time_since_last_smoked&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">scaled_time</span><span class="p">)</span>
+
 <span class="c1"># Create a DataFrame filled with zeros</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">()</span> <span class="p">,</span> <span class="n">columns</span><span class="o">=</span> <span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">phenotypes</span><span class="o">.</span><span class="n">index</span> <span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">phenotypes</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
 
 <span class="c1"># Fill the DataFrame with the differences</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">integer</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">scaled_time</span><span class="p">):</span>
-    
+    <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">scaled_time</span><span class="p">)</span> <span class="o">-</span> <span class="n">integer</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -544,11 +550,18 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Non-Smoker : 0 
+Smoker : 1
+</pre></div>
+</div>
+<img alt="../_images/5fba854b7793f4e8cc9ae7aa457ed9884b465efe38a49b758d278fd56db60cad.png" src="../_images/5fba854b7793f4e8cc9ae7aa457ed9884b465efe38a49b758d278fd56db60cad.png" />
+</div>
 </div>
 </section>
 </section>
-<section id="font-color-darkblue-train-gcn-on-second-modality-for-comparison-of-performance-font">
-<h2><font color='darkblue'> Train GCN on second modality for comparison of performance </font><a class="headerlink" href="#font-color-darkblue-train-gcn-on-second-modality-for-comparison-of-performance-font" title="Permalink to this heading">#</a></h2>
+<section id="train-gcn-on-second-modality-for-comparison-of-performance">
+<h2>Train GCN on second modality for comparison of performance<a class="headerlink" href="#train-gcn-on-second-modality-for-comparison-of-performance" title="Permalink to this heading">#</a></h2>
 <p>Here we will re-use the code from the previous section, specifically the train and evaluate functions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -593,10 +606,32 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GCN(
+  (gcnlayers): ModuleList(
+    (0): GraphConv(in=23676, out=128, normalization=both, activation=None)
+    (1): GraphConv(in=128, out=2, normalization=both, activation=None)
+  )
+  (batch_norms): ModuleList(
+    (0): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (drop): Dropout(p=0.05, inplace=False)
+)
+Graph(num_nodes=1000, num_edges=34843,
+      ndata_schemes={&#39;idx&#39;: Scheme(shape=(), dtype=torch.int64), &#39;label&#39;: Scheme(shape=(), dtype=torch.int8), &#39;feat&#39;: Scheme(shape=(23676,), dtype=torch.float32)}
+      edata_schemes={})
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "7ec68b9d25124881a3e4514f66fe9171", "version_major": 2, "version_minor": 0}</script><img alt="../_images/98abc3d99a3a1242634cb7e5d14830529c409499ce562f075926ad5f22dd85ec.png" src="../_images/98abc3d99a3a1242634cb7e5d14830529c409499ce562f075926ad5f22dd85ec.png" />
+<img alt="../_images/ed93481a02721bc325e1db72ee03dc5b66083349306ace5d043129502c910e83.png" src="../_images/ed93481a02721bc325e1db72ee03dc5b66083349306ace5d043129502c910e83.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GNN Model | Test Accuracy = 0.8875 | F1 = 0.8659 |
+</pre></div>
+</div>
+</div>
 </div>
 </section>
-<section id="font-color-darkblue-similarity-network-fusion-snf-font">
-<h2><font color='darkblue'> Similarity Network Fusion (SNF) </font><a class="headerlink" href="#font-color-darkblue-similarity-network-fusion-snf-font" title="Permalink to this heading">#</a></h2>
+<section id="similarity-network-fusion-snf">
+<h2>Similarity Network Fusion (SNF)<a class="headerlink" href="#similarity-network-fusion-snf" title="Permalink to this heading">#</a></h2>
 <p>We will once again implement SNF from the paper by <a class="reference external" href="https://www.nature.com/articles/nmeth.2810">Wang et al.</a></p>
 <p>We will implement it using the python package <a class="reference external" href="https://pypi.org/project/snfpy/">snfpy</a></p>
 <div class="cell docutils container">
@@ -616,6 +651,9 @@ document.write(`
 <span class="n">full_graphs</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">graph</span> <span class="ow">in</span> <span class="p">[</span><span class="n">G_time_to_smoke</span> <span class="p">,</span> <span class="n">G_DNAm</span><span class="p">]</span> <span class="p">:</span> 
+    <span class="n">graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_pandas_adjacency</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+    
+    <span class="n">full_graphs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -633,7 +671,7 @@ document.write(`
 <span class="sd">2. Convert the numpy array output from the SNF function to a pandas DataFrame with the index and columns as the patient IDs.</span>
 
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">adj</span> <span class="o">=</span> <span class="n">snf</span><span class="o">.</span><span class="n">snf</span><span class="p">()</span>
+<span class="n">adj</span> <span class="o">=</span> <span class="n">snf</span><span class="o">.</span><span class="n">snf</span><span class="p">(</span><span class="n">full_graphs</span> <span class="p">,</span> <span class="n">K</span> <span class="o">=</span> <span class="mi">25</span> <span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
 
 <span class="n">adj_snf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">adj</span> <span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">phenotypes</span><span class="o">.</span><span class="n">index</span> <span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">phenotypes</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> 
 </pre></div>
@@ -654,10 +692,13 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/edc35e7c3969da83959bcb47a57cec9c3c70d6990b0843a5964729651135a7b3.png" src="../_images/edc35e7c3969da83959bcb47a57cec9c3c70d6990b0843a5964729651135a7b3.png" />
+</div>
 </div>
 </section>
-<section id="font-color-darkblue-gcn-on-snf-network-font">
-<h2><font color='darkblue'> GCN on SNF network </font><a class="headerlink" href="#font-color-darkblue-gcn-on-snf-network-font" title="Permalink to this heading">#</a></h2>
+<section id="gcn-on-snf-network">
+<h2>GCN on SNF network<a class="headerlink" href="#gcn-on-snf-network" title="Permalink to this heading">#</a></h2>
 <p>We now have fused our graphs into a single patient similarity network and we are ready to learn from this.</p>
 <p>Again we will re-use the code from the previous part but changing our graph to the the SNF graph created above.</p>
 <div class="cell docutils container">
@@ -700,6 +741,28 @@ document.write(`
     <span class="s2">&quot;GNN Model | Test Accuracy = </span><span class="si">{:.4f}</span><span class="s2"> | F1 = </span><span class="si">{:.4f}</span><span class="s2"> |&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
      <span class="n">test_output_metrics</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">,</span> <span class="n">test_output_metrics</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">)</span>
 <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GCN(
+  (gcnlayers): ModuleList(
+    (0): GraphConv(in=23676, out=128, normalization=both, activation=None)
+    (1): GraphConv(in=128, out=2, normalization=both, activation=None)
+  )
+  (batch_norms): ModuleList(
+    (0): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  )
+  (drop): Dropout(p=0.05, inplace=False)
+)
+Graph(num_nodes=1000, num_edges=29970,
+      ndata_schemes={&#39;idx&#39;: Scheme(shape=(), dtype=torch.int64), &#39;label&#39;: Scheme(shape=(), dtype=torch.int8), &#39;feat&#39;: Scheme(shape=(23676,), dtype=torch.float32)}
+      edata_schemes={})
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "c5a521216b8d4468a12eb78237bf0abf", "version_major": 2, "version_minor": 0}</script><img alt="../_images/24eaeabdaa229a5d5ba5ebd4d3db92a03aa44af7e760c6e82dfdafd2dbc43178.png" src="../_images/24eaeabdaa229a5d5ba5ebd4d3db92a03aa44af7e760c6e82dfdafd2dbc43178.png" />
+<img alt="../_images/0ffd40cabd56ad36fa63e2eeba9683b263bbd98008553df5ce8a2357cd1bb80e.png" src="../_images/0ffd40cabd56ad36fa63e2eeba9683b263bbd98008553df5ce8a2357cd1bb80e.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GNN Model | Test Accuracy = 0.8600 | F1 = 0.8340 |
 </pre></div>
 </div>
 </div>
@@ -773,13 +836,13 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-functions-and-packages">Import Functions and Packages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-and-process-generation-scotland-data">Import and Process Generation Scotland Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-patient-similarity-network-for-second-modality">Create Patient Similarity Network for Second Modality</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note-creating-second-modality-of-time-since-last-cigarette-this-will-be-highly-correlated-with-the-outcome-of-smoking-or-not-however-we-want-to-use-this-as-an-exemplar-for-snf-gnn-s">NOTE : Creating second modality of time since last cigarette. This will be highly correlated with the outcome of smoking or not however, we want to use this as an exemplar for SNF + GNN’s</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note-creating-second-modality-of-time-since-last-cigarette-this-will-be-highly-correlated-with-the-outcome-of-smoking-or-not-however-we-want-to-use-this-as-an-exemplar-for-snf-gnns">NOTE : Creating second modality of time since last cigarette. This will be highly correlated with the outcome of smoking or not however, we want to use this as an exemplar for SNF + GNN’s</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-time-since-last-smoked-network">Plot the Time Since Last Smoked Network</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-train-gcn-on-second-modality-for-comparison-of-performance-font"><font color="darkblue"> Train GCN on second modality for comparison of performance </font></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-similarity-network-fusion-snf-font"><font color="darkblue"> Similarity Network Fusion (SNF) </font></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#font-color-darkblue-gcn-on-snf-network-font"><font color="darkblue"> GCN on SNF network </font></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-gcn-on-second-modality-for-comparison-of-performance">Train GCN on second modality for comparison of performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-network-fusion-snf">Similarity Network Fusion (SNF)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gcn-on-snf-network">GCN on SNF network</a></li>
 </ul>
   </nav></div>
 

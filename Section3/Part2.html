@@ -442,15 +442,6 @@ document.write(`
 <p>First we will load the data from Generation Scotland and create labels for individuals who have smoked before using the ‘pack_years’ feature</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the Generation Scotland data using pickle</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/data/raw/ISMB_GS_Data.pkl&#39;</span> <span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span> <span class="p">:</span> 
-    <span class="n">loaded_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">#################################################</span>
 <span class="sd">               YOUR CODE HERE</span>
@@ -461,8 +452,16 @@ document.write(`
 <span class="sd">Extract &#39;Phenotypes&#39; from loaded_data pkl file, set the index as `Sample_SentrixID` and subset to wave 1</span>
 <span class="sd">&#39;&#39;&#39;</span>
 
-<span class="n">w1</span> <span class="o">=</span> <span class="n">loaded_data</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span> <span class="c1"># we are only working with Wave 1 patients for this task</span>
-<span class="n">phenotypes</span> <span class="o">=</span> <span class="n">loaded_data</span><span class="p">[]</span><span class="o">.</span><span class="n">set_index</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[]</span> <span class="c1"># get the phenotypes for the wave 1 patients</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/data/raw/ISMB_GS_Data.pkl&#39;</span> <span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span> <span class="p">:</span> 
+    <span class="n">loaded_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w1</span> <span class="o">=</span> <span class="n">loaded_data</span><span class="p">[</span><span class="s1">&#39;DNAm_w1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span> <span class="c1"># we are only working with Wave 1 patients for this task</span>
+<span class="n">phenotypes</span> <span class="o">=</span> <span class="n">loaded_data</span><span class="p">[</span><span class="s1">&#39;Phenotypes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Sample_SentrixID&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">w1</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="c1"># get the phenotypes for the wave 1 patients</span>
 </pre></div>
 </div>
 </div>
@@ -503,9 +502,16 @@ document.write(`
 <span class="sd">Plot the distribution of smokers and non-smokers</span>
 <span class="sd">&#39;&#39;&#39;</span>
 
+<span class="n">phenotypes</span><span class="p">[</span><span class="s1">&#39;Smoking&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span> <span class="c1"># plot the distribution of smokers and non-smokers</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribution of Smokers and Non-Smokers&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Distribution of Smokers and Non-Smokers&#39;)
+</pre></div>
+</div>
+<img alt="../_images/2a7798ab4d6877baceea57d7d8f871ba06d2530c67cfd208f6911d68e4c8edb1.png" src="../_images/2a7798ab4d6877baceea57d7d8f871ba06d2530c67cfd208f6911d68e4c8edb1.png" />
 </div>
 </div>
 </section>
@@ -519,10 +525,178 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/data/raw/smoking.tsv&#39;</span> <span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1">#Tab seperated document from EWAS</span>
+
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>author</th>
+      <th>consortium</th>
+      <th>pmid</th>
+      <th>date</th>
+      <th>trait</th>
+      <th>efo</th>
+      <th>analysis</th>
+      <th>source</th>
+      <th>outcome</th>
+      <th>exposure</th>
+      <th>...</th>
+      <th>chrpos</th>
+      <th>chr</th>
+      <th>pos</th>
+      <th>gene</th>
+      <th>type</th>
+      <th>beta</th>
+      <th>se</th>
+      <th>p</th>
+      <th>details</th>
+      <th>study_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Sikdar S</td>
+      <td>CHARGE</td>
+      <td>31536415</td>
+      <td>2019-09-19</td>
+      <td>Smoking</td>
+      <td>EFO_0009115, EFO_0006527, EFO_0004318</td>
+      <td>random effects meta-analysis</td>
+      <td>Table S2</td>
+      <td>DNA methylation</td>
+      <td>Smoking</td>
+      <td>...</td>
+      <td>chr2:233284934</td>
+      <td>2</td>
+      <td>233284934</td>
+      <td>-</td>
+      <td>Island</td>
+      <td>-0.08545</td>
+      <td>0.00131</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>31536415_Sikdar-S_smoking_random_effects_meta-...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Sikdar S</td>
+      <td>CHARGE</td>
+      <td>31536415</td>
+      <td>2019-09-19</td>
+      <td>Smoking</td>
+      <td>EFO_0009115, EFO_0006527, EFO_0004318</td>
+      <td>random effects meta-analysis</td>
+      <td>Table S2</td>
+      <td>DNA methylation</td>
+      <td>Smoking</td>
+      <td>...</td>
+      <td>chr19:17000585</td>
+      <td>19</td>
+      <td>17000585</td>
+      <td>F2RL3</td>
+      <td>North shore</td>
+      <td>-0.07233</td>
+      <td>0.00129</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>31536415_Sikdar-S_smoking_random_effects_meta-...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Sikdar S</td>
+      <td>CHARGE</td>
+      <td>31536415</td>
+      <td>2019-09-19</td>
+      <td>Smoking</td>
+      <td>EFO_0009115, EFO_0006527, EFO_0004318</td>
+      <td>random effects meta-analysis</td>
+      <td>Table S2</td>
+      <td>DNA methylation</td>
+      <td>Smoking</td>
+      <td>...</td>
+      <td>chr5:373378</td>
+      <td>5</td>
+      <td>373378</td>
+      <td>AHRR</td>
+      <td>North shore</td>
+      <td>-0.03138</td>
+      <td>0.00078</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>31536415_Sikdar-S_smoking_random_effects_meta-...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Sikdar S</td>
+      <td>CHARGE</td>
+      <td>31536415</td>
+      <td>2019-09-19</td>
+      <td>Smoking</td>
+      <td>EFO_0009115, EFO_0006527, EFO_0004318</td>
+      <td>random effects meta-analysis</td>
+      <td>Table S2</td>
+      <td>DNA methylation</td>
+      <td>Smoking</td>
+      <td>...</td>
+      <td>chr2:233284402</td>
+      <td>2</td>
+      <td>233284402</td>
+      <td>-</td>
+      <td>Island</td>
+      <td>-0.07381</td>
+      <td>0.00132</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>31536415_Sikdar-S_smoking_random_effects_meta-...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Sikdar S</td>
+      <td>CHARGE</td>
+      <td>31536415</td>
+      <td>2019-09-19</td>
+      <td>Smoking</td>
+      <td>EFO_0009115, EFO_0006527, EFO_0004318</td>
+      <td>random effects meta-analysis</td>
+      <td>Table S2</td>
+      <td>DNA methylation</td>
+      <td>Smoking</td>
+      <td>...</td>
+      <td>chr6:30720080</td>
+      <td>6</td>
+      <td>30720080</td>
+      <td>-</td>
+      <td>Open sea</td>
+      <td>-0.08558</td>
+      <td>0.00159</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>31536415_Sikdar-S_smoking_random_effects_meta-...</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 31 columns</p>
+</div></div></div>
 </div>
 </section>
 <section id="font-color-darkblue-patient-similarity-network-generation-font">
@@ -536,12 +710,17 @@ document.write(`
 
 <span class="sd">We want to include the most informative CpG sites, so we will only include CpG sites that have been annotated multiple times with smoking</span>
 
-<span class="sd">1. Count the number of times a CpG site is present in the smoking.tcv dataset</span>
+<span class="sd">1. Count the number of times a CpG site is present in the smoking.tsv dataset</span>
 <span class="sd">2. If a CpG is present in the dataset more than 10 times add it to the list common_annotated_cpgs</span>
 <span class="sd">3. Filter the methylation data to only include the CpG sites in common_annotated_cpgs</span>
 <span class="sd">4. Call the new dataframe w1_filt</span>
 
 <span class="sd">&#39;&#39;&#39;</span>
+<span class="n">common_annotated_cpgs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;cpg&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;cpg&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> 
+
+<span class="n">cpgs</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">common_annotated_cpgs</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">w1</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="n">w1_filt</span> <span class="o">=</span> <span class="n">w1</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span> <span class="p">:</span> <span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">cpgs</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
@@ -558,6 +737,7 @@ document.write(`
 <span class="sd">The function for this is given as abs_bicorr</span>
 
 <span class="sd">&#39;&#39;&#39;</span>
+<span class="n">patient_similarity_matrix</span> <span class="o">=</span> <span class="n">abs_bicorr</span><span class="p">(</span><span class="n">w1_filt</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -573,17 +753,24 @@ document.write(`
 <span class="sd">Specify the node colours by assigning a colour to each phenotype using the .astype(`category`).cat.codes panda functionality</span>
 
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">node_colour</span> <span class="o">=</span>  <span class="c1"># set the colours for the nodes</span>
+<span class="n">node_colour</span> <span class="o">=</span> <span class="n">phenotypes</span><span class="p">[</span><span class="s1">&#39;Smoking&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">set_categories</span><span class="p">(</span><span class="n">wesanderson</span><span class="o">.</span><span class="n">FantasticFox2_5</span><span class="o">.</span><span class="n">hex_colors</span> <span class="p">,</span> <span class="n">rename</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># set the colours for the nodes</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">phenotypes</span><span class="p">[</span><span class="s1">&#39;Smoking&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> : 0 </span><span class="se">\n</span><span class="si">{</span><span class="n">phenotypes</span><span class="p">[</span><span class="s1">&#39;Smoking&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> : 1&quot;</span><span class="p">)</span> <span class="c1"># print the mapping of the colours to the categories</span>
 
-<span class="n">G</span> <span class="o">=</span> <span class="n">plot_knn_network</span><span class="p">()</span> <span class="c1"># plot the network</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">plot_knn_network</span><span class="p">(</span><span class="n">patient_similarity_matrix</span> <span class="p">,</span> <span class="mi">25</span> <span class="p">,</span> <span class="n">phenotypes</span><span class="p">[</span><span class="s1">&#39;Smoking&#39;</span><span class="p">]</span> <span class="p">,</span> <span class="n">node_colours</span><span class="o">=</span><span class="n">node_colour</span><span class="p">)</span> <span class="c1"># plot the network</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;EWAS Smoking Patient Similarity Network&#39;</span><span class="p">)</span>
 <span class="n">legend_handles</span> <span class="o">=</span> <span class="n">gen_graph_legend</span><span class="p">(</span><span class="n">node_colour</span> <span class="p">,</span> <span class="n">G</span> <span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">)</span> <span class="c1"># generate the legend</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span> <span class="o">=</span> <span class="n">legend_handles</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Non-Smoker : 0 
+Smoker : 1
+</pre></div>
+</div>
+<img alt="../_images/9625d2fd8a6c4bdb8d693bc72024692bca6e3d3de24c1c828926533458c926fd.png" src="../_images/9625d2fd8a6c4bdb8d693bc72024692bca6e3d3de24c1c828926533458c926fd.png" />
 </div>
 </div>
 </section>
@@ -593,7 +780,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Put the data in a single dictionary</span>
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Feat&#39;</span> <span class="p">:</span> <span class="n">w1</span> <span class="p">,</span> <span class="s1">&#39;phenotypes&#39;</span> <span class="p">:</span> <span class="n">phenotypes</span> <span class="p">,</span> <span class="s1">&#39;PSN_EWAS&#39;</span> <span class="p">:</span> <span class="n">G</span><span class="p">}</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Feat&#39;</span> <span class="p">:</span> <span class="n">w1</span> <span class="p">,</span> <span class="s1">&#39;phenotypes&#39;</span> <span class="p">:</span> <span class="n">phenotypes</span> <span class="p">,</span> <span class="s1">&#39;PSN_raw&#39;</span> <span class="p">:</span> <span class="p">[]</span> <span class="p">,</span> <span class="s1">&#39;PSN_EWAS&#39;</span> <span class="p">:</span> <span class="n">G</span><span class="p">}</span>
 
 <span class="c1"># File path to save the pickle file</span>
 <span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;/data/intermediate/GCN_Data.pkl&#39;</span>
