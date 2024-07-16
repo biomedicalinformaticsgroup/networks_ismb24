@@ -455,12 +455,19 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/chaeeunlee/Documents/VSC_workspaces/ISMB_Test/Section2
+/Users/chaeeunlee/Documents/VSC_workspaces/ISMB_Test
+</pre></div>
+</div>
+</div>
 </div>
 <p><strong>Paths</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">intermediate_data_dir</span> <span class="o">=</span> <span class="s1">&#39;/data/intermediate/&#39;</span>
 <span class="n">raw_data_dir</span> <span class="o">=</span> <span class="s1">&#39;/data/raw/&#39;</span>
+
 
 <span class="c1"># Define paths to .gml network files from Section 1</span>
 <span class="c1"># These paths point to the Gene correlation network, Patient network from (1) TCGA gene expression data and (2) TCGA DNA methylation data.</span>
@@ -501,6 +508,11 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tcga_gxp_meta_dict</span> <span class="o">=</span> <span class="n">tcga_gxp_meta</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">tcga_gxp_meta_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;patient&#39;, &#39;race&#39;, &#39;gender&#39;, &#39;sample_type&#39;, &#39;cigarettes_per_day&#39;, &#39;Smoked&#39;, &#39;sizeFactor&#39;, &#39;replaceable&#39;])
 </pre></div>
 </div>
 </div>
@@ -551,22 +563,31 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>G_patient_gxp_weight: weight, G_patient_dnam_weight: weight
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the greedy modularity maximization method to detect communities in the patient network.</span>
 
 <span class="c1">### YOUR CODE HERE ###</span>
-<span class="n">patient_gxp_communities</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">community</span><span class="o">.</span><span class="n">modularity_max</span><span class="o">.</span><span class="n">greedy_modularity_communities</span><span class="p">()</span>
-<span class="n">patient_dnam_communities</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">community</span><span class="o">.</span><span class="n">modularity_max</span><span class="o">.</span><span class="n">greedy_modularity_communities</span><span class="p">()</span>
+<span class="n">patient_gxp_communities</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">community</span><span class="o">.</span><span class="n">modularity_max</span><span class="o">.</span><span class="n">greedy_modularity_communities</span><span class="p">(</span><span class="n">G_patient_gxp</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">G_patient_gxp_weight</span><span class="p">)</span>
+<span class="n">patient_dnam_communities</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">community</span><span class="o">.</span><span class="n">modularity_max</span><span class="o">.</span><span class="n">greedy_modularity_communities</span><span class="p">(</span><span class="n">G_patient_dnam</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">G_patient_dnam_weight</span><span class="p">)</span>
 
 <span class="c1"># Visualize the patient network with identified communities.</span>
 
 <span class="c1">### YOUR CODE HERE ###</span>
-<span class="n">draw_network_with_node_attrs</span><span class="p">(</span><span class="n">G_patient_gxp</span><span class="p">,</span> <span class="n">tcga_gxp_meta_dict</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Patient Gene Expression Network&#39;</span><span class="p">,</span> <span class="n">communities</span><span class="o">=</span><span class="n">patient_gxp_communities</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="s1">&#39;spring&#39;</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="p">)</span>
-<span class="n">draw_network_with_node_attrs</span><span class="p">(</span><span class="n">G_patient_dnam</span><span class="p">,</span> <span class="n">tcga_gxp_meta_dict</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Patient DNA Methylation Network&#39;</span><span class="p">,</span> <span class="n">communities</span><span class="o">=</span><span class="n">patient_dnam_communities</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="s1">&#39;spring&#39;</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="p">)</span>
+<span class="n">draw_network_with_node_attrs</span><span class="p">(</span><span class="n">G_patient_gxp</span><span class="p">,</span> <span class="n">tcga_gxp_meta_dict</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Patient Gene Expression Network&#39;</span><span class="p">,</span> <span class="n">communities</span><span class="o">=</span><span class="n">patient_gxp_communities</span><span class="p">,</span> <span class="n">color_attr</span><span class="o">=</span><span class="s1">&#39;community&#39;</span><span class="p">,</span> <span class="n">shape_attr</span><span class="o">=</span><span class="s1">&#39;Smoked&#39;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="s1">&#39;spring&#39;</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="p">)</span>
+<span class="n">draw_network_with_node_attrs</span><span class="p">(</span><span class="n">G_patient_dnam</span><span class="p">,</span> <span class="n">tcga_gxp_meta_dict</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Patient DNA Methylation Network&#39;</span><span class="p">,</span> <span class="n">communities</span><span class="o">=</span><span class="n">patient_dnam_communities</span><span class="p">,</span> <span class="n">color_attr</span><span class="o">=</span><span class="s1">&#39;community&#39;</span><span class="p">,</span> <span class="n">shape_attr</span><span class="o">=</span><span class="s1">&#39;Smoked&#39;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="s1">&#39;spring&#39;</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/31eccb7b069e5dcd951a38756c1912b5b19ccf13f3d638b9bcd6d8a77f986e75.png" src="../_images/31eccb7b069e5dcd951a38756c1912b5b19ccf13f3d638b9bcd6d8a77f986e75.png" />
+<img alt="../_images/359608e3163ede4453b57f339ef25b4d307fb8682149ba4496c4fefc2435be4a.png" src="../_images/359608e3163ede4453b57f339ef25b4d307fb8682149ba4496c4fefc2435be4a.png" />
 </div>
 </div>
 </section>
@@ -600,16 +621,21 @@ document.write(`
 <span class="c1"># In patient networks, the nodes represent patients. We want to ensure that there are sufficient number of nodes commonly found in the networks of different modalities before Similarity Network Fusion (SNF), so that they represent different aspects of the same patients.</span>
 
 <span class="c1">### YOUR CODE HERE ###</span>
-<span class="n">all_idx</span> <span class="o">=</span> 
+<span class="n">all_idx</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">G_patient_gxp_nodes_list</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">G_patient_dnam_nodes_list</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of overlapping patient nodes: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">all_idx</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Create adjacency matrix for G_patient_gxp with overlapping nodes</span>
 
 <span class="c1">### YOUR CODE HERE ###</span>
-<span class="n">G_patient_gxp_adj_matrix</span> <span class="o">=</span> 
+<span class="n">G_patient_gxp_adj_matrix</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_pandas_adjacency</span><span class="p">(</span><span class="n">G_patient_gxp</span><span class="p">,</span> <span class="n">nodelist</span><span class="o">=</span><span class="n">all_idx</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">G_patient_gxp_weight</span><span class="p">)</span>
 
 <span class="c1"># Create adjacency matrix for G_patient_dnam with overlapping nodes</span>
 <span class="n">G_patient_dnam_adj_matrix</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">to_pandas_adjacency</span><span class="p">(</span><span class="n">G_patient_dnam</span><span class="p">,</span> <span class="n">nodelist</span><span class="o">=</span><span class="n">all_idx</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">G_patient_dnam_weight</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of overlapping patient nodes: 381
 </pre></div>
 </div>
 </div>
@@ -636,7 +662,7 @@ document.write(`
 <span class="c1"># Convert the SNF adjacency matrix to a pandas DataFrame for easy manipulation</span>
 
 <span class="c1">### YOUR CODE HERE ###</span>
-<span class="n">adj_snf</span> <span class="o">=</span> 
+<span class="n">adj_snf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">adj_snf</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">all_idx</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">all_idx</span><span class="p">)</span>   
 </pre></div>
 </div>
 </div>
@@ -645,10 +671,11 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># From the adjacency matrix to a NetworkX graph</span>
 <span class="c1">### YOUR CODE HERE ###</span>
-<span class="n">G_snf</span> <span class="o">=</span> 
+<span class="n">G_snf</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">from_pandas_adjacency</span><span class="p">(</span><span class="n">adj_snf</span><span class="p">)</span>
 
 <span class="c1"># Remove self-loops from the graph</span>
 <span class="c1">### YOUR CODE HERE ###</span>
+<span class="n">G_snf</span><span class="o">.</span><span class="n">remove_edges_from</span><span class="p">(</span><span class="n">nx</span><span class="o">.</span><span class="n">selfloop_edges</span><span class="p">(</span><span class="n">G_snf</span><span class="p">))</span>
 
 <span class="c1"># Remove edges with weight under cutoff value</span>
 <span class="n">edges_to_remove</span> <span class="o">=</span> <span class="p">[(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">G_snf</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">cutoff_weight</span><span class="p">]</span>
@@ -665,6 +692,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/6ce6154bcfdcadaf7abd227f60b192af016b4fb7e65f5fea3a02e57757c6d045.png" src="../_images/6ce6154bcfdcadaf7abd227f60b192af016b4fb7e65f5fea3a02e57757c6d045.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -679,6 +709,9 @@ document.write(`
 
 <span class="c1">### YOUR CODE HERE ###</span>
     <span class="c1">### YOUR CODE HERE ###</span>
+    
+<span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">neighbors</span> <span class="ow">in</span> <span class="n">k_neighbors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">:</span>
         <span class="n">G_snf_knn</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -691,6 +724,9 @@ document.write(`
 <span class="n">draw_network_with_node_attrs</span><span class="p">(</span><span class="n">G_snf_knn</span><span class="p">,</span> <span class="n">node_attributes</span><span class="o">=</span><span class="n">tcga_gxp_meta_dict</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;SNF Patient Network + KNN&#39;</span><span class="p">,</span> <span class="n">communities</span><span class="o">=</span><span class="n">snf_knn_communities</span><span class="p">,</span> <span class="n">color_attr</span><span class="o">=</span><span class="s1">&#39;community&#39;</span><span class="p">,</span> <span class="n">shape_attr</span><span class="o">=</span><span class="s1">&#39;Smoked&#39;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="s1">&#39;spring&#39;</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2b527ce36152767c5ef9868838f018cc50efafe984a495be123d812799196a54.png" src="../_images/2b527ce36152767c5ef9868838f018cc50efafe984a495be123d812799196a54.png" />
 </div>
 </div>
 </section>
